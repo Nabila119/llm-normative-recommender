@@ -23,4 +23,5 @@ This thesis explores the use of Large Language Models (LLMs) to extract and form
 - Formal representations of stakeholder norms
 - Improved transparency and value alignment in recommender systems
 
-## Repository Structure
+
+
