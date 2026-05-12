@@ -1,0 +1,80 @@
+formula ::= implication
+
+implication ::= disjunction
+              | disjunction "→" implication
+
+disjunction ::= conjunction
+              | conjunction "∨" disjunction
+
+conjunction ::= negation
+              | negation "∧" conjunction
+
+negation ::= primary
+           | "¬" negation
+
+primary ::= modal_formula
+          | quantifier
+          | predicate
+          | "(" formula ")"
+
+
+modal_formula ::= MODAL_OP "(" formula ")"
+                | MODAL_OP "(" formula "|" formula ")"
+
+
+quantifier ::= "∀" VAR "." formula
+             | "∃" VAR "." formula
+
+
+predicate ::= PREDICATE_NAME "(" term_list ")"
+            | PREDICATE_NAME
+
+
+term_list ::= term
+            | term "," term_list
+
+
+term ::= VAR
+       | CONST
+       | FUNCTION_NAME "(" term_list ")"
+
+
+VAR ::= /[a-z][a-zA-Z0-9_]*/
+
+CONST ::= /[A-Z][a-zA-Z0-9_]*/
+
+FUNCTION_NAME ::= /[a-zA-Z][a-zA-Z0-9_]*/
+
+PREDICATE_NAME ::= /[a-zA-Z][a-zA-Z0-9_]*/
+
+
+MODAL_OP ::= "O" | "P" | "F"
+
+
+// Operator precedence:
+// ¬ > ∧ > ∨ > →
+
+
+// Constraints:
+//
+// - Disjunction inside modal operators should be avoided due to ambiguity.
+//   Example discouraged:
+//   P(A ∨ B)
+//
+// - Preferred formulations:
+//   P(A) ∧ P(B)
+//   or
+//   P(A ∧ B)
+//
+// - Nested modal operators are not allowed.
+//   Example not allowed:
+//   O(P(A))
+//
+// - Modal operators cannot scope over implications.
+//   Example not allowed:
+//   O(A → B)
+//
+// - Parsing must produce either:
+//   1. one unique AST
+//   or
+//   2. a parsing failure
