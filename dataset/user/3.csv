@@ -99,4 +99,4 @@ id,stakeholder,formulation_type,NL_norm,logic_formula
 98,user,implication,"Users preferring homemade meals should consume homemade meals.","∀x. homemadePreference(x) → O(consume(x,HomemadeMeal))"
 99,user,implication,"Users sensitive to gluten should avoid bread-based meals.","∀x. glutenSensitive(x) → F(consume(x,BreadMeal))"
 100,user,implication,"Users focused on wellness should consume nutritious snacks.","∀x. wellnessUser(x) → O(consume(x,NutritiousSnack))"
-```
+
