@@ -1,0 +1,2063 @@
+[
+  {
+    "id": "CR001",
+    "scope": "FoodDomain",
+    "nl_rule": "Shellfish meals count as non-vegan products",
+    "category": "dietaryClassification",
+    "logic_rule": "∀y.shellfishMeal(y)->nonVegan(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "shellfishMeal",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "nonVegan",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "shellfishMeal(y)"
+      ],
+      "then": "nonVegan(y)"
+    }
+  },
+  {
+    "id": "CR002",
+    "scope": "FoodDomain",
+    "nl_rule": "Meat meals count as non-vegan products",
+    "category": "dietaryClassification",
+    "logic_rule": "∀y.meatMeal(y)->nonVegan(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "meatMeal",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "nonVegan",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "meatMeal(y)"
+      ],
+      "then": "nonVegan(y)"
+    }
+  },
+  {
+    "id": "CR003",
+    "scope": "FoodDomain",
+    "nl_rule": "Dairy meals count as non-vegan products",
+    "category": "dietaryClassification",
+    "logic_rule": "∀y.dairyMeal(y)->nonVegan(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "dairyMeal",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "nonVegan",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "dairyMeal(y)"
+      ],
+      "then": "nonVegan(y)"
+    }
+  },
+  {
+    "id": "CR004",
+    "scope": "FoodDomain",
+    "nl_rule": "Egg meals count as non-vegan products",
+    "category": "dietaryClassification",
+    "logic_rule": "∀y.eggMeal(y)->nonVegan(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "eggMeal",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "nonVegan",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "eggMeal(y)"
+      ],
+      "then": "nonVegan(y)"
+    }
+  },
+  {
+    "id": "CR005",
+    "scope": "FoodDomain",
+    "nl_rule": "Honey products count as non-vegan products",
+    "category": "dietaryClassification",
+    "logic_rule": "∀y.honeyProduct(y)->nonVegan(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "honeyProduct",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "nonVegan",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "honeyProduct(y)"
+      ],
+      "then": "nonVegan(y)"
+    }
+  },
+  {
+    "id": "CR006",
+    "scope": "FoodDomain",
+    "nl_rule": "Meat meals count as non-vegetarian products",
+    "category": "dietaryClassification",
+    "logic_rule": "∀y.meatMeal(y)->nonVegetarian(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "meatMeal",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "nonVegetarian",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "meatMeal(y)"
+      ],
+      "then": "nonVegetarian(y)"
+    }
+  },
+  {
+    "id": "CR007",
+    "scope": "FoodDomain",
+    "nl_rule": "Shellfish meals count as non-vegetarian products",
+    "category": "dietaryClassification",
+    "logic_rule": "∀y.shellfishMeal(y)->nonVegetarian(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "shellfishMeal",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "nonVegetarian",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "shellfishMeal(y)"
+      ],
+      "then": "nonVegetarian(y)"
+    }
+  },
+  {
+    "id": "CR008",
+    "scope": "FoodDomain",
+    "nl_rule": "Fish meals count as non-vegetarian products",
+    "category": "dietaryClassification",
+    "logic_rule": "∀y.fishMeal(y)->nonVegetarian(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "fishMeal",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "nonVegetarian",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "fishMeal(y)"
+      ],
+      "then": "nonVegetarian(y)"
+    }
+  },
+  {
+    "id": "CR009",
+    "scope": "FoodDomain",
+    "nl_rule": "Chicken meals count as non-vegetarian products",
+    "category": "dietaryClassification",
+    "logic_rule": "∀y.chickenMeal(y)->nonVegetarian(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "chickenMeal",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "nonVegetarian",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "chickenMeal(y)"
+      ],
+      "then": "nonVegetarian(y)"
+    }
+  },
+  {
+    "id": "CR010",
+    "scope": "FoodDomain",
+    "nl_rule": "Beef meals count as non-vegetarian products",
+    "category": "dietaryClassification",
+    "logic_rule": "∀y.beefMeal(y)->nonVegetarian(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "beefMeal",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "nonVegetarian",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "beefMeal(y)"
+      ],
+      "then": "nonVegetarian(y)"
+    }
+  },
+  {
+    "id": "CR011",
+    "scope": "FoodDomain",
+    "nl_rule": "Energy drinks count as high sugar products",
+    "category": "nutritionClassification",
+    "logic_rule": "∀y.energyDrink(y)->highSugarProduct(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "energyDrink",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "highSugarProduct",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "energyDrink(y)"
+      ],
+      "then": "highSugarProduct(y)"
+    }
+  },
+  {
+    "id": "CR012",
+    "scope": "FoodDomain",
+    "nl_rule": "Sugary snacks count as high sugar products",
+    "category": "nutritionClassification",
+    "logic_rule": "∀y.sugarySnack(y)->highSugarProduct(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "sugarySnack",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "highSugarProduct",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "sugarySnack(y)"
+      ],
+      "then": "highSugarProduct(y)"
+    }
+  },
+  {
+    "id": "CR013",
+    "scope": "FoodDomain",
+    "nl_rule": "Candy products count as high sugar products",
+    "category": "nutritionClassification",
+    "logic_rule": "∀y.candyProduct(y)->highSugarProduct(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "candyProduct",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "highSugarProduct",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "candyProduct(y)"
+      ],
+      "then": "highSugarProduct(y)"
+    }
+  },
+  {
+    "id": "CR014",
+    "scope": "FoodDomain",
+    "nl_rule": "Sweet desserts count as high sugar products",
+    "category": "nutritionClassification",
+    "logic_rule": "∀y.sweetDessert(y)->highSugarProduct(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "sweetDessert",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "highSugarProduct",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "sweetDessert(y)"
+      ],
+      "then": "highSugarProduct(y)"
+    }
+  },
+  {
+    "id": "CR015",
+    "scope": "FoodDomain",
+    "nl_rule": "Regular soda counts as a high sugar product",
+    "category": "nutritionClassification",
+    "logic_rule": "∀y.regularSoda(y)->highSugarProduct(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "regularSoda",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "highSugarProduct",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "regularSoda(y)"
+      ],
+      "then": "highSugarProduct(y)"
+    }
+  },
+  {
+    "id": "CR016",
+    "scope": "FoodDomain",
+    "nl_rule": "Salty snacks count as high salt products",
+    "category": "nutritionClassification",
+    "logic_rule": "∀y.saltySnack(y)->highSaltProduct(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "saltySnack",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "highSaltProduct",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "saltySnack(y)"
+      ],
+      "then": "highSaltProduct(y)"
+    }
+  },
+  {
+    "id": "CR017",
+    "scope": "FoodDomain",
+    "nl_rule": "Processed meat counts as a high salt product",
+    "category": "nutritionClassification",
+    "logic_rule": "∀y.processedMeat(y)->highSaltProduct(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "processedMeat",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "highSaltProduct",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "processedMeat(y)"
+      ],
+      "then": "highSaltProduct(y)"
+    }
+  },
+  {
+    "id": "CR018",
+    "scope": "FoodDomain",
+    "nl_rule": "Instant noodles count as high salt products",
+    "category": "nutritionClassification",
+    "logic_rule": "∀y.instantNoodles(y)->highSaltProduct(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "instantNoodles",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "highSaltProduct",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "instantNoodles(y)"
+      ],
+      "then": "highSaltProduct(y)"
+    }
+  },
+  {
+    "id": "CR019",
+    "scope": "FoodDomain",
+    "nl_rule": "Salted nuts count as high salt products",
+    "category": "nutritionClassification",
+    "logic_rule": "∀y.saltedNuts(y)->highSaltProduct(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "saltedNuts",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "highSaltProduct",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "saltedNuts(y)"
+      ],
+      "then": "highSaltProduct(y)"
+    }
+  },
+  {
+    "id": "CR020",
+    "scope": "FoodDomain",
+    "nl_rule": "Canned soup counts as a high salt product",
+    "category": "nutritionClassification",
+    "logic_rule": "∀y.cannedSoup(y)->highSaltProduct(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "cannedSoup",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "highSaltProduct",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "cannedSoup(y)"
+      ],
+      "then": "highSaltProduct(y)"
+    }
+  },
+  {
+    "id": "CR021",
+    "scope": "FoodDomain",
+    "nl_rule": "Fried meals count as high fat products",
+    "category": "nutritionClassification",
+    "logic_rule": "∀y.friedMeal(y)->highFatProduct(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "friedMeal",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "highFatProduct",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "friedMeal(y)"
+      ],
+      "then": "highFatProduct(y)"
+    }
+  },
+  {
+    "id": "CR022",
+    "scope": "FoodDomain",
+    "nl_rule": "Cream desserts count as high fat products",
+    "category": "nutritionClassification",
+    "logic_rule": "∀y.creamDessert(y)->highFatProduct(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "creamDessert",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "highFatProduct",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "creamDessert(y)"
+      ],
+      "then": "highFatProduct(y)"
+    }
+  },
+  {
+    "id": "CR023",
+    "scope": "FoodDomain",
+    "nl_rule": "Fast food meals count as high fat products",
+    "category": "nutritionClassification",
+    "logic_rule": "∀y.fastFoodMeal(y)->highFatProduct(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "fastFoodMeal",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "highFatProduct",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "fastFoodMeal(y)"
+      ],
+      "then": "highFatProduct(y)"
+    }
+  },
+  {
+    "id": "CR024",
+    "scope": "FoodDomain",
+    "nl_rule": "Cheese meals count as high fat products",
+    "category": "nutritionClassification",
+    "logic_rule": "∀y.cheeseMeal(y)->highFatProduct(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "cheeseMeal",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "highFatProduct",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "cheeseMeal(y)"
+      ],
+      "then": "highFatProduct(y)"
+    }
+  },
+  {
+    "id": "CR025",
+    "scope": "FoodDomain",
+    "nl_rule": "Butter products count as high fat products",
+    "category": "nutritionClassification",
+    "logic_rule": "∀y.butterProduct(y)->highFatProduct(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "butterProduct",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "highFatProduct",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "butterProduct(y)"
+      ],
+      "then": "highFatProduct(y)"
+    }
+  },
+  {
+    "id": "CR026",
+    "scope": "FoodDomain",
+    "nl_rule": "Nut snacks contain nuts",
+    "category": "allergenClassification",
+    "logic_rule": "∀y.nutSnack(y)->contains(y,Nuts)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "nutSnack",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "contains",
+          "args": [
+            "y",
+            "Nuts"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "nutSnack(y)"
+      ],
+      "then": "contains(y,Nuts)"
+    }
+  },
+  {
+    "id": "CR027",
+    "scope": "FoodDomain",
+    "nl_rule": "Peanut snacks contain nuts",
+    "category": "allergenClassification",
+    "logic_rule": "∀y.peanutSnack(y)->contains(y,Nuts)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "peanutSnack",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "contains",
+          "args": [
+            "y",
+            "Nuts"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "peanutSnack(y)"
+      ],
+      "then": "contains(y,Nuts)"
+    }
+  },
+  {
+    "id": "CR028",
+    "scope": "FoodDomain",
+    "nl_rule": "Almond desserts contain nuts",
+    "category": "allergenClassification",
+    "logic_rule": "∀y.almondDessert(y)->contains(y,Nuts)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "almondDessert",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "contains",
+          "args": [
+            "y",
+            "Nuts"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "almondDessert(y)"
+      ],
+      "then": "contains(y,Nuts)"
+    }
+  },
+  {
+    "id": "CR029",
+    "scope": "FoodDomain",
+    "nl_rule": "Shellfish meals contain shellfish",
+    "category": "allergenClassification",
+    "logic_rule": "∀y.shellfishMeal(y)->contains(y,Shellfish)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "shellfishMeal",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "contains",
+          "args": [
+            "y",
+            "Shellfish"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "shellfishMeal(y)"
+      ],
+      "then": "contains(y,Shellfish)"
+    }
+  },
+  {
+    "id": "CR030",
+    "scope": "FoodDomain",
+    "nl_rule": "Shrimp meals contain shellfish",
+    "category": "allergenClassification",
+    "logic_rule": "∀y.shrimpMeal(y)->contains(y,Shellfish)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "shrimpMeal",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "contains",
+          "args": [
+            "y",
+            "Shellfish"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "shrimpMeal(y)"
+      ],
+      "then": "contains(y,Shellfish)"
+    }
+  },
+  {
+    "id": "CR031",
+    "scope": "FoodDomain",
+    "nl_rule": "Wheat meals contain gluten",
+    "category": "medicalSuitability",
+    "logic_rule": "∀y.wheatMeal(y)->contains(y,Gluten)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "wheatMeal",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "contains",
+          "args": [
+            "y",
+            "Gluten"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "wheatMeal(y)"
+      ],
+      "then": "contains(y,Gluten)"
+    }
+  },
+  {
+    "id": "CR032",
+    "scope": "FoodDomain",
+    "nl_rule": "Bread products contain gluten",
+    "category": "medicalSuitability",
+    "logic_rule": "∀y.breadProduct(y)->contains(y,Gluten)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "breadProduct",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "contains",
+          "args": [
+            "y",
+            "Gluten"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "breadProduct(y)"
+      ],
+      "then": "contains(y,Gluten)"
+    }
+  },
+  {
+    "id": "CR033",
+    "scope": "FoodDomain",
+    "nl_rule": "Regular pasta contains gluten",
+    "category": "medicalSuitability",
+    "logic_rule": "∀y.regularPasta(y)->contains(y,Gluten)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "regularPasta",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "contains",
+          "args": [
+            "y",
+            "Gluten"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "regularPasta(y)"
+      ],
+      "then": "contains(y,Gluten)"
+    }
+  },
+  {
+    "id": "CR034",
+    "scope": "FoodDomain",
+    "nl_rule": "Dairy meals contain lactose",
+    "category": "medicalSuitability",
+    "logic_rule": "∀y.dairyMeal(y)->contains(y,Lactose)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "dairyMeal",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "contains",
+          "args": [
+            "y",
+            "Lactose"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "dairyMeal(y)"
+      ],
+      "then": "contains(y,Lactose)"
+    }
+  },
+  {
+    "id": "CR035",
+    "scope": "FoodDomain",
+    "nl_rule": "Milk products contain lactose",
+    "category": "medicalSuitability",
+    "logic_rule": "∀y.milkProduct(y)->contains(y,Lactose)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "milkProduct",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "contains",
+          "args": [
+            "y",
+            "Lactose"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "milkProduct(y)"
+      ],
+      "then": "contains(y,Lactose)"
+    }
+  },
+  {
+    "id": "CR036",
+    "scope": "FoodDomain",
+    "nl_rule": "Cheese meals contain lactose",
+    "category": "medicalSuitability",
+    "logic_rule": "∀y.cheeseMeal(y)->contains(y,Lactose)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "cheeseMeal",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "contains",
+          "args": [
+            "y",
+            "Lactose"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "cheeseMeal(y)"
+      ],
+      "then": "contains(y,Lactose)"
+    }
+  },
+  {
+    "id": "CR037",
+    "scope": "FoodDomain",
+    "nl_rule": "Pork meals count as non-halal products",
+    "category": "religiousClassification",
+    "logic_rule": "∀y.porkMeal(y)->nonHalal(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "porkMeal",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "nonHalal",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "porkMeal(y)"
+      ],
+      "then": "nonHalal(y)"
+    }
+  },
+  {
+    "id": "CR038",
+    "scope": "FoodDomain",
+    "nl_rule": "Alcohol products count as non-halal products",
+    "category": "religiousClassification",
+    "logic_rule": "∀y.alcoholProduct(y)->nonHalal(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "alcoholProduct",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "nonHalal",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "alcoholProduct(y)"
+      ],
+      "then": "nonHalal(y)"
+    }
+  },
+  {
+    "id": "CR039",
+    "scope": "FoodDomain",
+    "nl_rule": "Non certified meat counts as uncertain halal status",
+    "category": "religiousClassification",
+    "logic_rule": "∀y.nonCertifiedMeat(y)->uncertainHalalStatus(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "nonCertifiedMeat",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "uncertainHalalStatus",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "nonCertifiedMeat(y)"
+      ],
+      "then": "uncertainHalalStatus(y)"
+    }
+  },
+  {
+    "id": "CR040",
+    "scope": "FoodDomain",
+    "nl_rule": "Pork meals count as non-kosher products",
+    "category": "religiousClassification",
+    "logic_rule": "∀y.porkMeal(y)->nonKosher(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "porkMeal",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "nonKosher",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "porkMeal(y)"
+      ],
+      "then": "nonKosher(y)"
+    }
+  },
+  {
+    "id": "CR041",
+    "scope": "FoodDomain",
+    "nl_rule": "Shellfish meals count as non-kosher products",
+    "category": "religiousClassification",
+    "logic_rule": "∀y.shellfishMeal(y)->nonKosher(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "shellfishMeal",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "nonKosher",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "shellfishMeal(y)"
+      ],
+      "then": "nonKosher(y)"
+    }
+  },
+  {
+    "id": "CR042",
+    "scope": "FoodDomain",
+    "nl_rule": "Non certified meat counts as uncertain kosher status",
+    "category": "religiousClassification",
+    "logic_rule": "∀y.nonCertifiedMeat(y)->uncertainKosherStatus(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "nonCertifiedMeat",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "uncertainKosherStatus",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "nonCertifiedMeat(y)"
+      ],
+      "then": "uncertainKosherStatus(y)"
+    }
+  },
+  {
+    "id": "CR043",
+    "scope": "FoodDomain",
+    "nl_rule": "Energy drinks count as age restricted products",
+    "category": "productSafety",
+    "logic_rule": "∀y.energyDrink(y)->ageRestrictedProduct(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "energyDrink",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "ageRestrictedProduct",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "energyDrink(y)"
+      ],
+      "then": "ageRestrictedProduct(y)"
+    }
+  },
+  {
+    "id": "CR044",
+    "scope": "FoodDomain",
+    "nl_rule": "Products requiring warnings count as safety warning products",
+    "category": "productSafety",
+    "logic_rule": "∀y.requiresWarning(y)->safetyWarningProduct(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "requiresWarning",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "safetyWarningProduct",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "requiresWarning(y)"
+      ],
+      "then": "safetyWarningProduct(y)"
+    }
+  },
+  {
+    "id": "CR045",
+    "scope": "FoodDomain",
+    "nl_rule": "Products containing undeclared allergens count as unsafe products",
+    "category": "productSafety",
+    "logic_rule": "∀y.containsUndeclaredAllergen(y)->unsafeProduct(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "containsUndeclaredAllergen",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "unsafeProduct",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "containsUndeclaredAllergen(y)"
+      ],
+      "then": "unsafeProduct(y)"
+    }
+  },
+  {
+    "id": "CR046",
+    "scope": "FoodDomain",
+    "nl_rule": "Organic foods count as market preference products",
+    "category": "marketClassification",
+    "logic_rule": "∀y.organicFood(y)->marketPreferenceProduct(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "organicFood",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "marketPreferenceProduct",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "organicFood(y)"
+      ],
+      "then": "marketPreferenceProduct(y)"
+    }
+  },
+  {
+    "id": "CR047",
+    "scope": "FoodDomain",
+    "nl_rule": "Sustainable meals count as market preference products",
+    "category": "marketClassification",
+    "logic_rule": "∀y.sustainable(y)->marketPreferenceProduct(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "sustainable",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "marketPreferenceProduct",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "sustainable(y)"
+      ],
+      "then": "marketPreferenceProduct(y)"
+    }
+  },
+  {
+    "id": "CR048",
+    "scope": "FoodDomain",
+    "nl_rule": "Seasonal meals count as market preference products",
+    "category": "marketClassification",
+    "logic_rule": "∀y.seasonalMeal(y)->marketPreferenceProduct(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "seasonalMeal",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "marketPreferenceProduct",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "seasonalMeal(y)"
+      ],
+      "then": "marketPreferenceProduct(y)"
+    }
+  },
+  {
+    "id": "CR049",
+    "scope": "FoodDomain",
+    "nl_rule": "Mediterranean meals count as cuisine specific products",
+    "category": "marketClassification",
+    "logic_rule": "∀y.mediterraneanMeal(y)->cuisineSpecificProduct(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "mediterraneanMeal",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "cuisineSpecificProduct",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "mediterraneanMeal(y)"
+      ],
+      "then": "cuisineSpecificProduct(y)"
+    }
+  },
+  {
+    "id": "CR050",
+    "scope": "FoodDomain",
+    "nl_rule": "Asian meals count as cuisine specific products",
+    "category": "marketClassification",
+    "logic_rule": "∀y.asianMeal(y)->cuisineSpecificProduct(y)",
+    "ast": {
+      "type": "quantifier",
+      "quantifier": "forall",
+      "variable": "y",
+      "body": {
+        "type": "implication",
+        "antecedent": {
+          "type": "predicate",
+          "name": "asianMeal",
+          "args": [
+            "y"
+          ]
+        },
+        "consequent": {
+          "type": "predicate",
+          "name": "cuisineSpecificProduct",
+          "args": [
+            "y"
+          ]
+        }
+      }
+    },
+    "normalized_rule": {
+      "quantifiers": [
+        {
+          "quantifier": "forall",
+          "variable": "y"
+        }
+      ],
+      "if": [
+        "asianMeal(y)"
+      ],
+      "then": "cuisineSpecificProduct(y)"
+    }
+  }
+]

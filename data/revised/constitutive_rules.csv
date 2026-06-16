@@ -1,0 +1,51 @@
+id,scope,nl_rule,logic_rule,category
+CR001,FoodDomain,Shellfish meals count as non-vegan products,∀y.shellfishMeal(y)->nonVegan(y),dietaryClassification
+CR002,FoodDomain,Meat meals count as non-vegan products,∀y.meatMeal(y)->nonVegan(y),dietaryClassification
+CR003,FoodDomain,Dairy meals count as non-vegan products,∀y.dairyMeal(y)->nonVegan(y),dietaryClassification
+CR004,FoodDomain,Egg meals count as non-vegan products,∀y.eggMeal(y)->nonVegan(y),dietaryClassification
+CR005,FoodDomain,Honey products count as non-vegan products,∀y.honeyProduct(y)->nonVegan(y),dietaryClassification
+CR006,FoodDomain,Meat meals count as non-vegetarian products,∀y.meatMeal(y)->nonVegetarian(y),dietaryClassification
+CR007,FoodDomain,Shellfish meals count as non-vegetarian products,∀y.shellfishMeal(y)->nonVegetarian(y),dietaryClassification
+CR008,FoodDomain,Fish meals count as non-vegetarian products,∀y.fishMeal(y)->nonVegetarian(y),dietaryClassification
+CR009,FoodDomain,Chicken meals count as non-vegetarian products,∀y.chickenMeal(y)->nonVegetarian(y),dietaryClassification
+CR010,FoodDomain,Beef meals count as non-vegetarian products,∀y.beefMeal(y)->nonVegetarian(y),dietaryClassification
+CR011,FoodDomain,Energy drinks count as high sugar products,∀y.energyDrink(y)->highSugarProduct(y),nutritionClassification
+CR012,FoodDomain,Sugary snacks count as high sugar products,∀y.sugarySnack(y)->highSugarProduct(y),nutritionClassification
+CR013,FoodDomain,Candy products count as high sugar products,∀y.candyProduct(y)->highSugarProduct(y),nutritionClassification
+CR014,FoodDomain,Sweet desserts count as high sugar products,∀y.sweetDessert(y)->highSugarProduct(y),nutritionClassification
+CR015,FoodDomain,Regular soda counts as a high sugar product,∀y.regularSoda(y)->highSugarProduct(y),nutritionClassification
+CR016,FoodDomain,Salty snacks count as high salt products,∀y.saltySnack(y)->highSaltProduct(y),nutritionClassification
+CR017,FoodDomain,Processed meat counts as a high salt product,∀y.processedMeat(y)->highSaltProduct(y),nutritionClassification
+CR018,FoodDomain,Instant noodles count as high salt products,∀y.instantNoodles(y)->highSaltProduct(y),nutritionClassification
+CR019,FoodDomain,Salted nuts count as high salt products,∀y.saltedNuts(y)->highSaltProduct(y),nutritionClassification
+CR020,FoodDomain,Canned soup counts as a high salt product,∀y.cannedSoup(y)->highSaltProduct(y),nutritionClassification
+CR021,FoodDomain,Fried meals count as high fat products,∀y.friedMeal(y)->highFatProduct(y),nutritionClassification
+CR022,FoodDomain,Cream desserts count as high fat products,∀y.creamDessert(y)->highFatProduct(y),nutritionClassification
+CR023,FoodDomain,Fast food meals count as high fat products,∀y.fastFoodMeal(y)->highFatProduct(y),nutritionClassification
+CR024,FoodDomain,Cheese meals count as high fat products,∀y.cheeseMeal(y)->highFatProduct(y),nutritionClassification
+CR025,FoodDomain,Butter products count as high fat products,∀y.butterProduct(y)->highFatProduct(y),nutritionClassification
+CR026,FoodDomain,Nut snacks contain nuts,"∀y.nutSnack(y)->contains(y,Nuts)",allergenClassification
+CR027,FoodDomain,Peanut snacks contain nuts,"∀y.peanutSnack(y)->contains(y,Nuts)",allergenClassification
+CR028,FoodDomain,Almond desserts contain nuts,"∀y.almondDessert(y)->contains(y,Nuts)",allergenClassification
+CR029,FoodDomain,Shellfish meals contain shellfish,"∀y.shellfishMeal(y)->contains(y,Shellfish)",allergenClassification
+CR030,FoodDomain,Shrimp meals contain shellfish,"∀y.shrimpMeal(y)->contains(y,Shellfish)",allergenClassification
+CR031,FoodDomain,Wheat meals contain gluten,"∀y.wheatMeal(y)->contains(y,Gluten)",medicalSuitability
+CR032,FoodDomain,Bread products contain gluten,"∀y.breadProduct(y)->contains(y,Gluten)",medicalSuitability
+CR033,FoodDomain,Regular pasta contains gluten,"∀y.regularPasta(y)->contains(y,Gluten)",medicalSuitability
+CR034,FoodDomain,Dairy meals contain lactose,"∀y.dairyMeal(y)->contains(y,Lactose)",medicalSuitability
+CR035,FoodDomain,Milk products contain lactose,"∀y.milkProduct(y)->contains(y,Lactose)",medicalSuitability
+CR036,FoodDomain,Cheese meals contain lactose,"∀y.cheeseMeal(y)->contains(y,Lactose)",medicalSuitability
+CR037,FoodDomain,Pork meals count as non-halal products,∀y.porkMeal(y)->nonHalal(y),religiousClassification
+CR038,FoodDomain,Alcohol products count as non-halal products,∀y.alcoholProduct(y)->nonHalal(y),religiousClassification
+CR039,FoodDomain,Non certified meat counts as uncertain halal status,∀y.nonCertifiedMeat(y)->uncertainHalalStatus(y),religiousClassification
+CR040,FoodDomain,Pork meals count as non-kosher products,∀y.porkMeal(y)->nonKosher(y),religiousClassification
+CR041,FoodDomain,Shellfish meals count as non-kosher products,∀y.shellfishMeal(y)->nonKosher(y),religiousClassification
+CR042,FoodDomain,Non certified meat counts as uncertain kosher status,∀y.nonCertifiedMeat(y)->uncertainKosherStatus(y),religiousClassification
+CR043,FoodDomain,Energy drinks count as age restricted products,∀y.energyDrink(y)->ageRestrictedProduct(y),productSafety
+CR044,FoodDomain,Products requiring warnings count as safety warning products,∀y.requiresWarning(y)->safetyWarningProduct(y),productSafety
+CR045,FoodDomain,Products containing undeclared allergens count as unsafe products,∀y.containsUndeclaredAllergen(y)->unsafeProduct(y),productSafety
+CR046,FoodDomain,Organic foods count as market preference products,∀y.organicFood(y)->marketPreferenceProduct(y),marketClassification
+CR047,FoodDomain,Sustainable meals count as market preference products,∀y.sustainable(y)->marketPreferenceProduct(y),marketClassification
+CR048,FoodDomain,Seasonal meals count as market preference products,∀y.seasonalMeal(y)->marketPreferenceProduct(y),marketClassification
+CR049,FoodDomain,Mediterranean meals count as cuisine specific products,∀y.mediterraneanMeal(y)->cuisineSpecificProduct(y),marketClassification
+CR050,FoodDomain,Asian meals count as cuisine specific products,∀y.asianMeal(y)->cuisineSpecificProduct(y),marketClassification

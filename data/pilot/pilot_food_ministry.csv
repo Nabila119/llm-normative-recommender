@@ -1,0 +1,6 @@
+id,stakeholder,nl_norm,implication_formula,dyadic_formula,norm_type
+MINISTRYP001,Food Ministry,Children must not receive products exceeding sugar limits,"∀x.∀y.child(x)∧exceedsSugarLimit(y)->F(recommend(System,y,x))","∀x.∀y.F(recommend(System,y,x)|child(x)∧exceedsSugarLimit(y))",prohibition
+MINISTRYP002,Food Ministry,Diabetic users must receive foods that are safe for diabetic users,"∀x.∀y.diabetic(x)∧safeForDiabeticUsers(y)->O(recommend(System,y,x))","∀x.∀y.O(recommend(System,y,x)|diabetic(x)∧safeForDiabeticUsers(y))",obligation
+MINISTRYP003,Food Ministry,Adults may receive approved foods that comply with ministry guidelines,"∀x.∀y.adult(x)∧approvedByMinistry(y)∧compliesWithGuideline(y)->P(recommend(System,y,x))","∀x.∀y.P(recommend(System,y,x)|adult(x)∧approvedByMinistry(y)∧compliesWithGuideline(y))",permission
+MINISTRYP004,Food Ministry,Users allergic to nuts must not receive products containing undeclared allergens,"∀x.∀y.allergicTo(x,Nuts)∧containsUndeclaredAllergen(y)->F(recommend(System,y,x))","∀x.∀y.F(recommend(System,y,x)|allergicTo(x,Nuts)∧containsUndeclaredAllergen(y))",prohibition
+MINISTRYP005,Food Ministry,Users requiring kosher food may receive verified kosher products,"∀x.∀y.requiresKosher(x)∧verifiedKosher(y)->P(recommend(System,y,x))","∀x.∀y.P(recommend(System,y,x)|requiresKosher(x)∧verifiedKosher(y))",permission

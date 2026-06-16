@@ -20,8 +20,8 @@
 modal_formula: MODAL_OP "(" formula ")"
              | MODAL_OP "(" formula "|" formula ")"
 
-quantifier: "∀" NAME "." formula
-          | "∃" NAME "." formula
+quantifier: "∀" NAME "." formula       -> forall
+          | "∃" NAME "." formula       -> exists
 
 predicate: NAME "(" term_list ")"
          | NAME

@@ -1,0 +1,6 @@
+id,scope,nl_rule,logic_rule,category
+CRP001,FoodDomain,Shellfish meals count as non-vegan products,"∀y.shellfishMeal(y)->nonVegan(y)",dietaryClassification
+CRP002,FoodDomain,Meat meals count as non-vegetarian products,"∀y.meatMeal(y)->nonVegetarian(y)",dietaryClassification
+CRP003,FoodDomain,Energy drinks count as high sugar products,"∀y.energyDrink(y)->highSugarProduct(y)",nutritionClassification
+CRP004,FoodDomain,Nut snacks contain nuts,"∀y.nutSnack(y)->contains(y,Nuts)",allergenClassification
+CRP005,FoodDomain,Dairy meals contain lactose,"∀y.dairyMeal(y)->contains(y,Lactose)",medicalSuitability

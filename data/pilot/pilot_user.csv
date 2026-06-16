@@ -1,0 +1,6 @@
+id,stakeholder,nl_norm,implication_formula,dyadic_formula,norm_type
+USERP001,User,Children should not receive energy drink recommendations,"∀x.∀y.child(x)∧energyDrink(y)->F(recommend(System,y,x))","∀x.∀y.F(recommend(System,y,x)|child(x)∧energyDrink(y))",prohibition
+USERP002,User,Diabetic users should receive low sugar food recommendations,"∀x.∀y.diabetic(x)∧lowSugarFood(y)->O(recommend(System,y,x))","∀x.∀y.O(recommend(System,y,x)|diabetic(x)∧lowSugarFood(y))",obligation
+USERP003,User,Users requiring gluten-free food may receive certified gluten-free meal recommendations,"∀x.∀y.requiresGlutenFree(x)∧glutenFreeMeal(y)∧certifiedGlutenFree(y)->P(recommend(System,y,x))","∀x.∀y.P(recommend(System,y,x)|requiresGlutenFree(x)∧glutenFreeMeal(y)∧certifiedGlutenFree(y))",permission
+USERP004,User,Vegan users should not receive non-vegan meal recommendations,"∀x.∀y.vegan(x)∧nonVegan(y)->F(recommend(System,y,x))","∀x.∀y.F(recommend(System,y,x)|vegan(x)∧nonVegan(y))",prohibition
+USERP005,User,Users requiring halal food should receive certified halal meal recommendations,"∀x.∀y.requiresHalal(x)∧halalMeal(y)∧certifiedHalal(y)->O(recommend(System,y,x))","∀x.∀y.O(recommend(System,y,x)|requiresHalal(x)∧halalMeal(y)∧certifiedHalal(y))",obligation
