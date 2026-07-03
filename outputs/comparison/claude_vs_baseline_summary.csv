@@ -1,0 +1,4 @@
+stakeholder,baseline_rows,claude_rows,baseline_formulas,claude_formulas,exact_nl_norm_overlap,exact_implication_formula_overlap,exact_dyadic_formula_overlap,baseline_predicate_count,claude_predicate_count,shared_predicate_count,avg_baseline_condition_size,avg_claude_condition_size
+User,100,100,200,200,0,22,22,83,48,46,2.23,2.12
+Food Ministry,100,100,200,200,0,14,14,77,40,37,2.14,2.5
+Food Industry,100,100,200,200,0,6,6,48,39,39,2.33,2.04

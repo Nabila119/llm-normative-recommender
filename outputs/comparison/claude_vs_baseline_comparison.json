@@ -1,0 +1,309 @@
+[
+  {
+    "stakeholder": "User",
+    "baseline_rows": 100,
+    "claude_rows": 100,
+    "baseline_formulas": 200,
+    "claude_formulas": 200,
+    "baseline_norm_types": {
+      "prohibition": 37,
+      "obligation": 36,
+      "permission": 27
+    },
+    "claude_norm_types": {
+      "prohibition": 42,
+      "permission": 43,
+      "obligation": 15
+    },
+    "baseline_duplicate_nl": 0,
+    "claude_duplicate_nl": 0,
+    "baseline_predicate_count": 83,
+    "claude_predicate_count": 48,
+    "shared_predicate_count": 46,
+    "baseline_only_predicates": [
+      "allergenSafeMeal",
+      "caffeinatedProduct",
+      "certified",
+      "certifiedHealthy",
+      "containsUndeclaredAllergen",
+      "dairyMeal",
+      "discountedMeal",
+      "environmentFriendly",
+      "freshMeal",
+      "friedMeal",
+      "hasHealthGoal",
+      "hasNutritionLabel",
+      "heartHealthyMeal",
+      "highSaltProduct",
+      "highSugarProduct",
+      "localProduct",
+      "lowFatMeal",
+      "meatMeal",
+      "nonHalal",
+      "nonKosher",
+      "nonVegetarian",
+      "nutFreeMeal",
+      "plantBasedMeal",
+      "processedMeat",
+      "proteinRichMeal",
+      "requiresCertifiedProduct",
+      "requiresHeartHealthy",
+      "requiresWarning",
+      "safeForPregnantUsers",
+      "seasonalMeal"
+    ],
+    "claude_only_predicates": [
+      "nutSnack",
+      "sustainableMeal"
+    ],
+    "avg_baseline_condition_size": 2.23,
+    "avg_claude_condition_size": 2.12,
+    "by_id": {
+      "shared_ids": 100,
+      "same_norm_type": 37,
+      "same_nl": 0,
+      "same_implication_formula": 1,
+      "same_dyadic_formula": 1,
+      "different_formula_examples": [
+        {
+          "id": "USER002",
+          "baseline_nl": "Children should not receive high sugar product recommendations",
+          "claude_nl": "Children should not be recommended sugary snacks.",
+          "baseline_implication": "∀x.∀y.child(x)∧highSugarProduct(y)->F(recommend(System,y,x))",
+          "claude_implication": "∀x.∀y.child(x)∧sugarySnack(y)->F(recommend(System,y,x))"
+        },
+        {
+          "id": "USER003",
+          "baseline_nl": "Children should receive healthy meal recommendations",
+          "claude_nl": "Children should not be recommended ultra-processed food.",
+          "baseline_implication": "∀x.∀y.child(x)∧healthyMeal(y)->O(recommend(System,y,x))",
+          "claude_implication": "∀x.∀y.child(x)∧ultraProcessedFood(y)->F(recommend(System,y,x))"
+        },
+        {
+          "id": "USER004",
+          "baseline_nl": "Children may receive mild meal recommendations",
+          "claude_nl": "Children may be recommended healthy meals.",
+          "baseline_implication": "∀x.∀y.child(x)∧mildMeal(y)->P(recommend(System,y,x))",
+          "claude_implication": "∀x.∀y.child(x)∧healthyMeal(y)->P(recommend(System,y,x))"
+        },
+        {
+          "id": "USER005",
+          "baseline_nl": "Children should not receive ultra processed food recommendations",
+          "claude_nl": "Children must be recommended low sugar food.",
+          "baseline_implication": "∀x.∀y.child(x)∧ultraProcessedFood(y)->F(recommend(System,y,x))",
+          "claude_implication": "∀x.∀y.child(x)∧lowSugarFood(y)->O(recommend(System,y,x))"
+        },
+        {
+          "id": "USER006",
+          "baseline_nl": "Diabetic users should receive low sugar food recommendations",
+          "claude_nl": "Children should not be recommended spicy meals.",
+          "baseline_implication": "∀x.∀y.diabetic(x)∧lowSugarFood(y)->O(recommend(System,y,x))",
+          "claude_implication": "∀x.∀y.child(x)∧spicyMeal(y)->F(recommend(System,y,x))"
+        }
+      ]
+    },
+    "exact_nl_norm_overlap": 0,
+    "exact_nl_norm_overlap_percent_of_claude": 0.0,
+    "exact_implication_formula_overlap": 22,
+    "exact_implication_formula_overlap_percent_of_claude": 22.0,
+    "exact_dyadic_formula_overlap": 22,
+    "exact_dyadic_formula_overlap_percent_of_claude": 22.0
+  },
+  {
+    "stakeholder": "Food Ministry",
+    "baseline_rows": 100,
+    "claude_rows": 100,
+    "baseline_formulas": 200,
+    "claude_formulas": 200,
+    "baseline_norm_types": {
+      "prohibition": 45,
+      "obligation": 31,
+      "permission": 24
+    },
+    "claude_norm_types": {
+      "prohibition": 40,
+      "permission": 35,
+      "obligation": 25
+    },
+    "baseline_duplicate_nl": 0,
+    "claude_duplicate_nl": 0,
+    "baseline_predicate_count": 77,
+    "claude_predicate_count": 40,
+    "shared_predicate_count": 37,
+    "baseline_only_predicates": [
+      "ageRestrictedProduct",
+      "allergenSafeMeal",
+      "alternativeToRestrictedFood",
+      "available",
+      "avoids",
+      "certified",
+      "completeLabel",
+      "compliesWithLabeling",
+      "essentialFood",
+      "halalMeal",
+      "hasAllergenLabel",
+      "highFatProduct",
+      "highSaltProduct",
+      "highSugarProduct",
+      "incompleteLabel",
+      "kosherMeal",
+      "lowFatMeal",
+      "lowSaltFood",
+      "lowSugarFood",
+      "meetsNutritionGuideline",
+      "nonHalal",
+      "nonKosher",
+      "nutritionClaim",
+      "organicFood",
+      "prefers",
+      "requiresCertifiedProduct",
+      "requiresLowSalt",
+      "requiresLowSugar",
+      "safeFor",
+      "safetyWarningProduct"
+    ],
+    "claude_only_predicates": [
+      "friedMeal",
+      "saltySnack",
+      "sugarySnack"
+    ],
+    "avg_baseline_condition_size": 2.14,
+    "avg_claude_condition_size": 2.5,
+    "by_id": {
+      "shared_ids": 100,
+      "same_norm_type": 35,
+      "same_nl": 0,
+      "same_implication_formula": 1,
+      "same_dyadic_formula": 1,
+      "different_formula_examples": [
+        {
+          "id": "MINISTRY001",
+          "baseline_nl": "Food Ministry regulation prohibits the recommender from violating this safety rule: Children must not receive products exceeding sugar limits.",
+          "claude_nl": "Children must not be recommended products that are banned for children.",
+          "baseline_implication": "∀x.∀y.child(x)∧exceedsSugarLimit(y)->F(recommend(System,y,x))",
+          "claude_implication": "∀x.∀y.child(x)∧bannedForChildren(y)->F(recommend(System,y,x))"
+        },
+        {
+          "id": "MINISTRY002",
+          "baseline_nl": "Food Ministry regulation prohibits the recommender from violating this safety rule: Children must not receive age restricted products.",
+          "claude_nl": "Children must not be recommended products that exceed the sugar limit.",
+          "baseline_implication": "∀x.∀y.child(x)∧ageRestrictedProduct(y)->F(recommend(System,y,x))",
+          "claude_implication": "∀x.∀y.child(x)∧exceedsSugarLimit(y)->F(recommend(System,y,x))"
+        },
+        {
+          "id": "MINISTRY003",
+          "baseline_nl": "Food Ministry policy requires the recommender to follow this public-interest rule: Children must receive healthy meal recommendations when available.",
+          "claude_nl": "Children must not be recommended energy drinks.",
+          "baseline_implication": "∀x.∀y.child(x)∧healthyMeal(y)∧available(y)->O(recommend(System,y,x))",
+          "claude_implication": "∀x.∀y.child(x)∧energyDrink(y)->F(recommend(System,y,x))"
+        },
+        {
+          "id": "MINISTRY004",
+          "baseline_nl": "Food Ministry policy permits the recommender to act under this regulatory condition: Children may receive approved low sugar products.",
+          "claude_nl": "Children must not be recommended restricted products.",
+          "baseline_implication": "∀x.∀y.child(x)∧approvedByMinistry(y)∧lowSugarFood(y)->P(recommend(System,y,x))",
+          "claude_implication": "∀x.∀y.child(x)∧restricted(y)->F(recommend(System,y,x))"
+        },
+        {
+          "id": "MINISTRY005",
+          "baseline_nl": "Food Ministry regulation prohibits the recommender from violating this safety rule: Children must not receive products requiring safety warnings.",
+          "claude_nl": "Children must not be recommended products that are not approved by the ministry.",
+          "baseline_implication": "∀x.∀y.child(x)∧requiresWarning(y)->F(recommend(System,y,x))",
+          "claude_implication": "∀x.∀y.child(x)∧¬approvedByMinistry(y)->F(recommend(System,y,x))"
+        }
+      ]
+    },
+    "exact_nl_norm_overlap": 0,
+    "exact_nl_norm_overlap_percent_of_claude": 0.0,
+    "exact_implication_formula_overlap": 14,
+    "exact_implication_formula_overlap_percent_of_claude": 14.0,
+    "exact_dyadic_formula_overlap": 14,
+    "exact_dyadic_formula_overlap_percent_of_claude": 14.0
+  },
+  {
+    "stakeholder": "Food Industry",
+    "baseline_rows": 100,
+    "claude_rows": 100,
+    "baseline_formulas": 200,
+    "claude_formulas": 200,
+    "baseline_norm_types": {
+      "obligation": 38,
+      "permission": 36,
+      "prohibition": 26
+    },
+    "claude_norm_types": {
+      "obligation": 34,
+      "permission": 38,
+      "prohibition": 28
+    },
+    "baseline_duplicate_nl": 0,
+    "claude_duplicate_nl": 0,
+    "baseline_predicate_count": 48,
+    "claude_predicate_count": 39,
+    "shared_predicate_count": 39,
+    "baseline_only_predicates": [
+      "brandSafe",
+      "brandUnsafe",
+      "cuisineSpecificProduct",
+      "healthyMeal",
+      "marketPreferenceProduct",
+      "misleadingClaim",
+      "requiresCertifiedProduct",
+      "unaffordable",
+      "verifiedClaim"
+    ],
+    "claude_only_predicates": [],
+    "avg_baseline_condition_size": 2.33,
+    "avg_claude_condition_size": 2.04,
+    "by_id": {
+      "shared_ids": 100,
+      "same_norm_type": 40,
+      "same_nl": 0,
+      "same_implication_formula": 1,
+      "same_dyadic_formula": 1,
+      "different_formula_examples": [
+        {
+          "id": "INDUSTRY001",
+          "baseline_nl": "Food Industry policy requires the recommender to support this commercial objective: Eligible users should receive sponsored product recommendations when products are available.",
+          "claude_nl": "Sponsored products that are in stock should be recommended to users.",
+          "baseline_implication": "∀x.∀y.eligible(x)∧sponsored(y)∧available(y)->O(recommend(System,y,x))",
+          "claude_implication": "∀x.∀y.sponsored(y)∧available(y)->O(recommend(System,y,x))"
+        },
+        {
+          "id": "INDUSTRY002",
+          "baseline_nl": "Food Industry policy permits the recommender to use this market placement rule: Eligible adults may receive sponsored product recommendations.",
+          "claude_nl": "Premium products should be recommended to premium customers.",
+          "baseline_implication": "∀x.∀y.eligible(x)∧adult(x)∧sponsored(y)->P(recommend(System,y,x))",
+          "claude_implication": "∀x.∀y.premiumProduct(y)∧premiumCustomer(x)->O(recommend(System,y,x))"
+        },
+        {
+          "id": "INDUSTRY003",
+          "baseline_nl": "Food Industry compliance prohibits the recommender from violating this product-suitability rule: Ineligible users should not receive sponsored product recommendations.",
+          "claude_nl": "Certified products that are available should be recommended.",
+          "baseline_implication": "∀x.∀y.¬eligible(x)∧sponsored(y)->F(recommend(System,y,x))",
+          "claude_implication": "∀x.∀y.certified(y)∧available(y)->O(recommend(System,y,x))"
+        },
+        {
+          "id": "INDUSTRY004",
+          "baseline_nl": "Food Industry policy requires the recommender to support this commercial objective: Sponsored products should be recommended when they are approved and available.",
+          "claude_nl": "Local products should be recommended to users interested in local food.",
+          "baseline_implication": "∀x.∀y.sponsored(y)∧approved(y)∧available(y)->O(recommend(System,y,x))",
+          "claude_implication": "∀x.∀y.localProduct(y)∧interestedIn(x,LocalFood)->O(recommend(System,y,x))"
+        },
+        {
+          "id": "INDUSTRY005",
+          "baseline_nl": "Food Industry compliance prohibits the recommender from violating this product-suitability rule: Sponsored products should not be recommended when they are restricted.",
+          "claude_nl": "Sustainable products should be recommended to users interested in sustainable food.",
+          "baseline_implication": "∀x.∀y.sponsored(y)∧restricted(y)->F(recommend(System,y,x))",
+          "claude_implication": "∀x.∀y.sustainable(y)∧interestedIn(x,SustainableFood)->O(recommend(System,y,x))"
+        }
+      ]
+    },
+    "exact_nl_norm_overlap": 0,
+    "exact_nl_norm_overlap_percent_of_claude": 0.0,
+    "exact_implication_formula_overlap": 6,
+    "exact_implication_formula_overlap_percent_of_claude": 6.0,
+    "exact_dyadic_formula_overlap": 6,
+    "exact_dyadic_formula_overlap_percent_of_claude": 6.0
+  }
+]

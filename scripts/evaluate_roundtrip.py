@@ -1,3 +1,4 @@
+import argparse
 import csv
 import json
 import re
@@ -6,9 +7,6 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 ROUNDTRIP_DIR = PROJECT_ROOT / "outputs" / "roundtrip"
-INPUT = ROUNDTRIP_DIR / "roundtrip_backtranslations.csv"
-CSV_OUT = ROUNDTRIP_DIR / "roundtrip_evaluated.csv"
-JSON_OUT = ROUNDTRIP_DIR / "roundtrip_evaluated.json"
 
 
 MODALITY_CUES = {
@@ -216,7 +214,17 @@ def evaluate_row(row):
 
 
 def main():
-    with INPUT.open(encoding="utf-8", newline="") as f:
+    parser = argparse.ArgumentParser(description="Evaluate round-trip backtranslations.")
+    parser.add_argument("--input", default=str(ROUNDTRIP_DIR / "roundtrip_backtranslations.csv"))
+    parser.add_argument("--csv-out", default=str(ROUNDTRIP_DIR / "roundtrip_evaluated.csv"))
+    parser.add_argument("--json-out", default=str(ROUNDTRIP_DIR / "roundtrip_evaluated.json"))
+    args = parser.parse_args()
+
+    input_path = Path(args.input)
+    csv_out = Path(args.csv_out)
+    json_out = Path(args.json_out)
+
+    with input_path.open(encoding="utf-8", newline="") as f:
         rows = list(csv.DictReader(f))
 
     evaluated = []
@@ -252,12 +260,15 @@ def main():
         "human_notes",
     ]
 
-    with CSV_OUT.open("w", encoding="utf-8", newline="") as f:
+    csv_out.parent.mkdir(parents=True, exist_ok=True)
+    json_out.parent.mkdir(parents=True, exist_ok=True)
+
+    with csv_out.open("w", encoding="utf-8", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(evaluated)
 
-    JSON_OUT.write_text(json.dumps(evaluated, ensure_ascii=False, indent=2), encoding="utf-8")
+    json_out.write_text(json.dumps(evaluated, ensure_ascii=False, indent=2), encoding="utf-8")
 
     counts = {}
     for row in evaluated:
@@ -266,8 +277,8 @@ def main():
 
     print(f"evaluated rows={len(evaluated)}")
     print(f"auto score counts={counts}")
-    print(f"csv={CSV_OUT}")
-    print(f"json={JSON_OUT}")
+    print(f"csv={csv_out}")
+    print(f"json={json_out}")
 
 
 if __name__ == "__main__":

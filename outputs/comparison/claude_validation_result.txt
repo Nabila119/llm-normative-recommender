@@ -1,0 +1,5 @@
+data/claude/claude_user_dataset.csv: rows=100 formulas=200 errors=0 warnings=0
+data/claude/claude_food_ministry_dataset.csv: rows=100 formulas=200 errors=0 warnings=0
+data/claude/claude_food_industry_dataset.csv: rows=100 formulas=200 errors=0 warnings=0
+TOTAL: rows=300 formulas=600 errors=0 warnings=0
+VALIDATION PASSED
