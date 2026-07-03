@@ -1,0 +1,8 @@
+metric,value
+total_rows,600
+human_reviewed_rows,112
+human_score_2,84
+human_score_1,22
+human_score_0,6
+auto_human_exact_agreement,48
+auto_human_exact_agreement_percent,42.9
