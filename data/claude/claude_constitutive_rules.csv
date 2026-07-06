@@ -1,0 +1,51 @@
+id,scope,nl_rule,logic_rule,category
+CR001,FoodDomain,A shellfish meal counts as a non-vegan product.,∀y.shellfishMeal(y)->nonVegan(y),dietaryClassification
+CR002,FoodDomain,A meat meal counts as a non-vegan product.,∀y.meatMeal(y)->nonVegan(y),dietaryClassification
+CR003,FoodDomain,A dairy meal counts as a non-vegan product.,∀y.dairyMeal(y)->nonVegan(y),dietaryClassification
+CR004,FoodDomain,A product containing eggs counts as a non-vegan product.,"∀y.contains(y,Eggs)->nonVegan(y)",dietaryClassification
+CR005,FoodDomain,A product containing honey counts as a non-vegan product.,"∀y.contains(y,Honey)->nonVegan(y)",dietaryClassification
+CR006,FoodDomain,Every vegan meal also counts as a vegetarian meal.,∀y.veganMeal(y)->vegetarianMeal(y),dietaryClassification
+CR007,FoodDomain,A meat meal counts as a non-vegetarian product.,∀y.meatMeal(y)->nonVegetarian(y),dietaryClassification
+CR008,FoodDomain,A shellfish meal counts as a non-vegetarian product.,∀y.shellfishMeal(y)->nonVegetarian(y),dietaryClassification
+CR009,FoodDomain,A product containing gelatin counts as a non-vegetarian product.,"∀y.contains(y,Gelatin)->nonVegetarian(y)",dietaryClassification
+CR010,FoodDomain,A fish meal counts as a non-vegetarian product.,∀y.fishMeal(y)->nonVegetarian(y),dietaryClassification
+CR011,FoodDomain,A nut snack counts as a product that contains nuts.,"∀y.nutSnack(y)->contains(y,Nuts)",allergenClassification
+CR012,FoodDomain,A product containing nuts counts as an allergen-containing product.,"∀y.contains(y,Nuts)->allergenContaining(y)",allergenClassification
+CR013,FoodDomain,A product containing shellfish counts as an allergen-containing product.,"∀y.contains(y,Shellfish)->allergenContaining(y)",allergenClassification
+CR014,FoodDomain,A product containing milk counts as an allergen-containing product.,"∀y.contains(y,Milk)->allergenContaining(y)",allergenClassification
+CR015,FoodDomain,A product containing soy counts as an allergen-containing product.,"∀y.contains(y,Soy)->allergenContaining(y)",allergenClassification
+CR016,FoodDomain,A product containing gluten counts as an allergen-containing product.,"∀y.contains(y,Gluten)->allergenContaining(y)",allergenClassification
+CR017,FoodDomain,A product with an undeclared allergen counts as a product that requires a warning.,∀y.containsUndeclaredAllergen(y)->requiresWarning(y),allergenClassification
+CR018,FoodDomain,An energy drink counts as a product that exceeds the sugar limit.,∀y.energyDrink(y)->exceedsSugarLimit(y),nutritionClassification
+CR019,FoodDomain,A sugary snack counts as a product that exceeds the sugar limit.,∀y.sugarySnack(y)->exceedsSugarLimit(y),nutritionClassification
+CR020,FoodDomain,A product that exceeds the sugar limit counts as a high sugar product.,∀y.exceedsSugarLimit(y)->highSugarProduct(y),nutritionClassification
+CR021,FoodDomain,A salty snack counts as a product that exceeds the salt limit.,∀y.saltySnack(y)->exceedsSaltLimit(y),nutritionClassification
+CR022,FoodDomain,A product that exceeds the salt limit counts as a high salt product.,∀y.exceedsSaltLimit(y)->highSaltProduct(y),nutritionClassification
+CR023,FoodDomain,A fried meal counts as a product that exceeds the fat limit.,∀y.friedMeal(y)->exceedsFatLimit(y),nutritionClassification
+CR024,FoodDomain,A product that exceeds the fat limit counts as a high fat product.,∀y.exceedsFatLimit(y)->highFatProduct(y),nutritionClassification
+CR025,FoodDomain,An ultra-processed food does not count as a healthy meal.,∀y.ultraProcessedFood(y)->¬healthyMeal(y),nutritionClassification
+CR026,FoodDomain,A certified halal product counts as a halal meal.,∀y.certifiedHalal(y)->halalMeal(y),religiousClassification
+CR027,FoodDomain,A verified halal product counts as a halal meal.,∀y.verifiedHalal(y)->halalMeal(y),religiousClassification
+CR028,FoodDomain,A product containing pork counts as a non-halal product.,"∀y.contains(y,Pork)->nonHalal(y)",religiousClassification
+CR029,FoodDomain,A product containing alcohol counts as a non-halal product.,"∀y.contains(y,Alcohol)->nonHalal(y)",religiousClassification
+CR030,FoodDomain,A certified kosher product counts as a kosher meal.,∀y.certifiedKosher(y)->kosherMeal(y),religiousClassification
+CR031,FoodDomain,A verified kosher product counts as a kosher meal.,∀y.verifiedKosher(y)->kosherMeal(y),religiousClassification
+CR032,FoodDomain,A product containing pork counts as a non-kosher product.,"∀y.contains(y,Pork)->nonKosher(y)",religiousClassification
+CR033,FoodDomain,A product containing both meat and dairy counts as a non-kosher product.,"∀y.contains(y,Meat)∧contains(y,Dairy)->nonKosher(y)",religiousClassification
+CR034,FoodDomain,A certified gluten-free product counts as a gluten-free meal.,∀y.certifiedGlutenFree(y)->glutenFreeMeal(y),dietaryClassification
+CR035,FoodDomain,A product containing gluten counts as a gluten-containing product.,"∀y.contains(y,Gluten)->glutenContaining(y)",dietaryClassification
+CR036,FoodDomain,A gluten-containing product does not count as a gluten-free meal.,∀y.glutenContaining(y)->¬glutenFreeMeal(y),dietaryClassification
+CR037,FoodDomain,A gluten-free meal counts as safe for celiac users.,"∀y.glutenFreeMeal(y)->safeFor(y,CeliacUsers)",medicalSuitability
+CR038,FoodDomain,A certified lactose-free product counts as a lactose-free meal.,∀y.certifiedLactoseFree(y)->lactoseFreeMeal(y),dietaryClassification
+CR039,FoodDomain,A dairy meal counts as a product that contains lactose.,"∀y.dairyMeal(y)->contains(y,Lactose)",dietaryClassification
+CR040,FoodDomain,A product containing lactose does not count as a lactose-free meal.,"∀y.contains(y,Lactose)->¬lactoseFreeMeal(y)",dietaryClassification
+CR041,FoodDomain,An energy drink counts as a product banned for children.,∀y.energyDrink(y)->bannedForChildren(y),productSafety
+CR042,FoodDomain,A product containing alcohol counts as a product banned for children.,"∀y.contains(y,Alcohol)->bannedForChildren(y)",productSafety
+CR043,FoodDomain,A product banned for children counts as an age-restricted product.,∀y.bannedForChildren(y)->ageRestrictedProduct(y),productSafety
+CR044,FoodDomain,An organic food item counts as an organic product.,∀y.organicFood(y)->organic(y),marketClassification
+CR045,FoodDomain,A sustainable meal counts as a sustainable product.,∀y.sustainableMeal(y)->sustainable(y),marketClassification
+CR046,FoodDomain,A local product counts as a sustainable product.,∀y.localProduct(y)->sustainable(y),marketClassification
+CR047,FoodDomain,A spicy meal counts as a spicy product.,∀y.spicyMeal(y)->spicy(y),marketClassification
+CR048,FoodDomain,A mild meal counts as a mild product.,∀y.mildMeal(y)->mild(y),marketClassification
+CR049,FoodDomain,An Asian meal counts as an international cuisine meal.,∀y.asianMeal(y)->internationalCuisineMeal(y),marketClassification
+CR050,FoodDomain,A Mediterranean meal counts as an international cuisine meal.,∀y.mediterraneanMeal(y)->internationalCuisineMeal(y),marketClassification

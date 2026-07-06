@@ -1,0 +1,2 @@
+dataset,baseline_rows,claude_rows,baseline_formulas,claude_formulas,exact_nl_rule_overlap,exact_logic_rule_overlap,exact_category_overlap,baseline_predicate_count,claude_predicate_count,shared_predicate_count,baseline_duplicate_nl,claude_duplicate_nl,baseline_duplicate_logic,claude_duplicate_logic
+Constitutive Rules,50,50,50,50,0,8,7,56,53,24,0,0,0,0

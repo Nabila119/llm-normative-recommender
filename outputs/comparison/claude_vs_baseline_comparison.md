@@ -4,21 +4,20 @@ Claude metadata supplied by Viktor:
 
 - LLM: Claude
 - Model/version: Claude Opus 4.8, High effort
-- Date generated: 2026-06-28
-- Prompt file used: GitHub stakeholder prompt files
+- Stakeholder datasets generated: 2026-06-28
+- Constitutive rules generated: 2026-07-03
+- Prompt files used: GitHub stakeholder prompt files and `prompts/prompt_constitutive_rules.md`
 - Fresh chat: yes
 - Manual edits: none
 
 ## Validation Result
 
-The three Claude stakeholder datasets were validated using the same `scripts/validate_revised_datasets.py` parser validation used for the baseline revised datasets.
+The Claude stakeholder datasets and Claude constitutive rules were validated using the same `scripts/validate_revised_datasets.py` parser validation used for the baseline revised datasets.
 
 | Source | Records | Formulas | Errors | Warnings |
 |---|---:|---:|---:|---:|
-| Baseline revised stakeholder datasets | 300 | 600 | 0 | 0 |
-| Claude stakeholder datasets | 300 | 600 | 0 | 0 |
-
-Note: Claude constitutive rules were not provided in this batch, so this comparison covers the three stakeholder datasets only.
+| Baseline revised full dataset | 350 | 650 | 0 | 0 |
+| Claude full dataset | 350 | 650 | 0 | 0 |
 
 ## Round-Trip Automatic Evaluation
 
@@ -54,6 +53,19 @@ These automatic scores are heuristic triage results. Human review is still requi
 - Baseline: obligation: 38, permission: 36, prohibition: 26
 - Claude: obligation: 34, permission: 38, prohibition: 28
 
+## Constitutive Rules Comparison
+
+| Dataset | Claude rows | Exact NL overlap | Exact logic overlap | Exact category overlap | Shared predicates |
+|---|---:|---:|---:|---:|---:|
+| Constitutive Rules | 50 | 0 | 8 | 7 | 24 |
+
+- Baseline categories: allergenClassification: 5, dietaryClassification: 10, marketClassification: 5, medicalSuitability: 6, nutritionClassification: 15, productSafety: 3, religiousClassification: 6
+- Claude categories: allergenClassification: 7, dietaryClassification: 16, marketClassification: 7, medicalSuitability: 1, nutritionClassification: 8, productSafety: 3, religiousClassification: 8
+- Baseline predicate count: 56
+- Claude predicate count: 53
+- Baseline-only predicate examples: alcoholProduct, almondDessert, beefMeal, breadProduct, butterProduct, candyProduct, cannedSoup, cheeseMeal, chickenMeal, creamDessert, cuisineSpecificProduct, eggMeal, fastFoodMeal, honeyProduct, instantNoodles, marketPreferenceProduct, milkProduct, nonCertifiedMeat, peanutSnack, porkMeal, processedMeat, regularPasta, regularSoda, safetyWarningProduct, saltedNuts, seasonalMeal, shrimpMeal, sweetDessert, uncertainHalalStatus, uncertainKosherStatus
+- Claude-only predicate examples: allergenContaining, bannedForChildren, certifiedGlutenFree, certifiedHalal, certifiedKosher, certifiedLactoseFree, exceedsFatLimit, exceedsSaltLimit, exceedsSugarLimit, glutenContaining, glutenFreeMeal, halalMeal, healthyMeal, internationalCuisineMeal, kosherMeal, lactoseFreeMeal, localProduct, mild, mildMeal, organic, safeFor, spicy, spicyMeal, sustainableMeal, ultraProcessedFood, veganMeal, vegetarianMeal, verifiedHalal, verifiedKosher
+
 ## Predicate Vocabulary Differences
 
 ### User
@@ -82,7 +94,7 @@ These automatic scores are heuristic triage results. Human review is still requi
 
 ## Initial Interpretation
 
-Both datasets pass syntactic validation under the fixed grammar. This means Claude was able to follow the grammar and revised formula conventions for the three stakeholder datasets.
+Both datasets pass syntactic validation under the fixed grammar. This means Claude was able to follow the grammar and revised formula conventions for the stakeholder datasets and the constitutive background rules.
 
 The more important comparison is now semantic and design-oriented: whether Claude's norms are as stakeholder-specific, diverse, and useful for conflict detection as the baseline dataset. Exact formula overlap is expected to be limited because Claude generated new records from the same prompt rather than reproducing the baseline rows exactly.
 

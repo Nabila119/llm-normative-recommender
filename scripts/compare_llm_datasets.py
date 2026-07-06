@@ -16,8 +16,14 @@ DATASETS = [
     ("Food Ministry", BASELINE_DIR / "food_ministry_dataset.csv", CLAUDE_DIR / "claude_food_ministry_dataset.csv"),
     ("Food Industry", BASELINE_DIR / "food_industry_dataset.csv", CLAUDE_DIR / "claude_food_industry_dataset.csv"),
 ]
+CONSTITUTIVE_DATASET = (
+    "Constitutive Rules",
+    BASELINE_DIR / "constitutive_rules.csv",
+    CLAUDE_DIR / "claude_constitutive_rules.csv",
+)
 
 FORMULA_COLUMNS = ["implication_formula", "dyadic_formula"]
+CONSTITUTIVE_FORMULA_COLUMNS = ["logic_rule"]
 PREDICATE_RE = re.compile(r"([A-Za-z][A-Za-z0-9_]*)\(")
 
 
@@ -26,10 +32,10 @@ def read_csv(path):
         return list(csv.DictReader(f))
 
 
-def predicates(rows):
+def predicates(rows, formula_columns=FORMULA_COLUMNS):
     found = Counter()
     for row in rows:
-        for column in FORMULA_COLUMNS:
+        for column in formula_columns:
             for name in PREDICATE_RE.findall(row[column]):
                 if name not in {"O", "P", "F"}:
                     found[name] += 1
@@ -134,13 +140,81 @@ def summarize_dataset(stakeholder, baseline_path, claude_path):
     return summary
 
 
+def compare_constitutive_by_id(left_rows, right_rows):
+    left_by_id = {row["id"]: row for row in left_rows}
+    right_by_id = {row["id"]: row for row in right_rows}
+    shared_ids = sorted(set(left_by_id) & set(right_by_id))
+    same_logic = 0
+    same_nl = 0
+    same_category = 0
+    examples = []
+
+    for row_id in shared_ids:
+        left = left_by_id[row_id]
+        right = right_by_id[row_id]
+        same_logic += left["logic_rule"] == right["logic_rule"]
+        same_nl += left["nl_rule"] == right["nl_rule"]
+        same_category += left["category"] == right["category"]
+        if len(examples) < 5 and left["logic_rule"] != right["logic_rule"]:
+            examples.append({
+                "id": row_id,
+                "baseline_nl": left["nl_rule"],
+                "claude_nl": right["nl_rule"],
+                "baseline_logic": left["logic_rule"],
+                "claude_logic": right["logic_rule"],
+            })
+
+    return {
+        "shared_ids": len(shared_ids),
+        "same_nl_rule": same_nl,
+        "same_logic_rule": same_logic,
+        "same_category": same_category,
+        "different_logic_examples": examples,
+    }
+
+
+def summarize_constitutive(label, baseline_path, claude_path):
+    baseline = read_csv(baseline_path)
+    claude = read_csv(claude_path)
+    baseline_preds = predicates(baseline, CONSTITUTIVE_FORMULA_COLUMNS)
+    claude_preds = predicates(claude, CONSTITUTIVE_FORMULA_COLUMNS)
+    shared_predicates = set(baseline_preds) & set(claude_preds)
+
+    summary = {
+        "dataset": label,
+        "baseline_rows": len(baseline),
+        "claude_rows": len(claude),
+        "baseline_formulas": len(baseline),
+        "claude_formulas": len(claude),
+        "baseline_categories": dict(Counter(row["category"] for row in baseline)),
+        "claude_categories": dict(Counter(row["category"] for row in claude)),
+        "baseline_duplicate_nl": duplicate_count(baseline, "nl_rule"),
+        "claude_duplicate_nl": duplicate_count(claude, "nl_rule"),
+        "baseline_duplicate_logic": duplicate_count(baseline, "logic_rule"),
+        "claude_duplicate_logic": duplicate_count(claude, "logic_rule"),
+        "baseline_predicate_count": len(baseline_preds),
+        "claude_predicate_count": len(claude_preds),
+        "shared_predicate_count": len(shared_predicates),
+        "baseline_only_predicates": sorted(set(baseline_preds) - set(claude_preds))[:30],
+        "claude_only_predicates": sorted(set(claude_preds) - set(baseline_preds))[:30],
+        "by_id": compare_constitutive_by_id(baseline, claude),
+    }
+
+    for field in ["nl_rule", "logic_rule", "category"]:
+        count, baseline_total, claude_total = exact_overlap(baseline, claude, field)
+        summary[f"exact_{field}_overlap"] = count
+        summary[f"exact_{field}_overlap_percent_of_claude"] = round(100 * count / claude_total, 1) if claude_total else 0
+
+    return summary
+
+
 def md_counter(counter_dict):
     if not counter_dict:
         return "-"
     return ", ".join(f"{key}: {value}" for key, value in sorted(counter_dict.items()))
 
 
-def write_markdown(summaries):
+def write_markdown(summaries, constitutive_summary):
     baseline_scores = roundtrip_score_counts(ROUNDTRIP_DIR / "roundtrip_evaluated.csv")
     claude_scores = roundtrip_score_counts(ROUNDTRIP_DIR / "claude_roundtrip_evaluated.csv")
     lines = [
@@ -150,21 +224,20 @@ def write_markdown(summaries):
         "",
         "- LLM: Claude",
         "- Model/version: Claude Opus 4.8, High effort",
-        "- Date generated: 2026-06-28",
-        "- Prompt file used: GitHub stakeholder prompt files",
+        "- Stakeholder datasets generated: 2026-06-28",
+        "- Constitutive rules generated: 2026-07-03",
+        "- Prompt files used: GitHub stakeholder prompt files and `prompts/prompt_constitutive_rules.md`",
         "- Fresh chat: yes",
         "- Manual edits: none",
         "",
         "## Validation Result",
         "",
-        "The three Claude stakeholder datasets were validated using the same `scripts/validate_revised_datasets.py` parser validation used for the baseline revised datasets.",
+        "The Claude stakeholder datasets and Claude constitutive rules were validated using the same `scripts/validate_revised_datasets.py` parser validation used for the baseline revised datasets.",
         "",
         "| Source | Records | Formulas | Errors | Warnings |",
         "|---|---:|---:|---:|---:|",
-        "| Baseline revised stakeholder datasets | 300 | 600 | 0 | 0 |",
-        "| Claude stakeholder datasets | 300 | 600 | 0 | 0 |",
-        "",
-        "Note: Claude constitutive rules were not provided in this batch, so this comparison covers the three stakeholder datasets only.",
+        "| Baseline revised full dataset | 350 | 650 | 0 | 0 |",
+        "| Claude full dataset | 350 | 650 | 0 | 0 |",
         "",
         "## Round-Trip Automatic Evaluation",
         "",
@@ -199,6 +272,26 @@ def write_markdown(summaries):
             "",
         ])
 
+    lines.extend([
+        "## Constitutive Rules Comparison",
+        "",
+        "| Dataset | Claude rows | Exact NL overlap | Exact logic overlap | Exact category overlap | Shared predicates |",
+        "|---|---:|---:|---:|---:|---:|",
+        f"| {constitutive_summary['dataset']} | {constitutive_summary['claude_rows']} | "
+        f"{constitutive_summary['exact_nl_rule_overlap']} | "
+        f"{constitutive_summary['exact_logic_rule_overlap']} | "
+        f"{constitutive_summary['exact_category_overlap']} | "
+        f"{constitutive_summary['shared_predicate_count']} |",
+        "",
+        f"- Baseline categories: {md_counter(constitutive_summary['baseline_categories'])}",
+        f"- Claude categories: {md_counter(constitutive_summary['claude_categories'])}",
+        f"- Baseline predicate count: {constitutive_summary['baseline_predicate_count']}",
+        f"- Claude predicate count: {constitutive_summary['claude_predicate_count']}",
+        f"- Baseline-only predicate examples: {', '.join(constitutive_summary['baseline_only_predicates']) or '-'}",
+        f"- Claude-only predicate examples: {', '.join(constitutive_summary['claude_only_predicates']) or '-'}",
+        "",
+    ])
+
     lines.extend(["## Predicate Vocabulary Differences", ""])
     for item in summaries:
         lines.extend([
@@ -215,7 +308,7 @@ def write_markdown(summaries):
     lines.extend([
         "## Initial Interpretation",
         "",
-        "Both datasets pass syntactic validation under the fixed grammar. This means Claude was able to follow the grammar and revised formula conventions for the three stakeholder datasets.",
+        "Both datasets pass syntactic validation under the fixed grammar. This means Claude was able to follow the grammar and revised formula conventions for the stakeholder datasets and the constitutive background rules.",
         "",
         "The more important comparison is now semantic and design-oriented: whether Claude's norms are as stakeholder-specific, diverse, and useful for conflict detection as the baseline dataset. Exact formula overlap is expected to be limited because Claude generated new records from the same prompt rather than reproducing the baseline rows exactly.",
         "",
@@ -248,6 +341,30 @@ def write_csv_summary(summaries):
             writer.writerow({field: item[field] for field in fieldnames})
 
 
+def write_constitutive_csv_summary(summary):
+    fieldnames = [
+        "dataset",
+        "baseline_rows",
+        "claude_rows",
+        "baseline_formulas",
+        "claude_formulas",
+        "exact_nl_rule_overlap",
+        "exact_logic_rule_overlap",
+        "exact_category_overlap",
+        "baseline_predicate_count",
+        "claude_predicate_count",
+        "shared_predicate_count",
+        "baseline_duplicate_nl",
+        "claude_duplicate_nl",
+        "baseline_duplicate_logic",
+        "claude_duplicate_logic",
+    ]
+    with (OUT_DIR / "claude_vs_baseline_constitutive_summary.csv").open("w", encoding="utf-8", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerow({field: summary[field] for field in fieldnames})
+
+
 def roundtrip_score_counts(path):
     if not path.exists():
         return Counter()
@@ -258,12 +375,21 @@ def roundtrip_score_counts(path):
 def main():
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     summaries = [summarize_dataset(*dataset) for dataset in DATASETS]
+    constitutive_summary = summarize_constitutive(*CONSTITUTIVE_DATASET)
     (OUT_DIR / "claude_vs_baseline_comparison.json").write_text(
-        json.dumps(summaries, ensure_ascii=False, indent=2),
+        json.dumps(
+            {
+                "stakeholder_datasets": summaries,
+                "constitutive_rules": constitutive_summary,
+            },
+            ensure_ascii=False,
+            indent=2,
+        ),
         encoding="utf-8",
     )
-    write_markdown(summaries)
+    write_markdown(summaries, constitutive_summary)
     write_csv_summary(summaries)
+    write_constitutive_csv_summary(constitutive_summary)
     print(f"Wrote comparison outputs to {OUT_DIR}")
 
 
