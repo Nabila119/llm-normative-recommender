@@ -18,15 +18,15 @@ Date: Working draft, 2026
 
 # Abstract
 
-Autonomous recommender systems increasingly operate in domains where recommendations are not merely matters of preference optimization, but also involve ethical, legal, health-related, and stakeholder-specific constraints. In food recommendation, for example, a system may need to respect user allergies, religious dietary requirements, public-health restrictions, product-safety rules, and commercial objectives. These requirements are often expressed in natural language, while formal reasoning, parser validation, argumentation, and conflict detection require structured representations.
+Autonomous recommender systems increasingly operate in domains where recommendations are not merely matters of preference optimization, but also involve ethical, legal, health-related, and stakeholder-specific constraints. In food recommendation, for example, a system may need to respect user allergies, religious dietary requirements, public-health restrictions, product-safety rules, and commercial objectives. These requirements are often expressed in natural language, while formal reasoning, parser validation, argumentation, dialogue, and explanation require structured representations.
 
 This thesis investigates how large language models can support the formalization of stakeholder norms for an agent-based normative recommender system. The work is situated in the context of DJ4ME, where stakeholder views may be represented by avatars that reason with norms and participate in machine-ethics dialogue. The thesis develops a reproducible pipeline in which natural-language stakeholder norms are represented as deontic first-order logic formulas involving obligations, permissions, and prohibitions. Three stakeholder perspectives are considered: User, Food Ministry, and Food Industry.
 
 The current implementation constructs revised stakeholder datasets in which each natural-language norm is paired with both an implication-based monadic formulation and a dyadic formulation. This design supports comparison between formalization strategies rather than treating them as interchangeable. Product categories are modeled as predicates over product variables, and the recommendation action explicitly includes the target user. Constitutive rules, such as category classifications, are stored separately from stakeholder norms as background domain knowledge.
 
-The pipeline includes grammar-based validation, abstract syntax tree generation, normalized formula representations, and round-trip semantic preservation checks. The current validated dataset contains 350 records and 650 formal formulas with zero parser validation errors. It also produces 350 AST records and 600 round-trip backtranslation rows. The thesis contributes a structured dataset design and implementation pipeline for evaluating LLM-based norm formalization and preparing stakeholder norms for later conflict detection.
+The pipeline includes grammar-based validation, abstract syntax tree generation, normalized formula representations, and round-trip semantic preservation checks. The current validated dataset contains 350 records and 650 formal formulas with zero parser validation errors. It also produces 350 AST records and 600 round-trip backtranslation rows. The thesis contributes a structured dataset design and implementation pipeline for evaluating LLM-based norm formalization and preparing stakeholder norms for later use in DJ4ME-style dialogue, explanation, and reasoning components.
 
-Keywords: large language models; deontic logic; first-order logic; normative recommender systems; stakeholder norms; grammar validation; abstract syntax trees; conflict detection
+Keywords: large language models; deontic logic; first-order logic; normative recommender systems; stakeholder norms; grammar validation; abstract syntax trees; round-trip evaluation
 
 # List of Tables
 
@@ -40,7 +40,7 @@ Table 4.2 Round-trip automatic score interpretation
 Figure 3.1 Overview of the norm formalization pipeline
 Figure 3.2 Formula-to-AST normalization flow
 Figure 4.1 Round-trip semantic preservation workflow
-Figure 4.2 Planned conflict-detection workflow
+Figure 4.2 Planned downstream use in DJ4ME
 
 # Table of Contents
 
@@ -66,7 +66,7 @@ Figure 4.2 Planned conflict-detection workflow
     3.4 Parser Validation
     3.5 AST Generation and Normalization
     3.6 Round-Trip Semantic Preservation
-    3.7 Conflict Detection Design
+    3.7 Scope Boundary and Downstream DJ4ME Use
 
 4 Results and Discussion
     4.1 Dataset Outputs
@@ -87,13 +87,15 @@ Artificial intelligence systems are increasingly deployed in settings where thei
 
 Food recommendation provides a useful case study because the domain naturally contains many kinds of normative constraints. A user may require halal, kosher, vegan, gluten-free, lactose-free, low-sugar, or low-salt food. A child should not receive recommendations for energy drinks or age-restricted products. A person with an allergy should not receive food containing a harmful ingredient. A food ministry may require labeling, safety warnings, and protection of vulnerable users. Food industry actors may want to promote certified, sponsored, seasonal, or available products, while still respecting safety and compliance constraints. These concerns cannot be reduced to a single preference score.
 
-The DJ4ME project, A DJ for Machine Ethics: the Dialogue Jiminy, motivates this thesis. DJ4ME investigates how autonomous agents can make ethically relevant decisions by representing stakeholder perspectives through dialogue and argumentation. Stakeholders may be represented by avatars that express norms and participate in reasoning about what the agent should do. For such a system to work, stakeholder norms expressed in natural language must be formalized in a way that can be checked, compared, and used for reasoning.
+The DJ4ME project, A DJ for Machine Ethics: the Dialogue Jiminy, motivates this thesis. DJ4ME investigates how autonomous agents can make ethically relevant decisions by representing stakeholder perspectives through dialogue and argumentation. The project builds on the idea that affected stakeholders may be represented by avatars embedded in or connected to the agent. These avatars can hold norms, make arguments, and participate in dialogue about what the agent should do. In contrast to a purely automatic moral advisor that aggregates stakeholder norms internally, Dialogue Jiminy aims to preserve stakeholder autonomy by allowing avatars to participate in persuasion dialogue.
 
-Large language models are promising for this task because they are capable of interpreting natural-language rules and producing structured symbolic expressions. At the same time, LLMs are not guaranteed to produce valid formulas or semantically faithful translations. They may invent predicates, mix notation styles, omit variables, or produce formulas that look plausible but cannot be parsed. This thesis therefore studies LLM-based norm formalization as part of a controlled pipeline that combines natural-language generation, fixed grammar validation, AST generation, round-trip semantic checks, and preparation for conflict detection.
+The DJ4ME proposal identifies a natural-language interface as one of the core requirements for such a system. This interface is expected to support both norm mining and explanation synthesis. Norm mining and norm formalisation concern the transformation of informal stakeholder norms into formal rules usable by avatars. Explanation synthesis concerns the reverse direction: making formal recommendations or dialogues understandable in plain natural language. This thesis focuses on the first part of that interface: translating stakeholder norms from natural language into a controlled deontic first-order logic representation and evaluating the quality of this formalisation.
+
+Large language models are promising for this task because they are capable of interpreting natural-language rules and producing structured symbolic expressions. At the same time, LLMs are not guaranteed to produce valid formulas or semantically faithful translations. They may invent predicates, mix notation styles, omit variables, or produce formulas that look plausible but cannot be parsed. This thesis therefore studies LLM-based norm formalization as part of a controlled pipeline that combines natural-language generation, fixed grammar validation, AST generation, round-trip semantic checks, LLM comparison, and human semantic review.
 
 ## 1.2 Problem Statement
 
-Stakeholder norms are often available in natural language, but agent-based normative reasoning requires formal representations. The central problem is how to translate stakeholder norms into deontic first-order logic formulas in a way that is syntactically valid, semantically meaningful, and useful for downstream conflict analysis. This problem is made more difficult by the fact that conditional norms can be represented in different formal styles. In particular, implication-based monadic norms and dyadic norms have different semantic interpretations and should not be treated as interchangeable.
+Stakeholder norms are often available in natural language, but agent-based normative reasoning and dialogue require formal representations. The central problem is how to translate stakeholder norms into deontic first-order logic formulas in a way that is syntactically valid, semantically meaningful, and reusable by downstream DJ4ME components. This problem is made more difficult by the fact that conditional norms can be represented in different formal styles. In particular, implication-based monadic norms and dyadic norms have different semantic interpretations and should not be treated as interchangeable.
 
 A second modeling problem concerns product categories. Early versions of the dataset used expressions such as recommend(System,EnergyDrink), where a category such as EnergyDrink was treated as a constant. This is problematic because a constant denotes a particular object in a model rather than a class of products. The revised design instead quantifies over product variables and represents categories as predicates, such as energyDrink(y). This makes the formalization more suitable for a single domain model containing many products.
 
@@ -113,9 +115,9 @@ The thesis is guided by the following sub-questions:
 
 1. To what extent do generated formulas preserve the meaning of the original natural-language norm under round-trip translation?
 
-1. How do implication-based monadic formulations and dyadic formulations compare in terms of syntax validity, AST structure, semantic preservation, and suitability for conflict detection?
+1. How do implication-based monadic formulations and dyadic formulations compare in terms of syntax validity, AST structure, and semantic preservation?
 
-1. How can AST-based normalized representations support detection of conflicts between stakeholder norms?
+1. How reliable is automatic round-trip evaluation when compared with human semantic review?
 
 ## 1.4 Contributions
 
@@ -129,61 +131,71 @@ The thesis is guided by the following sub-questions:
 
 - A reproducible parser-validation and AST-generation pipeline.
 
-- An initial round-trip semantic preservation workflow with automatic triage scores and human-evaluation columns.
+- A round-trip semantic preservation workflow with automatic triage scores and human-evaluation results.
+
+- A comparison between a baseline LLM-generated dataset and a Claude-generated dataset produced from the same prompt structure.
 
 ## 1.5 Thesis Structure
 
-Chapter 2 reviews related work on LLM-based formalization, natural-language-to-logic translation, deontic logic, normative agents, multi-stakeholder recommender systems, and food recommendation. Chapter 3 presents the methodology, including dataset construction, grammar design, parser validation, AST generation, round-trip evaluation, and planned conflict detection. Chapter 4 reports current implementation results and discusses their implications. Chapter 5 concludes the thesis by summarizing contributions, limitations, and future work.
+Chapter 2 reviews related work on DJ4ME, LLM-based formalization, natural-language-to-logic translation, deontic logic, normative agents, multi-stakeholder recommender systems, and food recommendation. Chapter 3 presents the methodology, including dataset construction, grammar design, parser validation, AST generation, round-trip evaluation, LLM comparison, and human semantic review. Chapter 4 reports current implementation results and discusses their implications. Chapter 5 concludes the thesis by summarizing contributions, limitations, and future work.
 
 # Chapter 2: Literature Review
 
-## 2.1 Large Language Models and Formalization
+## 2.1 DJ4ME and Machine Ethics
+
+The DJ4ME project provides the research context for this thesis. It studies machine ethics for autonomous agents whose decisions may affect multiple stakeholders. The proposal connects machine ethics with deontic logic, normative systems, formal argumentation, argumentation as dialogue, and machine learning. Its central architectural idea is that stakeholders can be represented by avatars. These avatars can hold norms and participate in reasoning or dialogue about what an autonomous agent should do.
+
+DJ4ME builds on the Autonomous Jiminy architecture, where stakeholder norms can be combined into arguments in order to identify moral dilemmas and recommend actions to the agent. The Dialogue Jiminy extension shifts the focus toward persuasion dialogue between stakeholder avatars. This is important because it gives stakeholders more control over how their norms are used in the moral recommendation process.
+
+The proposal identifies a natural-language interface as a key part of the project. This interface includes norm mining, norm formalisation, and explanation synthesis. Norm formalisation is the part most relevant to this thesis: informal stakeholder norms must be converted into formal rules that can be validated and used by avatars or reasoning components. The thesis contributes to this upstream formalisation task by constructing and evaluating a pipeline for translating stakeholder food-recommendation norms into parser-validated deontic first-order logic.
+
+## 2.2 Large Language Models and Formalization
 
 Large language models have demonstrated strong abilities in natural-language understanding, text generation, summarization, and code-like symbolic output. These capabilities make them attractive for translating informal requirements or norms into formal languages. However, LLMs also introduce risks. They may produce syntactically invalid expressions, hallucinate predicates, collapse distinctions that matter semantically, or generate outputs that are fluent but not faithful to the source. In formalization tasks, these errors are especially important because small notation changes can alter the meaning of a formula.
 
 For this thesis, LLMs are not treated as standalone reasoners. Instead, they are treated as components in a hybrid pipeline. The LLM can assist in producing candidate formalizations, but the output must be checked by a grammar and parser before it is used for reasoning. This follows a broader direction in neurosymbolic AI: using language models for flexible linguistic interpretation while relying on formal tools for validation and structured reasoning.
 
-## 2.2 Natural Language to Logic Translation
+## 2.3 Natural Language to Logic Translation
 
 Work on natural-language-to-first-order-logic translation is directly relevant to this thesis. The LOGICLLAMA line of work, for example, studies how LLMs can translate natural language into first-order logic and emphasizes dataset generation, prompt design, grammar verification, and correction strategies. Such work shows that LLMs can be useful for formal translation tasks, but also that generated formulas require validation and that silver-label datasets should be handled carefully.
 
 FOLIO is another relevant reference because it provides natural-language statements paired with first-order logic annotations. It demonstrates the value of formal annotations for reasoning tasks and highlights the importance of carefully checked logical representations. However, FOLIO focuses on general first-order logic rather than deontic or modal norms.
 
-This thesis differs from standard NL-to-FOL work by focusing on modal/deontic first-order logic for stakeholder norms. The target formulas contain obligations, permissions, and prohibitions, and the downstream goal is not only logical reasoning but also norm comparison and conflict detection in a multi-stakeholder recommender setting.
+This thesis differs from standard NL-to-FOL work by focusing on modal/deontic first-order logic for stakeholder norms. The target formulas contain obligations, permissions, and prohibitions. The immediate goal is not to build a complete moral dialogue system, but to evaluate whether LLM-generated stakeholder norms can be expressed in a controlled formal language with valid syntax and preserved meaning.
 
-## 2.3 Deontic Logic and Normative Agents
+## 2.4 Deontic Logic and Normative Agents
 
 Deontic logic provides formal tools for representing normative concepts such as obligation, permission, and prohibition. In this thesis, the operators O, P, and F are used to represent these modalities. Conditional norms can be represented using implication-based formulas, such as X->O(Y), or dyadic formulas, such as O(Y|X). These forms are not treated as semantically identical. The thesis therefore keeps both forms paired for the same natural-language norm in order to support comparison.
 
-Normative agent research is also relevant because autonomous agents may need to reason about what they are permitted, required, or forbidden to do. Norm conflicts are a central challenge in this area. A system may face one norm requiring an action and another norm prohibiting the same action under overlapping conditions. Resolving such conflicts may require priorities, defeasible reasoning, or argumentation semantics. This thesis focuses first on formalization and conflict detection, while full conflict resolution is treated as future work.
+Normative agent research is also relevant because autonomous agents may need to reason about what they are permitted, required, or forbidden to do. Norm conflicts are a central challenge in this area. A system may face one norm requiring an action and another norm prohibiting the same action under overlapping conditions. Resolving such conflicts may require priorities, defeasible reasoning, or argumentation semantics. In this thesis, conflict handling is treated as a downstream DJ4ME use case rather than as an implemented component. The implemented focus is the formalisation and evaluation of the norms that such a component would later require.
 
-## 2.4 Multi-Stakeholder Recommender Systems
+## 2.5 Multi-Stakeholder Recommender Systems
 
 Multi-stakeholder recommender systems recognize that recommendations affect more than one party. A recommendation may benefit a user, a provider, a platform, a regulator, or a broader public interest. Research on multi-stakeholder recommendation and multi-sided fairness shows that recommender systems may need to balance competing objectives and constraints across different actors.
 
-The stakeholder framing is central to this thesis. User norms represent individual needs and constraints, Food Ministry norms represent public-health and regulatory concerns, and Food Industry norms represent commercial and product-placement objectives. The thesis formalizes these perspectives separately so that later reasoning can identify where they align and where they conflict.
+The stakeholder framing is central to this thesis. User norms represent individual needs and constraints, Food Ministry norms represent public-health and regulatory concerns, and Food Industry norms represent commercial and product-placement objectives. The thesis formalizes these perspectives separately so that downstream DJ4ME components could later compare stakeholder positions in argumentation or dialogue.
 
-## 2.5 Food Recommendation and Constraint-Aware Systems
+## 2.6 Food Recommendation and Constraint-Aware Systems
 
 Food recommendation is often discussed in relation to personalization, nutrition, health, dietary constraints, and recipe retrieval. Constraint-aware food recommendation systems and food knowledge graphs show that food recommendations may depend on structured information about ingredients, dietary labels, allergens, and user requirements. This thesis does not build a complete food knowledge graph, but it uses a similar idea at the logical level: predicates such as glutenFreeMeal(y), contains(y,Nuts), highSugarProduct(y), and certifiedHalal(y) represent product properties that a domain model could later interpret.
 
-The food domain is therefore suitable as a case study for normative recommendation. It contains personal preferences, safety constraints, religious requirements, medical needs, regulatory obligations, and commercial interests. These properties make it a rich setting for studying stakeholder norm formalization and conflict detection.
+The food domain is therefore suitable as a case study for normative recommendation. It contains personal preferences, safety constraints, religious requirements, medical needs, regulatory obligations, and commercial interests. These properties make it a rich setting for studying stakeholder norm formalization.
 
-## 2.6 Research Gap
+## 2.7 Research Gap
 
-Existing work studies LLM-based logic translation, normative agents, deontic reasoning, multi-stakeholder recommendation, and food recommendation. However, there is limited work combining these directions into a reproducible pipeline for translating stakeholder food recommendation norms into parser-validated deontic first-order logic formulas, generating ASTs, evaluating round-trip semantic preservation, and preparing for conflict detection. This thesis addresses that gap by building and evaluating such a pipeline in a focused case study.
+Existing work studies LLM-based logic translation, normative agents, deontic reasoning, multi-stakeholder recommendation, and food recommendation. However, there is limited work combining these directions into a reproducible pipeline for translating stakeholder food recommendation norms into parser-validated deontic first-order logic formulas, generating ASTs, comparing LLM-generated datasets, and evaluating round-trip semantic preservation with human review. This thesis addresses that gap by building and evaluating such a pipeline in a focused case study aligned with the DJ4ME language-interface objective.
 
 # Chapter 3: Methodology
 
 ## 3.1 Research Design
 
-The research follows an implementation-oriented design. The objective is to construct a reproducible pipeline that takes stakeholder norms in natural language and produces validated deontic first-order logic formulas suitable for AST generation and conflict analysis. The pipeline is not intended to produce food recommendations directly. Instead, it supports the upstream task of formalizing norms that could later be used by stakeholder avatars or normative reasoning components.
+The research follows an implementation-oriented design. The objective is to construct a reproducible pipeline that takes stakeholder norms in natural language and produces validated deontic first-order logic formulas suitable for AST generation, semantic checking, LLM comparison, and later use by DJ4ME components. The pipeline is not intended to produce food recommendations directly. Instead, it supports the upstream language-interface task of formalizing norms that could later be used by stakeholder avatars or normative reasoning components.
 
 The work is structured around three stakeholder perspectives: User, Food Ministry, and Food Industry. For each stakeholder, norms are expressed in natural language and formalized using two alternative conditional structures. The resulting formulas are validated against a fixed grammar, parsed into ASTs, normalized into comparable structures, and used for round-trip backtranslation.
 
 Figure 3.1 gives the conceptual pipeline:
 
-natural-language stakeholder norm -> modal/deontic FOL -> parser validation -> AST -> normalized norm -> round-trip evaluation -> conflict detection
+natural-language stakeholder norm -> modal/deontic FOL -> parser validation -> AST -> normalized norm -> round-trip evaluation -> human semantic review
 
 ## 3.2 Dataset Construction
 
@@ -256,7 +268,7 @@ For example, an implication-based prohibition can be normalized as:
   "condition": ["child(x)", "energyDrink(y)"]
 }
 
-This normalized representation is useful because both implication-based and dyadic formulas can be represented through common fields. This makes it easier to compare them and to detect direct conflicts, such as one norm obligating an action while another prohibits the same action under overlapping conditions.
+This normalized representation is useful because both implication-based and dyadic formulas can be represented through common fields. This makes it easier to compare whether the two formalisation strategies preserve the same modality, action, and condition structure for the same natural-language norm.
 
 ## 3.6 Round-Trip Semantic Preservation
 
@@ -272,13 +284,13 @@ The automatic evaluation assigns a preliminary score. A score of 2 indicates tha
 | 1 | Partial agreement | Requires review of missing or weakened concepts. |
 | 0 | Possible mismatch | Priority candidate for human evaluation. |
 
-## 3.7 Conflict Detection Design
+## 3.7 LLM Comparison and Human Semantic Review
 
-Conflict detection is the next stage of the pipeline. The thesis distinguishes conflict detection from conflict resolution. Conflict detection identifies candidate pairs of norms that cannot jointly be satisfied under overlapping conditions. Conflict resolution would require additional information such as stakeholder priority, legal hierarchy, defeasible rules, or argumentation semantics.
+To test whether the pipeline is model-specific or more generally useful, the thesis compares two LLM-generated datasets produced from the same prompt structure. The baseline dataset was generated in the working pipeline, while a second dataset was generated with Claude Opus 4.8 in fresh chats using the same stakeholder prompts. This allows comparison of parser validity, formula structure, predicate vocabulary, norm-type distribution, and round-trip preservation.
 
-A direct conflict can be represented when two norms refer to the same action and compatible or overlapping conditions, but assign incompatible modalities. For example, one norm may obligate recommending a product while another prohibits recommending the same product to the same user under overlapping conditions. The normalized AST fields make this comparison more systematic because action, modality, and condition are already separated.
+Human semantic review is used because automatic evaluation cannot fully determine whether a formula preserves the meaning of the original natural-language norm. In the current evaluation, a human reviewer inspected a selected subset of round-trip rows, including all rows that the automatic evaluator scored as 0 or 1 and additional quality-control rows from score-2 cases. The reviewer assigned human semantic scores and error categories.
 
-Draft note: After the conflict-detection script is implemented, this section should include the exact matching rules, examples of detected conflicts, and comparison with LLM-based conflict detection over natural-language norms.
+Conflict detection is not implemented as part of this thesis. It remains a downstream use case for DJ4ME. The ASTs and constitutive rules are nevertheless useful because they make the formalized norms easier to reuse in future argumentation, dialogue, or conflict-analysis components.
 
 # Chapter 4: Results and Discussion
 
@@ -317,23 +329,45 @@ auto score counts={'2': 538, '1': 40, '0': 22}
 
 The automatic round-trip evaluation should be treated as a triage method rather than a final semantic metric. It is useful for identifying likely preserved cases and prioritizing possible mismatches, but human evaluation is needed to confirm whether a backtranslation preserves the original norm. This is especially important for norms containing multiple conditions, negation, disjunction, or stakeholder-specific phrasing.
 
-## 4.4 Discussion
+Human evaluation was performed on 112 selected round-trip rows. The reviewed sample included all rows that the automatic evaluator scored as 0 or 1, plus additional quality-control examples from score-2 rows. The human reviewer judged 84 rows as semantically preserved, 22 as partially preserved, and 6 as mismatches. Exact agreement between the automatic score and the human score was 48 out of 112 reviewed rows, or 42.9%. This supports the methodological decision to treat automatic round-trip scoring as a triage signal rather than as a replacement for human semantic evaluation.
 
-### 4.4.1 Implication-Based and Dyadic Formulations
+## 4.4 Claude Comparison Results
 
-The paired dataset design directly addresses the concern that implication-based monadic norms and dyadic norms should not be mixed as if they were equivalent. By storing both formulations for the same natural-language norm, the thesis can compare their behavior while keeping the natural-language source constant. This design supports analysis of syntax validity, AST shape, round-trip preservation, and conflict-detection behavior across formalization strategies.
+To compare LLM performance under the same dataset-generation structure, a second set of stakeholder datasets was generated with Claude Opus 4.8 using the GitHub prompt files in fresh chats and without manual edits. The Claude batch included the three stakeholder datasets: User, Food Ministry, and Food Industry. A Claude constitutive-rules file was not yet available at the time of this draft, so the comparison covers stakeholder norms only.
 
-### 4.4.2 Product Categories as Predicates
+The Claude stakeholder datasets contained 300 records and 600 formulas. They passed the same parser validation as the baseline stakeholder datasets:
+
+| Source | Records | Formulas | Errors | Warnings |
+| --- | ---: | ---: | ---: | ---: |
+| Baseline stakeholder datasets | 300 | 600 | 0 | 0 |
+| Claude stakeholder datasets | 300 | 600 | 0 | 0 |
+
+The automatic round-trip comparison gave the following result:
+
+| Source | Rows | Score 2 | Score 1 | Score 0 |
+| --- | ---: | ---: | ---: | ---: |
+| Baseline stakeholder datasets | 600 | 538 | 40 | 22 |
+| Claude stakeholder datasets | 600 | 550 | 46 | 4 |
+
+These results suggest that Claude followed the grammar and formalisation conventions successfully. However, the comparison report also showed that Claude used a smaller predicate vocabulary, especially for the User and Food Ministry datasets. For example, the baseline User dataset used 83 predicates, while the Claude User dataset used 48. This indicates that parser validity and round-trip score alone are not sufficient to evaluate dataset quality. Diversity, stakeholder coverage, and usefulness for downstream DJ4ME reasoning must also be considered.
+
+## 4.5 Discussion
+
+### 4.5.1 Implication-Based and Dyadic Formulations
+
+The paired dataset design directly addresses the concern that implication-based monadic norms and dyadic norms should not be mixed as if they were equivalent. By storing both formulations for the same natural-language norm, the thesis can compare their behavior while keeping the natural-language source constant. This design supports analysis of syntax validity, AST shape, and round-trip preservation across formalization strategies.
+
+### 4.5.2 Product Categories as Predicates
 
 Treating product categories as predicates over a product variable improves the formal model. Instead of assuming that a category such as GlutenFreeMeal is a single constant, the revised formulas quantify over products and classify them through predicates. This makes the formalization compatible with a later product catalog, ontology, or knowledge base that can determine whether a particular item satisfies predicates such as glutenFreeMeal(y) or certifiedGlutenFree(y).
 
-### 4.4.3 Constitutive Rules and Redundancy
+### 4.5.3 Constitutive Rules and Redundancy
 
 Separating constitutive rules from stakeholder norms helps reduce redundancy and improves conceptual clarity. Stakeholder norms express what should, may, or must not be recommended. Constitutive rules define what counts as what in the food domain. This separation allows broad norms such as prohibiting non-vegan recommendations to vegan users while using background rules to classify specific products as non-vegan.
 
-### 4.4.4 Current Limitations
+### 4.5.4 Current Limitations
 
-The current implementation has several limitations. First, the datasets are generated and structurally validated, but they still require systematic human semantic review. Second, the round-trip evaluation is automatic and heuristic; it should support, not replace, human judgment. Third, conflict detection has been designed conceptually but still needs implementation and evaluation. Fourth, the current work validates syntax and structure but does not yet connect formulas to a full product database or formal model interpretation. Finally, if LLMs are used to generate or translate additional datasets, model version, prompt, temperature, and sampling settings must be recorded because exact reproducibility cannot be guaranteed from prompts alone.
+The current implementation has several limitations. First, the datasets are generated and structurally validated, but the human semantic review covers a selected sample rather than all round-trip rows. Second, the round-trip evaluation is automatic and heuristic; it should support, not replace, human judgment. Third, the current work validates syntax and structure but does not yet connect formulas to a full product database or formal model interpretation. Fourth, conflict detection and dialogue-based reasoning are downstream DJ4ME tasks and are not implemented in this thesis. Finally, if LLMs are used to generate or translate additional datasets, model version, prompt, temperature, and sampling settings must be recorded because exact reproducibility cannot be guaranteed from prompts alone.
 
 # Chapter 5: Conclusion and Future Work
 
@@ -341,17 +375,17 @@ The current implementation has several limitations. First, the datasets are gene
 
 This thesis develops a reproducible pipeline for stakeholder norm formalization in an agent-based normative recommender-system setting. It contributes a revised dataset design that addresses semantic concerns about conditional norms, product categories, and constitutive rules. It also implements grammar-based validation, AST generation, normalized formula representations, and round-trip backtranslation outputs.
 
-The current results demonstrate that the revised datasets can be parsed successfully under the fixed grammar. The pipeline validates 650 formulas with zero errors, generates 350 AST records, and produces 600 round-trip evaluation rows. These outputs provide the basis for the next experimental stage: semantic review and conflict detection.
+The current results demonstrate that the revised datasets can be parsed successfully under the fixed grammar. The pipeline validates 650 formulas with zero errors, generates 350 AST records, and produces 600 round-trip evaluation rows. These outputs support a focused evaluation of syntactic validity and semantic preservation in LLM-based norm formalisation.
 
 ## 5.2 Limitations
 
-- The dataset is currently generated and needs further human semantic validation.
+- The dataset is generated and structurally validated, but the human semantic evaluation covers a selected sample rather than every row.
 
 - Automatic round-trip scores are heuristic and should not be treated as final truth.
 
 - The current implementation detects syntax and structure, not full model-theoretic semantics.
 
-- Conflict detection is planned but not yet fully implemented in the current draft.
+- Conflict detection is not part of the implemented thesis scope; it is treated as downstream DJ4ME future work.
 
 - The domain predicates assume a future product catalog or knowledge base for interpretation.
 
@@ -359,15 +393,17 @@ The current results demonstrate that the revised datasets can be parsed successf
 
 ## 5.3 Future Work
 
-The immediate next step is to implement conflict detection over normalized AST representations. This should begin with direct modality conflicts, such as obligations and prohibitions concerning the same recommendation action under overlapping conditions. The system can then be extended to use constitutive rules so that conflicts can be detected between broader and more specific product categories.
+Future work can connect the parser-validated norms to the wider DJ4ME reasoning architecture. One direction is conflict detection over normalized AST representations, beginning with direct modality conflicts such as obligations and prohibitions concerning the same recommendation action under overlapping conditions. This is outside the implemented scope of the thesis but is a natural downstream use of the generated ASTs and constitutive rules.
 
 A second next step is human evaluation of round-trip semantic preservation. A reviewer can inspect the original natural-language norms, formulas, and backtranslations, then assign human semantic scores and error categories. These human scores can be compared with the automatic scores to determine where the automatic method is reliable and where it fails.
 
-A third direction is to compare LLM-based conflict detection over natural-language norms with logic-based conflict detection over formalized norms. This comparison directly supports the thesis objective of understanding whether formalization improves reliability, transparency, and explainability in normative recommender systems.
+A third direction is to integrate the formalized norms into stakeholder-avatar dialogue. In the DJ4ME setting, such norms could become inputs for avatars that make claims, provide reasons, concede or retract claims, and participate in persuasion dialogue.
 
-Finally, the thesis can be extended by testing multiple LLMs or prompt strategies for the NL-to-logic translation task. The evaluation can measure syntax validity, semantic preservation, parser error rates, correction effort, and conflict-detection usefulness.
+Finally, the thesis can be extended by testing additional LLMs or prompt strategies for the NL-to-logic translation task. The evaluation can measure syntax validity, semantic preservation, parser error rates, correction effort, vocabulary diversity, and usefulness for downstream DJ4ME components.
 
 # Bibliography
+
+[0] DJ4ME Project Proposal. A DJ for Machine Ethics: the Dialogue Jiminy. FullProposal18989918.pdf, pages 9-20 used for project context.
 
 [1] Harnessing the Power of Large Language Models for Natural Language to First-Order Logic Translation. arXiv:2305.15541.
 
