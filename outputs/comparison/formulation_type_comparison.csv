@@ -1,0 +1,5 @@
+source,formula_type,formulas,parser_valid,expected_pattern,score_2,score_1,score_0,avg_ast_nodes,avg_ast_depth,avg_ast_predicates
+baseline,dyadic,300,300,300,269,20,11,7.52,5.29,3.23
+baseline,implication,300,300,300,269,20,11,8.52,5.31,3.23
+claude,dyadic,300,300,300,275,23,2,7.56,5.34,3.22
+claude,implication,300,300,300,275,23,2,8.56,5.37,3.22
