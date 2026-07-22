@@ -119,6 +119,8 @@ The thesis is guided by the following sub-questions:
 
 1. How reliable is automatic round-trip evaluation when compared with human semantic review?
 
+The fourth sub-question is motivated by the fact that conditional stakeholder norms can be formalized in more than one plausible way. For example, a norm such as "children should not receive energy drink recommendations" can be represented as an implication-based formula, where the condition implies a monadic prohibition, or as a dyadic formula, where the prohibition is conditional on the relevant user and product properties. The thesis does not assume that these two forms are semantically identical. Instead, it treats them as alternative formalization strategies whose behavior can be compared under controlled conditions.
+
 ## 1.4 Contributions
 
 - A revised stakeholder norm dataset design for User, Food Ministry, and Food Industry perspectives.
@@ -201,6 +203,8 @@ natural-language stakeholder norm -> modal/deontic FOL -> parser validation -> A
 
 The dataset is a norm translation dataset. Each stakeholder record contains a natural-language norm and two formal representations of that norm. The revised stakeholder schema is shown in Table 3.1. The key design decision is that implication-based and dyadic formulas are paired within the same record rather than stored as unrelated records. This allows the thesis to compare the two formalization strategies for the same natural-language content.
 
+The original motivation for using both formulations was to avoid making a premature theoretical commitment to one representation of conditional norms. Implication-based formulas and dyadic deontic formulas are both common ways of expressing conditional normative statements, but they differ in how the condition is placed. In an implication-based formulation, the condition is outside the modal operator, as in X->O(Y). In a dyadic formulation, the condition is part of the modal expression itself, as in O(Y|X). Since these forms have different logical interpretations, the dataset pairs them for each natural-language norm instead of treating them as interchangeable duplicates.
+
 | Dataset | Schema | Current size |
 | --- | --- | --- |
 | Stakeholder norms | id, stakeholder, nl_norm, implication_formula, dyadic_formula, norm_type | 300 records |
@@ -240,6 +244,8 @@ Example formalizations for the same natural-language norm are:
 NL: Children should not receive energy drink recommendations.
 Implication: ∀x.∀y.child(x)∧energyDrink(y)->F(recommend(System,y,x))
 Dyadic: ∀x.∀y.F(recommend(System,y,x)|child(x)∧energyDrink(y))
+
+This design is based on several assumptions. First, the same natural-language conditional norm can often be given both an implication-based and a dyadic formalization. Second, the two formulations are not assumed to be logically equivalent; they are treated as rival or alternative representations of conditional normativity. Third, LLMs may handle the two forms differently, either syntactically or semantically. Fourth, ASTs can expose structural differences that are not visible from parser validity alone. Finally, round-trip backtranslation can provide an approximate test of whether the practical meaning of the norm is preserved in each formulation.
 
 ## 3.4 Parser Validation
 
@@ -351,11 +357,26 @@ The automatic round-trip comparison gave the following result:
 
 These results suggest that Claude followed the grammar and formalisation conventions successfully. However, the comparison report also showed that Claude used a smaller predicate vocabulary, especially for the User and Food Ministry datasets. For example, the baseline User dataset used 83 predicates, while the Claude User dataset used 48. This indicates that parser validity and round-trip score alone are not sufficient to evaluate dataset quality. Diversity, stakeholder coverage, and usefulness for downstream DJ4ME reasoning must also be considered.
 
+The implication-versus-dyadic comparison gave the following aggregate result:
+
+| Source | Formula type | Valid formulas | Score 2 | Score 1 | Score 0 | Avg. AST nodes |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| Baseline | Implication | 300/300 | 269 | 20 | 11 | 8.52 |
+| Baseline | Dyadic | 300/300 | 269 | 20 | 11 | 7.52 |
+| Claude | Implication | 300/300 | 275 | 23 | 2 | 8.56 |
+| Claude | Dyadic | 300/300 | 275 | 23 | 2 | 7.56 |
+
+The automatic round-trip score distributions were identical for implication and dyadic formulas within each source dataset. This suggests that, at the level measured by the current backtranslation heuristic, both formulations preserved the practical surface meaning of the natural-language norms equally well. However, the AST comparison showed a small structural difference: implication-based formulas produced slightly larger ASTs because they contain an explicit implication node. This should not be interpreted as a quality defect. It is a structural consequence of the representation. AST size is therefore used as a complexity indicator, not as a direct measure of correctness.
+
 ## 4.5 Discussion
 
 ### 4.5.1 Implication-Based and Dyadic Formulations
 
 The paired dataset design directly addresses the concern that implication-based monadic norms and dyadic norms should not be mixed as if they were equivalent. By storing both formulations for the same natural-language norm, the thesis can compare their behavior while keeping the natural-language source constant. This design supports analysis of syntax validity, AST shape, and round-trip preservation across formalization strategies.
+
+The comparison results show that both formulation types performed equally well under parser validation and automatic round-trip evaluation. All 600 implication and dyadic formulas in the baseline stakeholder dataset were parser-valid, and all 600 corresponding formulas in the Claude stakeholder dataset were also parser-valid. No paired norm received different automatic round-trip scores between its implication and dyadic versions. The main observed difference was structural: implication-based formulas had slightly larger ASTs than dyadic formulas. This is expected because implication formulas explicitly represent the conditional relation as a separate AST node, whereas dyadic formulas attach the condition directly to the modal operator.
+
+This result supports the use of both formulations in the thesis. The value of including both is not that one is immediately shown to be better than the other, but that the dataset enables a controlled comparison without assuming semantic equivalence. For the current evaluation, both formulations appear equally robust in terms of syntax and round-trip preservation, while differing modestly in structural complexity.
 
 ### 4.5.2 Product Categories as Predicates
 
