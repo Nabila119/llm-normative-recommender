@@ -2,7 +2,7 @@ Faculty of Science, Technology and Communication
 
 Leveraging LLMs for Agent-Based Normative Recommender Systems
 
-A Pipeline for Stakeholder Norm Formalization, Validation, and Conflict Analysis
+A Pipeline for Stakeholder Norm Translation, Validation, and Formulation Comparison
 
 Thesis Submitted in Partial Fulfillment of the Requirements for the Degree of Master in Information and Computer Sciences
 
@@ -20,9 +20,9 @@ Date: Working draft, 2026
 
 Autonomous recommender systems increasingly operate in domains where recommendations are not merely matters of preference optimization, but also involve ethical, legal, health-related, and stakeholder-specific constraints. In food recommendation, for example, a system may need to respect user allergies, religious dietary requirements, public-health restrictions, product-safety rules, and commercial objectives. These requirements are often expressed in natural language, while formal reasoning, parser validation, argumentation, dialogue, and explanation require structured representations.
 
-This thesis investigates how large language models can support the formalization of stakeholder norms for an agent-based normative recommender system. The work is situated in the context of DJ4ME, where stakeholder views may be represented by avatars that reason with norms and participate in machine-ethics dialogue. The thesis develops a reproducible pipeline in which natural-language stakeholder norms are represented as deontic first-order logic formulas involving obligations, permissions, and prohibitions. Three stakeholder perspectives are considered: User, Food Ministry, and Food Industry.
+This thesis investigates how large language models can support the formalization of stakeholder norms for an agent-based normative recommender system. The work is situated in the context of DJ4ME, where stakeholder views may be represented by avatars that reason with norms and participate in machine-ethics dialogue. The thesis develops a reproducible pipeline in which natural-language stakeholder norms are represented in a controlled modal/deontic first-order logic syntax involving obligations, permissions, and prohibitions. Three stakeholder perspectives are considered: User, Food Ministry, and Food Industry.
 
-The current implementation constructs revised stakeholder datasets in which each natural-language norm is paired with both an implication-based monadic formulation and a dyadic formulation. This design supports comparison between formalization strategies rather than treating them as interchangeable. Product categories are modeled as predicates over product variables, and the recommendation action explicitly includes the target user. Constitutive rules, such as category classifications, are stored separately from stakeholder norms as background domain knowledge.
+The current implementation constructs a norm translation dataset rather than a recommendation dataset. Each natural-language norm is paired with both an implication-based monadic formulation and a dyadic formulation. This design supports comparison between formalization strategies rather than treating them as interchangeable. Product categories are modeled as predicates over product variables, and the recommendation relation is represented as recommend(System,y,x), where y is the product and x is the target user. Constitutive rules, such as category classifications, are stored separately from stakeholder norms as background domain knowledge.
 
 The pipeline includes grammar-based validation, abstract syntax tree generation, normalized formula representations, and round-trip semantic preservation checks. The current validated dataset contains 350 records and 650 formal formulas with zero parser validation errors. It also produces 350 AST records and 600 round-trip backtranslation rows. The thesis contributes a structured dataset design and implementation pipeline for evaluating LLM-based norm formalization and preparing stakeholder norms for later use in DJ4ME-style dialogue, explanation, and reasoning components.
 
@@ -66,13 +66,15 @@ Figure 4.2 Planned downstream use in DJ4ME
     3.4 Parser Validation
     3.5 AST Generation and Normalization
     3.6 Round-Trip Semantic Preservation
-    3.7 Scope Boundary and Downstream DJ4ME Use
+    3.7 LLM Comparison and Human Semantic Review
+    3.8 Scope Boundary and Downstream DJ4ME Use
 
 4 Results and Discussion
     4.1 Dataset Outputs
     4.2 Parser Validation Results
     4.3 AST and Round-Trip Outputs
-    4.4 Discussion
+    4.4 Claude Comparison Results
+    4.5 Discussion
 
 5 Conclusion and Future Work
     5.1 Contributions
@@ -89,13 +91,13 @@ Food recommendation provides a useful case study because the domain naturally co
 
 The DJ4ME project, A DJ for Machine Ethics: the Dialogue Jiminy, motivates this thesis. DJ4ME investigates how autonomous agents can make ethically relevant decisions by representing stakeholder perspectives through dialogue and argumentation. The project builds on the idea that affected stakeholders may be represented by avatars embedded in or connected to the agent. These avatars can hold norms, make arguments, and participate in dialogue about what the agent should do. In contrast to a purely automatic moral advisor that aggregates stakeholder norms internally, Dialogue Jiminy aims to preserve stakeholder autonomy by allowing avatars to participate in persuasion dialogue.
 
-The DJ4ME proposal identifies a natural-language interface as one of the core requirements for such a system. This interface is expected to support both norm mining and explanation synthesis. Norm mining and norm formalisation concern the transformation of informal stakeholder norms into formal rules usable by avatars. Explanation synthesis concerns the reverse direction: making formal recommendations or dialogues understandable in plain natural language. This thesis focuses on the first part of that interface: translating stakeholder norms from natural language into a controlled deontic first-order logic representation and evaluating the quality of this formalisation.
+The DJ4ME proposal identifies a natural-language interface as one of the core requirements for such a system. This interface is expected to support both norm mining and explanation synthesis. Norm mining and norm formalisation concern the transformation of informal stakeholder norms into formal rules usable by avatars. Explanation synthesis concerns the reverse direction: making formal recommendations or dialogues understandable in plain natural language. This thesis focuses on the first part of that interface: translating stakeholder norms from natural language into a controlled modal/deontic first-order logic syntax and evaluating the quality of this formalisation.
 
 Large language models are promising for this task because they are capable of interpreting natural-language rules and producing structured symbolic expressions. At the same time, LLMs are not guaranteed to produce valid formulas or semantically faithful translations. They may invent predicates, mix notation styles, omit variables, or produce formulas that look plausible but cannot be parsed. This thesis therefore studies LLM-based norm formalization as part of a controlled pipeline that combines natural-language generation, fixed grammar validation, AST generation, round-trip semantic checks, LLM comparison, and human semantic review.
 
 ## 1.2 Problem Statement
 
-Stakeholder norms are often available in natural language, but agent-based normative reasoning and dialogue require formal representations. The central problem is how to translate stakeholder norms into deontic first-order logic formulas in a way that is syntactically valid, semantically meaningful, and reusable by downstream DJ4ME components. This problem is made more difficult by the fact that conditional norms can be represented in different formal styles. In particular, implication-based monadic norms and dyadic norms have different semantic interpretations and should not be treated as interchangeable.
+Stakeholder norms are often available in natural language, but agent-based normative reasoning and dialogue require formal representations. The central problem is how to translate stakeholder norms into formulas in a controlled modal/deontic first-order logic syntax in a way that is syntactically valid, semantically meaningful, and reusable by downstream DJ4ME components. This problem is made more difficult by the fact that conditional norms can be represented in different formal styles. In particular, implication-based monadic norms and dyadic norms have different semantic interpretations and should not be treated as interchangeable.
 
 A second modeling problem concerns product categories. Early versions of the dataset used expressions such as recommend(System,EnergyDrink), where a category such as EnergyDrink was treated as a constant. This is problematic because a constant denotes a particular object in a model rather than a class of products. The revised design instead quantifies over product variables and represents categories as predicates, such as energyDrink(y). This makes the formalization more suitable for a single domain model containing many products.
 
@@ -109,7 +111,7 @@ How can large language models support the translation, validation, and analysis 
 
 The thesis is guided by the following sub-questions:
 
-1. How accurately can LLMs translate stakeholder norms from natural language into modal/deontic first-order logic?
+1. How accurately can LLMs translate stakeholder norms from natural language into formulas in a controlled modal/deontic first-order logic syntax?
 
 1. To what extent do generated formulas satisfy the syntax of a controlled grammar?
 
@@ -149,7 +151,7 @@ The DJ4ME project provides the research context for this thesis. It studies mach
 
 DJ4ME builds on the Autonomous Jiminy architecture, where stakeholder norms can be combined into arguments in order to identify moral dilemmas and recommend actions to the agent. The Dialogue Jiminy extension shifts the focus toward persuasion dialogue between stakeholder avatars. This is important because it gives stakeholders more control over how their norms are used in the moral recommendation process.
 
-The proposal identifies a natural-language interface as a key part of the project. This interface includes norm mining, norm formalisation, and explanation synthesis. Norm formalisation is the part most relevant to this thesis: informal stakeholder norms must be converted into formal rules that can be validated and used by avatars or reasoning components. The thesis contributes to this upstream formalisation task by constructing and evaluating a pipeline for translating stakeholder food-recommendation norms into parser-validated deontic first-order logic.
+The proposal identifies a natural-language interface as a key part of the project. This interface includes norm mining, norm formalisation, and explanation synthesis. Norm formalisation is the part most relevant to this thesis: informal stakeholder norms must be converted into formal rules that can be validated and used by avatars or reasoning components. The thesis contributes to this upstream formalisation task by constructing and evaluating a pipeline for translating stakeholder food-recommendation norms into formulas in a controlled modal/deontic first-order logic syntax.
 
 ## 2.2 Large Language Models and Formalization
 
@@ -163,7 +165,7 @@ Work on natural-language-to-first-order-logic translation is directly relevant t
 
 FOLIO is another relevant reference because it provides natural-language statements paired with first-order logic annotations. It demonstrates the value of formal annotations for reasoning tasks and highlights the importance of carefully checked logical representations. However, FOLIO focuses on general first-order logic rather than deontic or modal norms.
 
-This thesis differs from standard NL-to-FOL work by focusing on modal/deontic first-order logic for stakeholder norms. The target formulas contain obligations, permissions, and prohibitions. The immediate goal is not to build a complete moral dialogue system, but to evaluate whether LLM-generated stakeholder norms can be expressed in a controlled formal language with valid syntax and preserved meaning.
+This thesis differs from standard NL-to-FOL work by focusing on a controlled modal/deontic first-order logic syntax for stakeholder norms. The target formulas contain obligations, permissions, prohibitions, implication-based conditional formulas, and dyadic conditional formulas. The immediate goal is not to build a complete moral dialogue system, but to evaluate whether LLM-generated stakeholder norms can be expressed in a controlled formal language with valid syntax and preserved meaning.
 
 ## 2.4 Deontic Logic and Normative Agents
 
@@ -185,19 +187,19 @@ The food domain is therefore suitable as a case study for normative recommendati
 
 ## 2.7 Research Gap
 
-Existing work studies LLM-based logic translation, normative agents, deontic reasoning, multi-stakeholder recommendation, and food recommendation. However, there is limited work combining these directions into a reproducible pipeline for translating stakeholder food recommendation norms into parser-validated deontic first-order logic formulas, generating ASTs, comparing LLM-generated datasets, and evaluating round-trip semantic preservation with human review. This thesis addresses that gap by building and evaluating such a pipeline in a focused case study aligned with the DJ4ME language-interface objective.
+Existing work studies LLM-based logic translation, normative agents, deontic reasoning, multi-stakeholder recommendation, and food recommendation. However, there is limited work combining these directions into a reproducible pipeline for translating stakeholder food-recommendation norms into formulas in a controlled modal/deontic first-order logic syntax, validating those formulas with a parser, generating ASTs, comparing LLM-generated datasets, and evaluating round-trip semantic preservation with human review. This thesis addresses that gap by building and evaluating such a pipeline in a focused case study aligned with the DJ4ME language-interface objective.
 
 # Chapter 3: Methodology
 
 ## 3.1 Research Design
 
-The research follows an implementation-oriented design. The objective is to construct a reproducible pipeline that takes stakeholder norms in natural language and produces validated deontic first-order logic formulas suitable for AST generation, semantic checking, LLM comparison, and later use by DJ4ME components. The pipeline is not intended to produce food recommendations directly. Instead, it supports the upstream language-interface task of formalizing norms that could later be used by stakeholder avatars or normative reasoning components.
+The research follows an implementation-oriented design. The objective is to construct a reproducible pipeline that takes stakeholder norms in natural language and produces validated formulas in a controlled modal/deontic first-order logic syntax suitable for AST generation, semantic checking, LLM comparison, and later use by DJ4ME components. The dataset is not a recommendation dataset, and the pipeline is not intended to produce food recommendations directly. Instead, it supports the upstream language-interface task of formalizing norms that could later be used by stakeholder avatars or normative reasoning components.
 
 The work is structured around three stakeholder perspectives: User, Food Ministry, and Food Industry. For each stakeholder, norms are expressed in natural language and formalized using two alternative conditional structures. The resulting formulas are validated against a fixed grammar, parsed into ASTs, normalized into comparable structures, and used for round-trip backtranslation.
 
 Figure 3.1 gives the conceptual pipeline:
 
-natural-language stakeholder norm -> modal/deontic FOL -> parser validation -> AST -> normalized norm -> round-trip evaluation -> human semantic review
+natural-language stakeholder norm -> controlled modal/deontic FOL syntax -> parser validation -> AST -> normalized norm -> round-trip evaluation -> human semantic review
 
 ## 3.2 Dataset Construction
 
@@ -255,7 +257,7 @@ Parser validation checks whether generated formulas satisfy the fixed grammar an
 | --- | --- |
 | Schema validation | Confirms that each CSV has the expected columns. |
 | Parser validation | Confirms that each formula can be parsed by the fixed grammar. |
-| Formula-type markers | Checks that implication formulas contain -> and dyadic formulas contain |. |
+| Formula-type markers | Checks that implication formulas contain -> and dyadic formulas contain \|. |
 | Recommendation arity | Checks that stakeholder formulas use recommend(System,y,x). |
 | Quantifier pattern | Checks stakeholder formulas start with ∀x.∀y. and constitutive rules start with ∀y. |
 | Uniqueness | Flags duplicate ids, natural-language norms, or formulas. |
@@ -292,9 +294,11 @@ The automatic evaluation assigns a preliminary score. A score of 2 indicates tha
 
 ## 3.7 LLM Comparison and Human Semantic Review
 
-To test whether the pipeline is model-specific or more generally useful, the thesis compares two LLM-generated datasets produced from the same prompt structure. The baseline dataset was generated in the working pipeline, while a second dataset was generated with Claude Opus 4.8 in fresh chats using the same stakeholder prompts. This allows comparison of parser validity, formula structure, predicate vocabulary, norm-type distribution, and round-trip preservation.
+To test whether the pipeline is model-specific or more generally useful, the thesis compares two LLM-generated datasets produced from the same prompt structure. The baseline dataset was generated in the working pipeline, while a second dataset was generated with Claude Opus 4.8 using high effort in fresh chats. The Claude stakeholder datasets were generated on 2026-06-28, and the Claude constitutive rules were generated on 2026-07-03. No manual edits were made to the Claude outputs before validation. This allows comparison of parser validity, formula structure, predicate vocabulary, norm-type distribution, and round-trip preservation.
 
 Human semantic review is used because automatic evaluation cannot fully determine whether a formula preserves the meaning of the original natural-language norm. In the current evaluation, a human reviewer inspected a selected subset of round-trip rows, including all rows that the automatic evaluator scored as 0 or 1 and additional quality-control rows from score-2 cases. The reviewer assigned human semantic scores and error categories.
+
+## 3.8 Scope Boundary and Downstream DJ4ME Use
 
 Conflict detection is not implemented as part of this thesis. It remains a downstream use case for DJ4ME. The ASTs and constitutive rules are nevertheless useful because they make the formalized norms easier to reuse in future argumentation, dialogue, or conflict-analysis components.
 
@@ -339,23 +343,23 @@ Human evaluation was performed on 112 selected round-trip rows. The reviewed sam
 
 ## 4.4 Claude Comparison Results
 
-To compare LLM performance under the same dataset-generation structure, a second set of stakeholder datasets was generated with Claude Opus 4.8 using the GitHub prompt files in fresh chats and without manual edits. The Claude batch included the three stakeholder datasets: User, Food Ministry, and Food Industry. A Claude constitutive-rules file was not yet available at the time of this draft, so the comparison covers stakeholder norms only.
+To compare LLM performance under the same dataset-generation structure, a second dataset batch was generated with Claude Opus 4.8 using high effort, the GitHub prompt files, fresh chats, and no manual edits. The Claude stakeholder datasets were generated on 2026-06-28, and the Claude constitutive rules were generated on 2026-07-03. The ChatGPT baseline model/version was recorded as ChatGPT 5.5, but the baseline effort setting was not explicitly logged, so the missing effort metadata is treated as a reproducibility limitation.
 
-The Claude stakeholder datasets contained 300 records and 600 formulas. They passed the same parser validation as the baseline stakeholder datasets:
+The Claude revised dataset contained 350 records and 650 formulas, matching the baseline revised dataset. Both passed the same parser validation:
 
 | Source | Records | Formulas | Errors | Warnings |
 | --- | ---: | ---: | ---: | ---: |
-| Baseline stakeholder datasets | 300 | 600 | 0 | 0 |
-| Claude stakeholder datasets | 300 | 600 | 0 | 0 |
+| Baseline revised dataset | 350 | 650 | 0 | 0 |
+| Claude revised dataset | 350 | 650 | 0 | 0 |
 
-The automatic round-trip comparison gave the following result:
+The automatic round-trip comparison covers the 300 stakeholder records and 600 stakeholder formulas in each dataset, because constitutive rules are background classifications rather than stakeholder norms. It gave the following result:
 
 | Source | Rows | Score 2 | Score 1 | Score 0 |
 | --- | ---: | ---: | ---: | ---: |
 | Baseline stakeholder datasets | 600 | 538 | 40 | 22 |
 | Claude stakeholder datasets | 600 | 550 | 46 | 4 |
 
-These results suggest that Claude followed the grammar and formalisation conventions successfully. However, the comparison report also showed that Claude used a smaller predicate vocabulary, especially for the User and Food Ministry datasets. For example, the baseline User dataset used 83 predicates, while the Claude User dataset used 48. This indicates that parser validity and round-trip score alone are not sufficient to evaluate dataset quality. Diversity, stakeholder coverage, and usefulness for downstream DJ4ME reasoning must also be considered.
+These results suggest that Claude followed the grammar and formalisation conventions successfully. However, the comparison report also showed that Claude used a smaller predicate vocabulary, especially for the User and Food Ministry datasets. For example, the baseline User dataset used 83 predicates, while the Claude User dataset used 48. This indicates that parser validity and round-trip score alone are not sufficient to evaluate dataset quality. Diversity, stakeholder coverage, reproducibility metadata, and usefulness for downstream DJ4ME reasoning must also be considered.
 
 The implication-versus-dyadic comparison gave the following aggregate result:
 
@@ -410,7 +414,7 @@ The current results demonstrate that the revised datasets can be parsed successf
 
 - The domain predicates assume a future product catalog or knowledge base for interpretation.
 
-- Using LLMs for data generation introduces reproducibility limits unless model settings and outputs are archived.
+- Using LLMs for data generation introduces reproducibility limits unless model settings and outputs are archived. In the current work, the Claude Opus 4.8 high-effort generation metadata was recorded, and the ChatGPT baseline model/version was recorded as ChatGPT 5.5, but the baseline effort setting was not explicitly logged.
 
 ## 5.3 Future Work
 
@@ -465,7 +469,7 @@ python scripts/evaluate_roundtrip.py
 | stakeholder | User |
 | nl_norm | Children should not receive energy drink recommendations. |
 | implication_formula | ∀x.∀y.child(x)∧energyDrink(y)->F(recommend(System,y,x)) |
-| dyadic_formula | ∀x.∀y.F(recommend(System,y,x)|child(x)∧energyDrink(y)) |
+| dyadic_formula | ∀x.∀y.F(recommend(System,y,x)\|child(x)∧energyDrink(y)) |
 | norm_type | prohibition |
 
 # Appendix C: Human Evaluation Form
