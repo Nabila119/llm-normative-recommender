@@ -1597,9 +1597,9 @@
     "auto_direct_overlap": "certified;lactosefree",
     "auto_original_concepts": "2",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: lactose-intolerant user + certified lactose-free product -> permitted recommendation. Auto-1 is conservative due to token overlap."
   },
   {
     "id": "USER045",
@@ -1615,9 +1615,9 @@
     "auto_direct_overlap": "certified;lactosefree",
     "auto_original_concepts": "2",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: lactose-intolerant user + certified lactose-free product -> permitted recommendation. Auto-1 is conservative due to token overlap."
   },
   {
     "id": "USER046",
@@ -1633,9 +1633,9 @@
     "auto_direct_overlap": "lactosefree",
     "auto_original_concepts": "1",
     "auto_concept_hits": "0",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: lactose-intolerant user + not lactose-free meal -> prohibited recommendation. Auto-1 is conservative due to negation/token overlap."
   },
   {
     "id": "USER046",
@@ -1651,9 +1651,9 @@
     "auto_direct_overlap": "lactosefree",
     "auto_original_concepts": "1",
     "auto_concept_hits": "0",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: lactose-intolerant user + not lactose-free meal -> prohibited recommendation. Auto-1 is conservative due to negation/token overlap."
   },
   {
     "id": "USER047",
@@ -1813,9 +1813,9 @@
     "auto_direct_overlap": "",
     "auto_original_concepts": "0",
     "auto_concept_hits": "0",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: if the user prefers the product, the system is permitted to recommend it. Auto-0 is overly conservative for this short norm."
   },
   {
     "id": "USER051",
@@ -1831,9 +1831,9 @@
     "auto_direct_overlap": "",
     "auto_original_concepts": "0",
     "auto_concept_hits": "0",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: if the user prefers the product, the system is permitted to recommend it. Auto-0 is overly conservative for this short norm."
   },
   {
     "id": "USER052",
@@ -1849,9 +1849,9 @@
     "auto_direct_overlap": "",
     "auto_original_concepts": "0",
     "auto_concept_hits": "0",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: if the user avoids the product, the system is prohibited from recommending it. Auto-0 is overly conservative for this short norm."
   },
   {
     "id": "USER052",
@@ -1867,9 +1867,9 @@
     "auto_direct_overlap": "",
     "auto_original_concepts": "0",
     "auto_concept_hits": "0",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: if the user avoids the product, the system is prohibited from recommending it. Auto-0 is overly conservative for this short norm."
   },
   {
     "id": "USER053",
@@ -2065,9 +2065,9 @@
     "auto_direct_overlap": "diabetic;healthy",
     "auto_original_concepts": "2",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: permission + healthy meal + diabetic user condition are preserved, but the hypertensive user condition from the original/formula is missing in the backtranslation."
   },
   {
     "id": "USER058",
@@ -2083,9 +2083,9 @@
     "auto_direct_overlap": "diabetic;healthy",
     "auto_original_concepts": "2",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: permission + healthy meal + diabetic user condition are preserved, but the hypertensive user condition from the original/formula is missing in the backtranslation."
   },
   {
     "id": "USER059",
@@ -2101,9 +2101,9 @@
     "auto_direct_overlap": "diabetic;ultraprocessed",
     "auto_original_concepts": "2",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: prohibition + ultra-processed food + diabetic user condition are preserved, but the hypertensive user condition from the original/formula is missing in the backtranslation."
   },
   {
     "id": "USER059",
@@ -2119,9 +2119,9 @@
     "auto_direct_overlap": "diabetic;ultraprocessed",
     "auto_original_concepts": "2",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: prohibition + ultra-processed food + diabetic user condition are preserved, but the hypertensive user condition from the original/formula is missing in the backtranslation."
   },
   {
     "id": "USER060",
@@ -2137,9 +2137,9 @@
     "auto_direct_overlap": "energy",
     "auto_original_concepts": "3",
     "auto_concept_hits": "2",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: prohibition + energy drink + child condition are preserved, but the elderly user condition from the original/formula is missing in the backtranslation."
   },
   {
     "id": "USER060",
@@ -2155,9 +2155,9 @@
     "auto_direct_overlap": "energy",
     "auto_original_concepts": "3",
     "auto_concept_hits": "2",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: prohibition + energy drink + child condition are preserved, but the elderly user condition from the original/formula is missing in the backtranslation."
   },
   {
     "id": "USER061",
@@ -2173,9 +2173,9 @@
     "auto_direct_overlap": "low;pregnant;salt",
     "auto_original_concepts": "3",
     "auto_concept_hits": "2",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: permission + low-salt food + pregnant user condition are preserved, but the elderly user condition from the original/formula is missing in the backtranslation."
   },
   {
     "id": "USER061",
@@ -2191,9 +2191,9 @@
     "auto_direct_overlap": "low;pregnant;salt",
     "auto_original_concepts": "3",
     "auto_concept_hits": "2",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: permission + low-salt food + pregnant user condition are preserved, but the elderly user condition from the original/formula is missing in the backtranslation."
   },
   {
     "id": "USER062",
@@ -2245,9 +2245,9 @@
     "auto_direct_overlap": "halal",
     "auto_original_concepts": "3",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "0",
+    "human_error_type": "wrong_condition",
+    "human_notes": "the formula changes the product condition from certified meals to healthy meals, and the backtranslation also drops the kosher condition. The original norm is not preserved."
   },
   {
     "id": "USER063",
@@ -2263,9 +2263,9 @@
     "auto_direct_overlap": "halal",
     "auto_original_concepts": "3",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "0",
+    "human_error_type": "wrong_condition",
+    "human_notes": "the formula changes the product condition from certified meals to healthy meals, and the backtranslation also drops the kosher condition. The original norm is not preserved."
   },
   {
     "id": "USER064",
@@ -2353,9 +2353,9 @@
     "auto_direct_overlap": "healthy",
     "auto_original_concepts": "2",
     "auto_concept_hits": "0",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: permission + healthy meal + lactose-intolerant user condition are preserved, but the gluten-sensitive user condition from the original/formula is missing in the backtranslation."
   },
   {
     "id": "USER066",
@@ -2371,9 +2371,9 @@
     "auto_direct_overlap": "healthy",
     "auto_original_concepts": "2",
     "auto_concept_hits": "0",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: permission + healthy meal + lactose-intolerant user condition are preserved, but the gluten-sensitive user condition from the original/formula is missing in the backtranslation."
   },
   {
     "id": "USER067",
@@ -3361,9 +3361,9 @@
     "auto_direct_overlap": "healthy",
     "auto_original_concepts": "1",
     "auto_concept_hits": "0",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: user requires low sugar + product is a healthy meal -> permitted recommendation. Auto-1 is conservative because it missed some concept overlap."
   },
   {
     "id": "USER094",
@@ -3379,9 +3379,9 @@
     "auto_direct_overlap": "healthy",
     "auto_original_concepts": "1",
     "auto_concept_hits": "0",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: user requires low sugar + product is a healthy meal -> permitted recommendation. Auto-1 is conservative because it missed some concept overlap."
   },
   {
     "id": "USER095",
@@ -3397,9 +3397,9 @@
     "auto_direct_overlap": "mediterranean",
     "auto_original_concepts": "2",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: user requires low salt + product is a Mediterranean meal -> permitted recommendation. Auto-1 is conservative because it missed some concept overlap."
   },
   {
     "id": "USER095",
@@ -3415,9 +3415,9 @@
     "auto_direct_overlap": "mediterranean",
     "auto_original_concepts": "2",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: user requires low salt + product is a Mediterranean meal -> permitted recommendation. Auto-1 is conservative because it missed some concept overlap."
   },
   {
     "id": "USER096",
@@ -3541,9 +3541,9 @@
     "auto_direct_overlap": "lactosefree",
     "auto_original_concepts": "1",
     "auto_concept_hits": "0",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: lactose-intolerant user + lactose-free meal -> permitted recommendation. Auto-1 is conservative due to token overlap."
   },
   {
     "id": "USER099",
@@ -3559,9 +3559,9 @@
     "auto_direct_overlap": "lactosefree",
     "auto_original_concepts": "1",
     "auto_concept_hits": "0",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: lactose-intolerant user + lactose-free meal -> permitted recommendation. Auto-1 is conservative due to token overlap."
   },
   {
     "id": "USER100",
@@ -3865,9 +3865,9 @@
     "auto_direct_overlap": "energy",
     "auto_original_concepts": "3",
     "auto_concept_hits": "2",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: prohibition + child condition + energy drink condition are preserved, but the sugary snack condition from the original/formula is missing in the backtranslation."
   },
   {
     "id": "MINISTRY008",
@@ -3883,9 +3883,9 @@
     "auto_direct_overlap": "energy",
     "auto_original_concepts": "3",
     "auto_concept_hits": "2",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: prohibition + child condition + energy drink condition are preserved, but the sugary snack condition from the original/formula is missing in the backtranslation."
   },
   {
     "id": "MINISTRY009",
@@ -3901,9 +3901,9 @@
     "auto_direct_overlap": "sugar",
     "auto_original_concepts": "3",
     "auto_concept_hits": "2",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: prohibition + child condition + sugar-limit condition are preserved, but the salt-limit condition from the original/formula is missing in the backtranslation."
   },
   {
     "id": "MINISTRY009",
@@ -3919,9 +3919,9 @@
     "auto_direct_overlap": "sugar",
     "auto_original_concepts": "3",
     "auto_concept_hits": "2",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: prohibition + child condition + sugar-limit condition are preserved, but the salt-limit condition from the original/formula is missing in the backtranslation."
   },
   {
     "id": "MINISTRY010",
@@ -4153,9 +4153,9 @@
     "auto_direct_overlap": "diabetic;sugary",
     "auto_original_concepts": "3",
     "auto_concept_hits": "2",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: prohibition + diabetic user condition + sugary snack condition are preserved, but the energy drink condition from the original/formula is missing in the backtranslation."
   },
   {
     "id": "MINISTRY016",
@@ -4171,9 +4171,9 @@
     "auto_direct_overlap": "diabetic;sugary",
     "auto_original_concepts": "3",
     "auto_concept_hits": "2",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: prohibition + diabetic user condition + sugary snack condition are preserved, but the energy drink condition from the original/formula is missing in the backtranslation."
   },
   {
     "id": "MINISTRY017",
@@ -5305,9 +5305,9 @@
     "auto_direct_overlap": "healthy",
     "auto_original_concepts": "2",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: permission + adult user condition + healthy meal condition are preserved, but the affordable product condition from the original/formula is missing in the backtranslation."
   },
   {
     "id": "MINISTRY048",
@@ -5323,9 +5323,9 @@
     "auto_direct_overlap": "healthy",
     "auto_original_concepts": "2",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: permission + adult user condition + healthy meal condition are preserved, but the affordable product condition from the original/formula is missing in the backtranslation."
   },
   {
     "id": "MINISTRY049",
@@ -6385,9 +6385,9 @@
     "auto_direct_overlap": "healthy;vulnerable",
     "auto_original_concepts": "1",
     "auto_concept_hits": "0",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: obligation + vulnerable user condition + healthy meal condition are preserved, but the affordable meal condition from the original/formula is missing in the backtranslation."
   },
   {
     "id": "MINISTRY078",
@@ -6403,9 +6403,9 @@
     "auto_direct_overlap": "healthy;vulnerable",
     "auto_original_concepts": "1",
     "auto_concept_hits": "0",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: obligation + vulnerable user condition + healthy meal condition are preserved, but the affordable meal condition from the original/formula is missing in the backtranslation."
   },
   {
     "id": "MINISTRY079",
@@ -8797,9 +8797,9 @@
     "auto_direct_overlap": "sponsored",
     "auto_original_concepts": "2",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: permission + sponsored product condition are preserved, but the discounted product condition from the original/formula is missing in the backtranslation."
   },
   {
     "id": "INDUSTRY045",
@@ -8815,9 +8815,9 @@
     "auto_direct_overlap": "sponsored",
     "auto_original_concepts": "2",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: permission + sponsored product condition are preserved, but the discounted product condition from the original/formula is missing in the backtranslation."
   },
   {
     "id": "INDUSTRY046",
@@ -8833,9 +8833,9 @@
     "auto_direct_overlap": "premium",
     "auto_original_concepts": "2",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: permission + premium product condition are preserved, but the certified product condition from the original/formula is missing in the backtranslation."
   },
   {
     "id": "INDUSTRY046",
@@ -8851,9 +8851,9 @@
     "auto_direct_overlap": "premium",
     "auto_original_concepts": "2",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: permission + premium product condition are preserved, but the certified product condition from the original/formula is missing in the backtranslation."
   },
   {
     "id": "INDUSTRY047",
@@ -8869,9 +8869,9 @@
     "auto_direct_overlap": "local",
     "auto_original_concepts": "2",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: permission + local product condition are preserved, but the sustainable product condition from the original/formula is missing in the backtranslation."
   },
   {
     "id": "INDUSTRY047",
@@ -8887,9 +8887,9 @@
     "auto_direct_overlap": "local",
     "auto_original_concepts": "2",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: permission + local product condition are preserved, but the sustainable product condition from the original/formula is missing in the backtranslation."
   },
   {
     "id": "INDUSTRY048",
@@ -8941,9 +8941,9 @@
     "auto_direct_overlap": "mediterranean",
     "auto_original_concepts": "2",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: permission + Mediterranean meal condition are preserved, but the Asian meal condition from the original/formula is missing in the backtranslation."
   },
   {
     "id": "INDUSTRY049",
@@ -8959,9 +8959,9 @@
     "auto_direct_overlap": "mediterranean",
     "auto_original_concepts": "2",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: permission + Mediterranean meal condition are preserved, but the Asian meal condition from the original/formula is missing in the backtranslation."
   },
   {
     "id": "INDUSTRY050",
@@ -9697,9 +9697,9 @@
     "auto_direct_overlap": "certified",
     "auto_original_concepts": "2",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: permission + certified product condition are preserved, but the organic product condition from the original/formula is missing in the backtranslation."
   },
   {
     "id": "INDUSTRY070",
@@ -9715,9 +9715,9 @@
     "auto_direct_overlap": "certified",
     "auto_original_concepts": "2",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: permission + certified product condition are preserved, but the organic product condition from the original/formula is missing in the backtranslation."
   },
   {
     "id": "INDUSTRY071",
@@ -10381,9 +10381,9 @@
     "auto_direct_overlap": "restricted",
     "auto_original_concepts": "2",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: prohibition + restricted product condition are preserved, but the not-approved product condition from the original/formula is missing in the backtranslation."
   },
   {
     "id": "INDUSTRY089",
@@ -10399,9 +10399,9 @@
     "auto_direct_overlap": "restricted",
     "auto_original_concepts": "2",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: prohibition + restricted product condition are preserved, but the not-approved product condition from the original/formula is missing in the backtranslation."
   },
   {
     "id": "INDUSTRY090",
@@ -10705,9 +10705,9 @@
     "auto_direct_overlap": "avoids",
     "auto_original_concepts": "1",
     "auto_concept_hits": "0",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: prohibition + user-avoids-product condition are preserved, but the restricted product condition from the original/formula is missing in the backtranslation."
   },
   {
     "id": "INDUSTRY098",
@@ -10723,9 +10723,9 @@
     "auto_direct_overlap": "avoids",
     "auto_original_concepts": "1",
     "auto_concept_hits": "0",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: prohibition + user-avoids-product condition are preserved, but the restricted product condition from the original/formula is missing in the backtranslation."
   },
   {
     "id": "INDUSTRY099",
