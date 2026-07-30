@@ -1,4 +1,4 @@
-![](assets/university_of_luxembourg_logo.png){width=2in}
+![University of Luxembourg logo](../assets/university_of_luxembourg_logo.png)
 
 Faculty of Science, Technology and Communication
 
@@ -18,9 +18,6 @@ Reviewer: Reka Markovich
 
 Date: July 2026
 
-```{=openxml}
-<w:p><w:r><w:br w:type="page"/></w:r></w:p>
-```
 
 # Abstract
 
