@@ -1,3 +1,5 @@
+![](assets/university_of_luxembourg_logo.png){width=2in}
+
 Faculty of Science, Technology and Communication
 
 Leveraging LLMs for Agent-Based Normative Recommender Systems
@@ -8,13 +10,17 @@ Thesis Submitted in Partial Fulfillment of the Requirements for the Degree of Ma
 
 Author: Nabila Waheed
 
-Supervisor: [Supervisor name]
+Supervisor: Prof. Leon van der Torre
 
-Advisor: [Advisor name]
+Advisor: Matteo Magnini
 
-Reviewer: [Reviewer name]
+Reviewer: Reka Markovich
 
-Date: Working draft, 2026
+Date: July 2026
+
+```{=openxml}
+<w:p><w:r><w:br w:type="page"/></w:r></w:p>
+```
 
 # Abstract
 
@@ -34,6 +40,11 @@ Table 3.1 Dataset schemas and record counts
 Table 3.2 Main validation checks
 Table 4.1 Current validation results
 Table 4.2 Round-trip automatic score interpretation
+Table 4.3 Automatic round-trip comparison between ChatGPT baseline and Claude
+Table 4.4 Human review comparison between ChatGPT baseline and Claude
+Table 4.5 Auto-human crosstab for the ChatGPT baseline
+Table 4.6 Auto-human crosstab for Claude
+Table 4.7 Human error-type comparison
 
 # List of Figures
 
@@ -52,12 +63,13 @@ Figure 4.2 Planned downstream use in DJ4ME
     1.5 Thesis Structure
 
 2 Literature Review
-    2.1 Large Language Models and Formalization
-    2.2 Natural Language to Logic Translation
-    2.3 Deontic Logic and Normative Agents
-    2.4 Multi-Stakeholder Recommender Systems
-    2.5 Food Recommendation and Constraint-Aware Systems
-    2.6 Research Gap
+    2.1 DJ4ME and Machine Ethics
+    2.2 Large Language Models and Formalization
+    2.3 Natural Language to Logic Translation
+    2.4 Deontic Logic and Normative Agents
+    2.5 Multi-Stakeholder Recommender Systems
+    2.6 Food Recommendation and Constraint-Aware Systems
+    2.7 Research Gap
 
 3 Methodology
     3.1 Research Design
@@ -80,6 +92,12 @@ Figure 4.2 Planned downstream use in DJ4ME
     5.1 Contributions
     5.2 Limitations
     5.3 Future Work
+
+Bibliography
+
+Appendix A: Repository and Reproducibility
+Appendix B: Example Dataset Record
+Appendix C: Human Evaluation Form
 
 # Chapter 1: Introduction
 
@@ -169,7 +187,7 @@ Chapter 2 reviews related work on DJ4ME, LLM-based formalization, natural-langua
 
 ## 2.1 DJ4ME and Machine Ethics
 
-The DJ4ME project provides the research context for this thesis. It studies machine ethics for autonomous agents whose decisions may affect multiple stakeholders. The proposal connects machine ethics with deontic logic, normative systems, formal argumentation, argumentation as dialogue, and machine learning. Its central architectural idea is that stakeholders can be represented by avatars. These avatars can hold norms and participate in reasoning or dialogue about what an autonomous agent should do.
+The DJ4ME project provides the research context for this thesis. It studies machine ethics for autonomous agents whose decisions may affect multiple stakeholders [0]. The proposal connects machine ethics with deontic logic, normative systems, formal argumentation, argumentation as dialogue, and machine learning. Formal argumentation is relevant because abstract argumentation frameworks provide a way to evaluate competing arguments and attacks between them [7]. DJ4ME's central architectural idea is that stakeholders can be represented by avatars. These avatars can hold norms and participate in reasoning or dialogue about what an autonomous agent should do.
 
 DJ4ME builds on the Autonomous Jiminy architecture, where stakeholder norms can be combined into arguments in order to identify moral dilemmas and recommend actions to the agent. The Dialogue Jiminy extension shifts the focus toward persuasion dialogue between stakeholder avatars. This is important because it gives stakeholders more control over how their norms are used in the moral recommendation process.
 
@@ -183,9 +201,9 @@ This thesis also draws from DJ4ME's distinction between norm mining and explanat
 
 ## 2.2 Large Language Models and Formalization
 
-Large language models have demonstrated strong abilities in natural-language understanding, text generation, summarization, and code-like symbolic output. These capabilities make them attractive for translating informal requirements or norms into formal languages. However, LLMs also introduce risks. They may produce syntactically invalid expressions, hallucinate predicates, collapse distinctions that matter semantically, or generate outputs that are fluent but not faithful to the source. In formalization tasks, these errors are especially important because small notation changes can alter the meaning of a formula.
+Large language models have demonstrated strong abilities in natural-language understanding, text generation, summarization, and code-like symbolic output. These capabilities make them attractive for translating informal requirements or norms into formal languages. Recent work on LLM-assisted logical reasoning has explored this direction by coupling language models with symbolic solvers or formal representations [3]. However, LLMs also introduce risks. They may produce syntactically invalid expressions, hallucinate predicates, collapse distinctions that matter semantically, or generate outputs that are fluent but not faithful to the source. In formalization tasks, these errors are especially important because small notation changes can alter the meaning of a formula.
 
-For this thesis, LLMs are not treated as standalone reasoners. Instead, they are treated as components in a hybrid pipeline. The LLM can assist in producing candidate formalizations, but the output must be checked by a grammar and parser before it is used for reasoning. This follows a broader direction in neurosymbolic AI: using language models for flexible linguistic interpretation while relying on formal tools for validation and structured reasoning.
+For this thesis, LLMs are not treated as standalone reasoners. Instead, they are treated as components in a hybrid pipeline. The LLM can assist in producing candidate formalizations, but the output must be checked by a grammar and parser before it is used for reasoning. This follows a broader direction in neurosymbolic AI: using language models for flexible linguistic interpretation while relying on formal tools for validation and structured reasoning. Logic-LM, for example, uses LLMs together with symbolic solvers for logical reasoning, which illustrates the general motivation for separating natural-language interpretation from formal checking [3].
 
 This hybrid role is especially important in formalization tasks. LLMs are useful because they can interpret varied natural-language expressions and produce structured symbolic candidates without requiring every norm to be hand-coded from scratch. However, the same flexibility creates risk. A model can produce an expression that looks logically sophisticated while violating the intended grammar or silently changing the scope of a condition. The parser and validation scripts therefore act as a boundary between plausible text generation and accepted formal data.
 
@@ -195,9 +213,9 @@ The pipeline therefore uses LLMs as generators of candidate structured data, not
 
 ## 2.3 Natural Language to Logic Translation
 
-Work on natural-language-to-first-order-logic translation is directly relevant to this thesis. The LOGICLLAMA line of work, for example, studies how LLMs can translate natural language into first-order logic and emphasizes dataset generation, prompt design, grammar verification, and correction strategies. Such work shows that LLMs can be useful for formal translation tasks, but also that generated formulas require validation and that silver-label datasets should be handled carefully.
+Work on natural-language-to-first-order-logic translation is directly relevant to this thesis. Semantic parsing research has long studied the conversion of natural-language utterances into executable or logical forms, and recent surveys describe a movement from rule-based systems toward neural and program-synthesis approaches [9]. The LOGICLLAMA line of work studies how LLMs can translate natural language into first-order logic and emphasizes dataset generation, prompt design, grammar verification, and correction strategies [1]. Such work shows that LLMs can be useful for formal translation tasks, but also that generated formulas require validation and that silver-label datasets should be handled carefully.
 
-FOLIO is another relevant reference because it provides natural-language statements paired with first-order logic annotations. It demonstrates the value of formal annotations for reasoning tasks and highlights the importance of carefully checked logical representations. However, FOLIO focuses on general first-order logic rather than deontic or modal norms.
+FOLIO is another relevant reference because it provides natural-language statements paired with first-order logic annotations [2]. It demonstrates the value of formal annotations for reasoning tasks and highlights the importance of carefully checked logical representations. More recent neurosymbolic work, such as compositional FOL translation and verification, also points to the value of decomposing natural-language reasoning tasks into formal translation and formal checking stages [10]. However, these works focus on general first-order logic rather than deontic or modal norms.
 
 This thesis differs from standard NL-to-FOL work by focusing on a controlled modal/deontic first-order logic syntax for stakeholder norms. The target formulas contain obligations, permissions, prohibitions, implication-based conditional formulas, and dyadic conditional formulas. The immediate goal is not to build a complete moral dialogue system, but to evaluate whether LLM-generated stakeholder norms can be expressed in a controlled formal language with valid syntax and preserved meaning.
 
@@ -209,23 +227,23 @@ The relevance of NL-to-FOL work is therefore both technical and cautionary. It s
 
 ## 2.4 Deontic Logic and Normative Agents
 
-Deontic logic provides formal tools for representing normative concepts such as obligation, permission, and prohibition. In this thesis, the operators O, P, and F are used to represent these modalities. Conditional norms can be represented using implication-based formulas, such as X->O(Y), or dyadic formulas, such as O(Y|X). These forms are not treated as semantically identical. The thesis therefore keeps both forms paired for the same natural-language norm in order to support comparison.
+Deontic logic provides formal tools for representing normative concepts such as obligation, permission, and prohibition. In normative multi-agent systems, deontic concepts are commonly used to describe how agents should, may, or must not behave [11, 12]. In this thesis, the operators O, P, and F are used to represent these modalities. Conditional norms can be represented using implication-based formulas, such as X->O(Y), or dyadic formulas, such as O(Y|X). These forms are not treated as semantically identical. The thesis therefore keeps both forms paired for the same natural-language norm in order to support comparison.
 
-Normative agent research is also relevant because autonomous agents may need to reason about what they are permitted, required, or forbidden to do. Norm conflicts are a central challenge in this area. A system may face one norm requiring an action and another norm prohibiting the same action under overlapping conditions. Resolving such conflicts may require priorities, defeasible reasoning, or argumentation semantics. In this thesis, conflict handling is treated as a downstream DJ4ME use case rather than as an implemented component. The implemented focus is the formalisation and evaluation of the norms that such a component would later require.
+Normative agent research is also relevant because autonomous agents may need to reason about what they are permitted, required, or forbidden to do. Norm conflicts are a central challenge in this area. A system may face one norm requiring an action and another norm prohibiting the same action under overlapping conditions. Literature on normative conflict detection and resolution in multi-agent systems shows that conflicts require additional mechanisms beyond the representation of single norms, such as priorities, exception handling, argumentation, or other conflict-resolution strategies [6, 13]. In this thesis, conflict handling is treated as a downstream DJ4ME use case rather than as an implemented component. The implemented focus is the formalisation and evaluation of the norms that such a component would later require.
 
 This distinction between formalizing, detecting, and resolving conflicts is important. Formalizing a norm means representing its modality, action, and condition in a structured language. Detecting a conflict would require comparing two or more formalized norms and identifying incompatible modalities over overlapping actions and conditions. Resolving a conflict would require an additional theory of priority, exception, authority, stakeholder weight, or argument acceptability. The present thesis contributes mainly to the first step and prepares artifacts that could support the second.
 
 Dyadic deontic formulations are relevant here because many real norms are conditional. A food item may be permitted for one user and forbidden for another; a recommendation may be obligatory only when a health condition and product property both hold. Conditionality is therefore not a minor syntactic detail. It determines the circumstances under which a norm applies, and it affects how a future agent might identify overlapping or conflicting cases.
 
-The thesis does not choose between implication-based and dyadic formulations as a final theoretical position. Instead, it treats the two forms as alternative encodings that can be compared under the same dataset and evaluation procedure. This is a pragmatic choice. A full semantic analysis of conditional deontic logic would require more theoretical machinery than the implemented pipeline provides. However, ignoring the difference would also be problematic. The paired design gives the thesis a way to acknowledge the theoretical issue while still producing concrete implementation results.
+The thesis does not choose between implication-based and dyadic formulations as a final theoretical position. Instead, it treats the two forms as alternative encodings that can be compared under the same dataset and evaluation procedure. This is a pragmatic choice. A full semantic analysis of conditional deontic logic and multi-agent deontic logic would require more theoretical machinery than the implemented pipeline provides [14]. However, ignoring the difference would also be problematic. The paired design gives the thesis a way to acknowledge the theoretical issue while still producing concrete implementation results.
 
 ## 2.5 Multi-Stakeholder Recommender Systems
 
-Multi-stakeholder recommender systems recognize that recommendations affect more than one party. A recommendation may benefit a user, a provider, a platform, a regulator, or a broader public interest. Research on multi-stakeholder recommendation and multi-sided fairness shows that recommender systems may need to balance competing objectives and constraints across different actors.
+Multi-stakeholder recommender systems recognize that recommendations affect more than one party. A recommendation may benefit a user, a provider, a platform, a regulator, or a broader public interest. Research on multi-stakeholder recommendation and multi-sided fairness shows that recommender systems may need to balance competing objectives and constraints across different actors [4, 5].
 
 The stakeholder framing is central to this thesis. User norms represent individual needs and constraints, Food Ministry norms represent public-health and regulatory concerns, and Food Industry norms represent commercial and product-placement objectives. The thesis formalizes these perspectives separately so that downstream DJ4ME components could later compare stakeholder positions in argumentation or dialogue.
 
-This separation also avoids treating "the recommender system" as if it had only one objective. In a conventional recommender evaluation, the system may be assessed mainly by prediction accuracy, ranking quality, or user engagement. In a multi-stakeholder setting, a recommendation may simultaneously affect user safety, regulatory compliance, provider interests, and public trust. A formal norm dataset can make these dimensions explicit by showing which stakeholder perspective gives rise to which obligation, permission, or prohibition.
+This separation also avoids treating "the recommender system" as if it had only one objective. In a conventional recommender evaluation, the system may be assessed mainly by prediction accuracy, ranking quality, or user engagement. In a multi-stakeholder setting, a recommendation may simultaneously affect user safety, regulatory compliance, provider interests, and public trust. Constraint-based and knowledge-based recommender-system research is relevant here because it shows that recommendation can be guided by explicit constraints and domain knowledge rather than only by collaborative or content-similarity signals [15]. A formal norm dataset can make these dimensions explicit by showing which stakeholder perspective gives rise to which obligation, permission, or prohibition.
 
 The three stakeholder groups used here are a simplification, but they are useful for implementation. The User perspective captures personal and individual constraints, the Food Ministry perspective captures public-health and regulatory constraints, and the Food Industry perspective captures commercial and product-related constraints. A larger DJ4ME deployment could include more stakeholder categories, but the three-way structure is sufficient for testing whether LLM-generated norms can be formalized consistently across different kinds of normative vocabulary.
 
@@ -233,9 +251,9 @@ This structure also produces different kinds of norms. User norms often concern 
 
 ## 2.6 Food Recommendation and Constraint-Aware Systems
 
-Food recommendation is often discussed in relation to personalization, nutrition, health, dietary constraints, and recipe retrieval. Constraint-aware food recommendation systems and food knowledge graphs show that food recommendations may depend on structured information about ingredients, dietary labels, allergens, and user requirements. This thesis does not build a complete food knowledge graph, but it uses a similar idea at the logical level: predicates such as glutenFreeMeal(y), contains(y,Nuts), highSugarProduct(y), and certifiedHalal(y) represent product properties that a domain model could later interpret.
+Food recommendation is often discussed in relation to personalization, nutrition, health, dietary constraints, and recipe retrieval. Surveys of food recommender systems show that the domain is diverse and technically challenging because recommendations may depend on user preferences, nutritional requirements, ingredients, recipes, health goals, and contextual factors [16, 17]. Constraint-aware food recommendation systems and food knowledge graphs show that food recommendations may depend on structured information about ingredients, dietary labels, allergens, and user requirements [8]. This thesis does not build a complete food knowledge graph, but it uses a similar idea at the logical level: predicates such as glutenFreeMeal(y), contains(y,Nuts), highSugarProduct(y), and certifiedHalal(y) represent product properties that a domain model could later interpret.
 
-The food domain is therefore suitable as a case study for normative recommendation. It contains personal preferences, safety constraints, religious requirements, medical needs, regulatory obligations, and commercial interests. These properties make it a rich setting for studying stakeholder norm formalization.
+The food domain is therefore suitable as a case study for normative recommendation. It contains personal preferences, safety constraints, religious requirements, medical needs, regulatory obligations, and commercial interests. Health and nutrition recommender-system reviews also show that evaluation is difficult because such systems may need to consider not only technical recommendation accuracy but also health relevance, user characteristics, explanation, and real-world impact [18]. These properties make food recommendation a rich setting for studying stakeholder norm formalization.
 
 The domain also provides intuitive examples for evaluating translation quality. A reader can usually understand why a child should not receive energy drink recommendations, why a user with a nut allergy should avoid products containing nuts, or why a product making a health claim may require appropriate labeling. This makes the round-trip evaluation more interpretable: when a backtranslation loses a condition, weakens a prohibition, or changes the target user, the error can be explained in ordinary language.
 
@@ -432,7 +450,7 @@ The human review design focuses attention on likely error cases while still chec
 
 The comparison with Claude serves a different purpose. It tests whether the pipeline is tied to one LLM-generated dataset or whether another model can follow the same prompt structure and validation rules. Since both the baseline and Claude datasets are validated with the same scripts, differences in round-trip scores, predicate vocabulary, and norm-type distribution can be interpreted as differences in generated dataset characteristics rather than differences in the evaluation machinery.
 
-The human review and Claude comparison complement each other. Human review evaluates semantic preservation within the baseline round-trip output. The Claude comparison evaluates whether a separate generated dataset can satisfy the same structural and syntactic standards. Together they support a more balanced assessment: the pipeline is not only syntactically successful, but also reveals where automatic semantic evaluation remains limited and where model choice affects dataset characteristics.
+The human review and Claude comparison complement each other. Human review evaluates semantic preservation within selected baseline and Claude round-trip outputs. The Claude comparison evaluates whether a separate generated dataset can satisfy the same structural, syntactic, and round-trip evaluation standards. Together they support a more balanced assessment: the pipeline is not only syntactically successful, but also reveals where automatic semantic evaluation remains limited and where model choice affects dataset characteristics.
 
 The current human review should be understood as targeted rather than exhaustive. The reviewed rows were selected to include all automatic low-score cases and additional high-score quality-control cases. This makes the review efficient for finding likely errors, but it also means that the reviewed sample is not a random sample of the full dataset. The reported human score distribution therefore describes the reviewed subset, not necessarily the entire 600-row round-trip output. This is why the thesis reports both the coverage and the selection strategy.
 
@@ -512,12 +530,54 @@ The Claude revised dataset contained 350 records and 650 formulas, matching the 
 
 The automatic round-trip comparison covers the 300 stakeholder records and 600 stakeholder formulas in each dataset, because constitutive rules are background classifications rather than stakeholder norms. It gave the following result:
 
-| Source | Rows | Score 2 | Score 1 | Score 0 |
+| Source | Rows | Auto score 2 | Auto score 1 | Auto score 0 |
 | --- | ---: | ---: | ---: | ---: |
-| Baseline stakeholder datasets | 600 | 538 | 40 | 22 |
-| Claude stakeholder datasets | 600 | 550 | 46 | 4 |
+| ChatGPT baseline | 600 | 538 (89.7%) | 40 (6.7%) | 22 (3.7%) |
+| Claude | 600 | 550 (91.7%) | 46 (7.7%) | 4 (0.7%) |
 
-These results suggest that Claude followed the grammar and formalisation conventions successfully. However, the comparison report also showed that Claude used a smaller predicate vocabulary, especially for the User and Food Ministry datasets. For example, the baseline User dataset used 83 predicates, while the Claude User dataset used 48. This indicates that parser validity and round-trip score alone are not sufficient to evaluate dataset quality. Diversity, stakeholder coverage, reproducibility metadata, and usefulness for downstream DJ4ME reasoning must also be considered.
+Table 4.3 shows that Claude produced slightly more automatic score-2 rows than the ChatGPT baseline and substantially fewer automatic score-0 rows. Claude had 550 score-2 rows out of 600, or 91.7%, compared with 538 out of 600, or 89.7%, for the ChatGPT baseline. The most visible difference is at the severe-error end of the scale: Claude produced 4 automatic score-0 rows, or 0.7%, while the ChatGPT baseline produced 22 automatic score-0 rows, or 3.7%.
+
+Human review was then used to check the automatic scores. The reviewed samples were selected in the same general spirit but are not identical in size. For the ChatGPT baseline, 112 rows were reviewed: all automatic score-0 and score-1 rows plus 50 quality-control rows from automatic score-2 cases. For Claude, 100 rows were reviewed: all automatic score-0 and score-1 rows plus a reproducible 50-row sample from automatic score-2 cases. The human review comparison is shown in Table 4.4.
+
+| Source | Reviewed rows | Human score 2 | Human score 1 | Human score 0 | Exact auto-human agreement |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| ChatGPT baseline | 112 | 84 (75.0%) | 22 (19.6%) | 6 (5.4%) | 48/112 (42.9%) |
+| Claude | 100 | 61 (61.0%) | 37 (37.0%) | 2 (2.0%) | 81/100 (81.0%) |
+
+The human results confirm that Claude had fewer severe semantic mismatches in the reviewed sample. Only 2 of the 100 reviewed Claude rows were assigned human score 0, compared with 6 of the 112 reviewed ChatGPT baseline rows. However, Claude also had a larger proportion of partial-preservation cases in the reviewed sample: 37.0% of reviewed Claude rows received human score 1, compared with 19.6% of reviewed ChatGPT baseline rows. This reflects the fact that many Claude errors involved preserving the main modality and action while omitting one condition, especially one side of a disjunction.
+
+The exact auto-human agreement rate was also higher for Claude: 81.0%, compared with 42.9% for the ChatGPT baseline. This does not mean that the automatic evaluator is generally reliable without human checking. Rather, it means that the automatic labels aligned more closely with the Claude reviewed sample than with the ChatGPT baseline reviewed sample. The ChatGPT baseline review showed many cases where automatic score 0 or 1 was overly conservative, while the Claude review showed fewer such disagreements.
+
+The detailed auto-human crosstabs show where the disagreements occurred.
+
+| ChatGPT auto score | Human score 0 | Human score 1 | Human score 2 | Total |
+| --- | ---: | ---: | ---: | ---: |
+| Auto score 0 | 0 (0.0%) | 4 (18.2%) | 18 (81.8%) | 22 |
+| Auto score 1 | 6 (15.0%) | 8 (20.0%) | 26 (65.0%) | 40 |
+| Auto score 2 | 0 (0.0%) | 10 (20.0%) | 40 (80.0%) | 50 |
+
+| Claude auto score | Human score 0 | Human score 1 | Human score 2 | Total |
+| --- | ---: | ---: | ---: | ---: |
+| Auto score 0 | 0 (0.0%) | 0 (0.0%) | 4 (100.0%) | 4 |
+| Auto score 1 | 2 (4.3%) | 34 (73.9%) | 10 (21.7%) | 46 |
+| Auto score 2 | 0 (0.0%) | 3 (6.0%) | 47 (94.0%) | 50 |
+
+Tables 4.5 and 4.6 show two different patterns. In the ChatGPT baseline, many automatic low-score rows were judged faithful by the human reviewer: 18 of 22 automatic score-0 rows and 26 of 40 automatic score-1 rows received human score 2. This means the automatic evaluator was often too conservative for the baseline. In the Claude reviewed set, automatic score-1 rows more often corresponded to partial preservation: 34 of 46 automatic score-1 rows received human score 1. The Claude automatic score-2 sample was also strong, with 47 of 50 sampled rows confirmed as human score 2.
+
+The human error-type distribution gives additional qualitative detail:
+
+| Error type | ChatGPT baseline count | ChatGPT baseline percent | Claude count | Claude percent |
+| --- | ---: | ---: | ---: | ---: |
+| None | 48 | 42.9% | 61 | 61.0% |
+| Awkward but equivalent | 36 | 32.1% | 0 | 0.0% |
+| Lost meaning | 12 | 10.7% | 0 | 0.0% |
+| Wrong condition | 8 | 7.1% | 2 | 2.0% |
+| Wrong action | 6 | 5.4% | 0 | 0.0% |
+| Missing condition | 2 | 1.8% | 37 | 37.0% |
+
+The error types suggest that the two datasets failed in different ways. The ChatGPT baseline had a broader mix of awkward-but-equivalent backtranslations, lost meaning, wrong conditions, wrong actions, and missing conditions. Claude's reviewed errors were more concentrated: most non-faithful cases were missing-condition errors, especially where one disjunctive alternative was dropped in the backtranslation. This makes the Claude error pattern easier to characterize, even though it still shows that human review is necessary.
+
+Overall, these results suggest that Claude followed the grammar and formalisation conventions successfully and produced stronger round-trip results than the ChatGPT baseline, especially by reducing severe automatic and human mismatch cases. However, the comparison report also showed that Claude used a smaller predicate vocabulary, especially for the User and Food Ministry datasets. For example, the baseline User dataset used 83 predicates, while the Claude User dataset used 48. This indicates that parser validity and round-trip score alone are not sufficient to evaluate dataset quality. Diversity, stakeholder coverage, reproducibility metadata, and usefulness for downstream DJ4ME reasoning must also be considered.
 
 The Claude comparison is useful because it separates pipeline robustness from dataset style. Both the baseline and Claude datasets pass validation, which suggests that the grammar and prompts are sufficiently clear for more than one LLM-generated dataset. At the same time, the predicate vocabulary differs substantially. Claude uses fewer predicates in the User and Food Ministry datasets, while the baseline dataset contains more varied predicate names. This may reflect different model tendencies: one model may generalize through broader predicates, while another may produce more specific product or condition predicates.
 
@@ -590,6 +650,8 @@ The current results demonstrate that the revised datasets can be parsed successf
 
 The thesis also shows that evaluation must be multi-layered. Parser validation is necessary because invalid formulas cannot support reliable downstream reasoning. However, parser validation is not sufficient because syntactically valid formulas can still fail to preserve the original norm. Round-trip evaluation and human review add semantic checks, while LLM comparison and formulation comparison add evidence about model behavior and representation choices. Together, these layers provide a more cautious evaluation than a single syntax score would allow.
 
+The comparison between the ChatGPT baseline and Claude illustrates this point. Both datasets passed parser validation, but their round-trip and human-review profiles differed. Claude produced fewer automatic score-0 rows, 4 out of 600 compared with 22 out of 600 for the ChatGPT baseline, and fewer human-confirmed semantic mismatches in the reviewed sample, 2 out of 100 compared with 6 out of 112. At the same time, Claude still produced partial-preservation errors, mainly missing-condition cases. The result is therefore not that one automatic metric settles dataset quality, but that a layered evaluation can reveal different kinds of strengths and weaknesses.
+
 ## 5.2 Limitations
 
 - The dataset is generated and structurally validated, but the human semantic evaluation covers a selected sample rather than every row.
@@ -624,30 +686,51 @@ Finally, future work could connect the formalized norms to explanation generatio
 
 # Bibliography
 
-[0] DJ4ME Project Proposal. A DJ for Machine Ethics: the Dialogue Jiminy. FullProposal18989918.pdf, pages 9-20 used for project context.
+[0] DJ4ME. A DJ for Machine Ethics: the Dialogue Jiminy. University of Luxembourg project page. https://icr.uni.lu/dj4me/index.html
 
-[1] Harnessing the Power of Large Language Models for Natural Language to First-Order Logic Translation. arXiv:2305.15541.
+[1] Yang, Y., Xiong, S., Payani, A., Shareghi, E., and Fekri, F. Harnessing the Power of Large Language Models for Natural Language to First-Order Logic Translation. arXiv:2305.15541, 2023.
 
-[2] FOLIO: Natural Language Reasoning with First-Order Logic. arXiv:2209.00840.
+[2] Han, S., Schoelkopf, H., Zhao, Y., Qi, Z., Riddell, M., Benson, L., Sun, L., Zubova, E., Qiao, Y., Burtell, M., Peng, D., Fan, J., Liu, Y., Wong, B., Sailor, M., Ni, A., Nan, L., Kasai, J., Yu, T., Zhang, R., Fabbri, A. R., Kryscinski, W., Lin, X. V., Cohan, A., Radev, D., Smith, N. A., and Yih, W.-t. FOLIO: Natural Language Reasoning with First-Order Logic. arXiv:2209.00840, 2022.
 
-[3] Logic-LM: Empowering Large Language Models with Symbolic Solvers for Faithful Logical Reasoning. arXiv:2305.12295.
+[3] Pan, L., Albalak, A., Wang, X., and Wang, W. Y. Logic-LM: Empowering Large Language Models with Symbolic Solvers for Faithful Logical Reasoning. arXiv:2305.12295, 2023.
 
-[4] Multi-Stakeholder Recommendation: Applications and Challenges. arXiv:1707.08913.
+[4] Abdollahpouri, H., Burke, R., Mobasher, B., and Malthouse, E. C. Multi-Stakeholder Recommendation: Applications and Challenges. arXiv:1707.08913, 2017.
 
-[5] Multi-stakeholder Recommendation and its Connection to Multi-sided Fairness. arXiv:1907.13158.
+[5] Abdollahpouri, H. Multi-stakeholder Recommendation and its Connection to Multi-sided Fairness. arXiv:1907.13158, 2019.
 
-[6] A Defeasible Deontic Calculus for Resolving Norm Conflicts. arXiv:2407.04869.
+[6] Olson, T., Salas-Damian, R., and Forbus, K. D. A Defeasible Deontic Calculus for Resolving Norm Conflicts. arXiv:2407.04869, 2024.
 
-[7] Dung, P. M. On the Acceptability of Arguments and its Fundamental Role in Nonmonotonic Reasoning, Logic Programming and n-Person Games.
+[7] Dung, P. M. On the Acceptability of Arguments and its Fundamental Role in Nonmonotonic Reasoning, Logic Programming and n-Person Games. Artificial Intelligence, 77(2), 321-357, 1995.
 
-[8] Personalized Food Recommendation as Constrained Question Answering over a Large-Scale Food Knowledge Graph. arXiv:2101.01775.
+[8] Personalized Food Recommendation as Constrained Question Answering over a Large-Scale Food Knowledge Graph. arXiv:2101.01775, 2021.
 
-Draft note: Before submission, convert this bibliography into the citation style required by the programme and cite sources inline throughout Chapters 1 and 2.
+[9] Kamath, A., and Das, R. A Survey on Semantic Parsing. AKBC, 2019.
+
+[10] Ryu, H., Kim, G., Lee, H. S., and Yang, E. Divide and Translate: Compositional First-Order Logic Translation and Verification for Complex Logical Reasoning. arXiv:2410.08047, 2024.
+
+[11] Boella, G., Pigozzi, G., and van der Torre, L. Normative Systems in Computer Science: Ten Guidelines for Normative Multiagent Systems. Dagstuhl Seminar Proceedings, 2009. https://doi.org/10.4230/DagSemProc.09121.2
+
+[12] Mahmoud, M. A., Ahmad, M. S., Yusoff, M. Z. M., and Mustapha, A. A Review of Norms and Normative Multiagent Systems. The Scientific World Journal, 2014.
+
+[13] Santos, J. S., Zahn, J. O., Silvestre, E. A., and Silva, V. T. Detection and Resolution of Normative Conflicts in Multi-Agent Systems: A Literature Survey. Journal of Autonomous Agents and Multi-Agent Systems, 2017.
+
+[14] Pigozzi, G., and van der Torre, L. Multiagent Deontic Logic and its Challenges from a Normative Systems Perspective. Journal of Logics and Their Applications, 2017.
+
+[15] Felfernig, A., and Burke, R. Constraint-Based Recommender Systems: Technologies and Research Issues. In International Conference on Electronic Commerce, ACM, 2008, pp. 17-26.
+
+[16] Bondevik, J. N., Bennin, K. E., Babur, O., and Ersch, C. A Systematic Review on Food Recommender Systems. Expert Systems with Applications, 238, 122166, 2024.
+
+[17] Trattner, C., and Elsweiler, D. An Overview of Recommender Systems in the Healthy Food Domain. Journal of Intelligent Information Systems, 50, 501-526, 2018.
+
+[18] De Croon, R., Van Houdt, L., Htun, N. N., Slabbinck, H., Verbert, K., and Vanden Abeele, V. Health Recommender Systems: Systematic Review. Journal of Medical Internet Research, 2021.
+
+Draft note: Before submission, convert this bibliography into the citation style required by the programme and ensure that every bibliography item is cited consistently.
 
 # Appendix A: Repository and Reproducibility
 
 The current repository is llm-normative-recommender. Older folders have been archived under archive/previous_structure. The active pipeline folders are data, prompts, grammar, scripts, outputs, and docs.
 
+```bash
 python scripts/generate_revised_user_dataset.py
 python scripts/generate_revised_food_ministry_dataset.py
 python scripts/generate_revised_food_industry_dataset.py
@@ -656,6 +739,7 @@ python scripts/validate_revised_datasets.py
 python scripts/generate_asts.py
 python scripts/backtranslate_roundtrip.py
 python scripts/evaluate_roundtrip.py
+```
 
 # Appendix B: Example Dataset Record
 
