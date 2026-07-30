@@ -27,7 +27,7 @@ This thesis investigates how large language models can support the formalization
 
 The current implementation constructs a norm translation dataset rather than a recommendation dataset. Each natural-language norm is paired with both an implication-based monadic formulation and a dyadic formulation. This design supports comparison between formalization strategies rather than treating them as interchangeable. Product categories are modeled as predicates over product variables, and the recommendation relation is represented as recommend(System,y,x), where y is the product and x is the target user. Constitutive rules, such as category classifications, are stored separately from stakeholder norms as background domain knowledge.
 
-The pipeline includes grammar-based validation, abstract syntax tree generation, normalized formula representations, and round-trip semantic preservation checks. To examine robustness across LLMs, the study compares datasets generated with ChatGPT and Claude using the same controlled grammar and prompt structure. Both datasets achieved zero parser validation errors. Round-trip evaluation showed that most formal-to-natural-language backtranslations preserved the original norm, while human review confirmed that syntactic validity alone is insufficient for assessing semantic faithfulness. The comparison further showed that the Claude-generated dataset produced fewer severe semantic mismatches, whereas the ChatGPT-generated dataset used a broader predicate vocabulary. This provides a reproducible DJ4ME-oriented norm-formalization pipeline.
+The pipeline includes grammar-based validation, AST generation, normalized formula representations, and round-trip checks. Using the same controlled grammar and prompt structure, it compares ChatGPT- and Claude-generated datasets. Both achieved zero parser validation errors. Round-trip evaluation and human review show that syntactic validity alone does not ensure semantic faithfulness: Claude produced fewer severe mismatches, while ChatGPT used a broader predicate vocabulary. This provides a reproducible DJ4ME-oriented norm-formalization pipeline.
 
 Keywords: large language models; deontic logic; first-order logic; normative recommender systems; stakeholder norms; grammar validation; abstract syntax trees; round-trip evaluation
 
@@ -35,13 +35,17 @@ Keywords: large language models; deontic logic; first-order logic; normative rec
 
 Table 3.1 Dataset schemas and record counts
 Table 3.2 Main validation checks
-Table 4.1 Current validation results
-Table 4.2 Round-trip automatic score interpretation
+Table 3.3 Round-trip automatic score interpretation
+Table 4.1 Dataset output files and purposes
+Table 4.2 Parser validation comparison
 Table 4.3 Automatic round-trip comparison between ChatGPT baseline and Claude
 Table 4.4 Human review comparison between ChatGPT baseline and Claude
 Table 4.5 Auto-human crosstab for the ChatGPT baseline
 Table 4.6 Auto-human crosstab for Claude
 Table 4.7 Human error-type comparison
+Table 4.8 Implication-versus-dyadic comparison
+Table B.1 Example dataset record
+Table C.1 Human evaluation scoring rubric
 
 # List of Figures
 
@@ -270,9 +274,11 @@ The research follows an implementation-oriented design. The objective is to cons
 
 The work is structured around three stakeholder perspectives: User, Food Ministry, and Food Industry. For each stakeholder, norms are expressed in natural language and formalized using two alternative conditional structures. The resulting formulas are validated against a fixed grammar, parsed into ASTs, normalized into comparable structures, and used for round-trip backtranslation.
 
-Figure 3.1 gives the conceptual pipeline:
+Figure 3.1 gives the conceptual pipeline.
 
-natural-language stakeholder norm -> controlled modal/deontic FOL syntax -> parser validation -> AST -> normalized norm -> round-trip evaluation -> human semantic review
+![Figure 3.1 Overview of the norm formalization pipeline](../assets/figures/figure_3_1_pipeline.png)
+
+Figure 3.1. Overview of the norm formalization pipeline.
 
 The methodology is designed around traceability. Each dataset row keeps the natural-language norm together with its two formal representations, which makes it possible to inspect a translation error without searching across unrelated files. The scripts then produce derived artifacts rather than replacing the source data: validation reports, AST JSON files, round-trip backtranslations, evaluated round-trip rows, and comparison reports. This makes the pipeline reproducible and makes it easier to identify which stage produced a particular result.
 
@@ -289,6 +295,8 @@ The methodology also emphasizes repeatability over one-off manual correction. Ma
 The dataset is a norm translation dataset. Each stakeholder record contains a natural-language norm and two formal representations of that norm. The revised stakeholder schema is shown in Table 3.1. The key design decision is that implication-based and dyadic formulas are paired within the same record rather than stored as unrelated records. This allows the thesis to compare the two formalization strategies for the same natural-language content.
 
 The original motivation for using both formulations was to avoid making a premature theoretical commitment to one representation of conditional norms. Implication-based formulas and dyadic deontic formulas are both common ways of expressing conditional normative statements, but they differ in how the condition is placed. In an implication-based formulation, the condition is outside the modal operator, as in X->O(Y). In a dyadic formulation, the condition is part of the modal expression itself, as in O(Y|X). Since these forms have different logical interpretations, the dataset pairs them for each natural-language norm instead of treating them as interchangeable duplicates.
+
+Table 3.1. Dataset schemas and record counts.
 
 | Dataset | Schema | Current size |
 | --- | --- | --- |
@@ -382,6 +390,8 @@ The validation results are therefore not only a quality-control step but also a 
 
 The validation checks are also useful pedagogically: they make explicit what the thesis considers a valid formula. For example, the recommendation arity check encodes the decision that both product and target user must appear in the action. The formula-type marker check encodes the decision that implication and dyadic formulas should remain distinguishable. The old-style guard encodes the correction from category constants to predicates over product variables. These checks turn design decisions into executable tests.
 
+Table 3.2. Main validation checks.
+
 | Validation check | Purpose |
 | --- | --- |
 | Schema validation | Confirms that each CSV has the expected columns. |
@@ -409,6 +419,12 @@ For example, an implication-based prohibition can be normalized as:
 
 This normalized representation is useful because both implication-based and dyadic formulas can be represented through common fields. This makes it easier to compare whether the two formalisation strategies preserve the same modality, action, and condition structure for the same natural-language norm.
 
+Figure 3.2 summarizes how a formula is converted into a structured AST and then normalized for comparison.
+
+![Figure 3.2 Formula-to-AST normalization flow](../assets/figures/figure_3_2_ast_flow.png)
+
+Figure 3.2. Formula-to-AST normalization flow.
+
 Normalization is especially useful for the implication-versus-dyadic comparison. The surface syntax differs between `condition->F(action)` and `F(action|condition)`, but both can be mapped into fields such as form, modality, action, and condition. This does not make the two logical forms semantically equivalent. It only provides a common representation for controlled comparison of what the dataset generated and what the evaluation pipeline can inspect.
 
 The AST outputs also provide a bridge between the current thesis and future implementation work. A downstream component should not need to parse raw formula strings repeatedly or rely on fragile string matching. It should be able to consume structured representations. By generating AST artifacts, the thesis demonstrates that the formulas are not only human-readable but also machine-processable in a way that could support later reasoning modules.
@@ -421,7 +437,11 @@ Parser validation is necessary but insufficient. It checks whether a formula is 
 
 The round-trip step is motivated by a practical evaluation problem. Directly proving semantic equivalence between a natural-language norm and a formal formula is difficult, especially without a full model-theoretic interpretation. However, if a formula can be backtranslated into controlled natural language, the result can be compared with the original norm. This does not prove correctness, but it can reveal common translation failures such as missing conditions, wrong modality, wrong target user, or weakened action descriptions.
 
-original NL -> formula -> AST -> backtranslated NL -> automatic score + human review
+Figure 4.1 summarizes the round-trip semantic preservation workflow.
+
+![Figure 4.1 Round-trip semantic preservation workflow](../assets/figures/figure_4_1_roundtrip.png)
+
+Figure 4.1. Round-trip semantic preservation workflow.
 
 The automatic evaluation assigns a preliminary score. A score of 2 indicates that modality and key concepts appear preserved. A score of 1 indicates partial preservation or modality uncertainty. A score of 0 indicates a possible semantic mismatch requiring human review. The evaluated output file also includes blank columns for human semantic score, human error type, and human notes.
 
@@ -430,6 +450,8 @@ The automatic score is intentionally treated as a triage signal. It is useful fo
 This evaluation choice reflects a broader issue in semantic parsing and logic translation: syntax can often be checked mechanically, but meaning is harder to evaluate automatically. The round-trip method provides a practical compromise. It converts formal outputs back into a language form that can be compared with the original norm, making errors more visible to a human reviewer. The method is imperfect, but it is transparent and easy to audit because the backtranslated statements are stored in the output files.
 
 The round-trip method is also useful because it creates an intermediate artifact for discussion. Instead of asking a reviewer to inspect only a formal formula, the reviewer can compare the original natural-language norm with a controlled natural-language backtranslation. This lowers the barrier for semantic review and makes the evaluation more accessible to readers who may not be specialists in formal logic. At the same time, the formula remains available for inspection when a mismatch is found.
+
+Table 3.3. Round-trip automatic score interpretation.
 
 | Score | Meaning | Use in thesis |
 | --- | --- | --- |
@@ -455,6 +477,12 @@ The current human review should be understood as targeted rather than exhaustive
 
 Conflict detection is not implemented as part of this thesis. It remains a downstream use case for DJ4ME. The ASTs and constitutive rules are nevertheless useful because they make the formalized norms easier to reuse in future argumentation, dialogue, or conflict-analysis components.
 
+Figure 4.2 shows how the thesis artifacts can later feed into DJ4ME-style avatar reasoning, dialogue, and explanation components.
+
+![Figure 4.2 Planned downstream use in DJ4ME](../assets/figures/figure_4_2_dj4me.png)
+
+Figure 4.2. Planned downstream use in DJ4ME.
+
 This boundary is important for avoiding overclaiming. The thesis creates artifacts that could support conflict detection, but it does not implement the reasoning needed to determine whether two norms apply under overlapping conditions in a real product domain. It also does not implement argumentation semantics for deciding which norm should prevail. Instead, it prepares the formalized and validated norm representations that such later components would need.
 
 # Chapter 4: Results and Discussion
@@ -464,6 +492,8 @@ This boundary is important for avoiding overclaiming. The thesis creates artifac
 The current revised implementation produces three stakeholder datasets and one constitutive-rule dataset. Each stakeholder dataset contains 100 records, and each record contains two formulas. The constitutive-rule dataset contains 50 background rules. This produces 350 total records and 650 formulas for parser validation.
 
 The dataset output reflects the revised design decisions described in the methodology. The 300 stakeholder records are organized by stakeholder perspective, and each record contains one natural-language norm, one implication-based formula, and one dyadic formula. The 50 constitutive rules are stored separately because they provide domain classifications rather than stakeholder obligations, permissions, or prohibitions. This organization allows the thesis to evaluate both the formalization of stakeholder norms and the usefulness of a separate background-rule layer.
+
+Table 4.1. Dataset output files and purposes.
 
 | File | Rows | Formula columns | Purpose |
 | --- | --- | --- | --- |
@@ -520,12 +550,16 @@ To compare LLM performance under the same dataset-generation structure, a second
 
 The Claude revised dataset contained 350 records and 650 formulas, matching the baseline revised dataset. Both passed the same parser validation:
 
+Table 4.2. Parser validation comparison.
+
 | Source | Records | Formulas | Errors | Warnings |
 | --- | ---: | ---: | ---: | ---: |
 | Baseline revised dataset | 350 | 650 | 0 | 0 |
 | Claude revised dataset | 350 | 650 | 0 | 0 |
 
 The automatic round-trip comparison covers the 300 stakeholder records and 600 stakeholder formulas in each dataset, because constitutive rules are background classifications rather than stakeholder norms. It gave the following result:
+
+Table 4.3. Automatic round-trip comparison between ChatGPT baseline and Claude.
 
 | Source | Rows | Auto score 2 | Auto score 1 | Auto score 0 |
 | --- | ---: | ---: | ---: | ---: |
@@ -535,6 +569,8 @@ The automatic round-trip comparison covers the 300 stakeholder records and 600 s
 Table 4.3 shows that Claude produced slightly more automatic score-2 rows than the ChatGPT baseline and substantially fewer automatic score-0 rows. Claude had 550 score-2 rows out of 600, or 91.7%, compared with 538 out of 600, or 89.7%, for the ChatGPT baseline. The most visible difference is at the severe-error end of the scale: Claude produced 4 automatic score-0 rows, or 0.7%, while the ChatGPT baseline produced 22 automatic score-0 rows, or 3.7%.
 
 Human review was then used to check the automatic scores. The reviewed samples were selected in the same general spirit but are not identical in size. For the ChatGPT baseline, 112 rows were reviewed: all automatic score-0 and score-1 rows plus 50 quality-control rows from automatic score-2 cases. For Claude, 100 rows were reviewed: all automatic score-0 and score-1 rows plus a reproducible 50-row sample from automatic score-2 cases. The human review comparison is shown in Table 4.4.
+
+Table 4.4. Human review comparison between ChatGPT baseline and Claude.
 
 | Source | Reviewed rows | Human score 2 | Human score 1 | Human score 0 | Exact auto-human agreement |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -547,11 +583,15 @@ The exact auto-human agreement rate was also higher for Claude: 81.0%, compared 
 
 The detailed auto-human crosstabs show where the disagreements occurred.
 
+Table 4.5. Auto-human crosstab for the ChatGPT baseline.
+
 | ChatGPT auto score | Human score 0 | Human score 1 | Human score 2 | Total |
 | --- | ---: | ---: | ---: | ---: |
 | Auto score 0 | 0 (0.0%) | 4 (18.2%) | 18 (81.8%) | 22 |
 | Auto score 1 | 6 (15.0%) | 8 (20.0%) | 26 (65.0%) | 40 |
 | Auto score 2 | 0 (0.0%) | 10 (20.0%) | 40 (80.0%) | 50 |
+
+Table 4.6. Auto-human crosstab for Claude.
 
 | Claude auto score | Human score 0 | Human score 1 | Human score 2 | Total |
 | --- | ---: | ---: | ---: | ---: |
@@ -562,6 +602,8 @@ The detailed auto-human crosstabs show where the disagreements occurred.
 Tables 4.5 and 4.6 show two different patterns. In the ChatGPT baseline, many automatic low-score rows were judged faithful by the human reviewer: 18 of 22 automatic score-0 rows and 26 of 40 automatic score-1 rows received human score 2. This means the automatic evaluator was often too conservative for the baseline. In the Claude reviewed set, automatic score-1 rows more often corresponded to partial preservation: 34 of 46 automatic score-1 rows received human score 1. The Claude automatic score-2 sample was also strong, with 47 of 50 sampled rows confirmed as human score 2.
 
 The human error-type distribution gives additional qualitative detail:
+
+Table 4.7. Human error-type comparison.
 
 | Error type | ChatGPT baseline count | ChatGPT baseline percent | Claude count | Claude percent |
 | --- | ---: | ---: | ---: | ---: |
@@ -585,6 +627,8 @@ The comparison also demonstrates the importance of storing metadata. Claude's mo
 The constitutive-rule comparison further shows that two valid datasets can organize background knowledge differently. The baseline and Claude constitutive-rule files both validate, but they differ in category distribution and predicate vocabulary. This matters because constitutive rules shape how general stakeholder norms might apply to concrete products. A future reasoning component would need to decide whether different predicate vocabularies should be aligned, merged, or kept separate as model-specific variants.
 
 The implication-versus-dyadic comparison gave the following aggregate result:
+
+Table 4.8. Implication-versus-dyadic comparison.
 
 | Source | Formula type | Valid formulas | Score 2 | Score 1 | Score 0 | Avg. AST nodes |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
@@ -740,6 +784,8 @@ python scripts/evaluate_roundtrip.py
 
 # Appendix B: Example Dataset Record
 
+Table B.1. Example dataset record.
+
 | Field | Value |
 | --- | --- |
 | id | USER001 |
@@ -752,6 +798,8 @@ python scripts/evaluate_roundtrip.py
 # Appendix C: Human Evaluation Form
 
 The round-trip evaluation file contains columns for human review. Reviewers should compare the original natural-language norm with the backtranslated natural-language statement and assign a score.
+
+Table C.1. Human evaluation scoring rubric.
 
 | Human score | Interpretation |
 | --- | --- |
