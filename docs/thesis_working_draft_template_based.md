@@ -16,7 +16,7 @@ Advisor: Matteo Magnini
 
 Reviewer: Reka Markovich
 
-Date: July 2026
+Date: August 2026
 
 
 # Abstract
@@ -27,7 +27,7 @@ This thesis investigates how large language models can support the formalization
 
 The current implementation constructs a norm translation dataset rather than a recommendation dataset. Each natural-language norm is paired with both an implication-based monadic formulation and a dyadic formulation. This design supports comparison between formalization strategies rather than treating them as interchangeable. Product categories are modeled as predicates over product variables, and the recommendation relation is represented as recommend(System,y,x), where y is the product and x is the target user. Constitutive rules, such as category classifications, are stored separately from stakeholder norms as background domain knowledge.
 
-The pipeline includes grammar-based validation, abstract syntax tree generation, normalized formula representations, and round-trip semantic preservation checks. To examine robustness across LLMs, the study compares datasets generated with ChatGPT and Claude using the same controlled grammar and prompt structure. Both datasets achieved zero parser validation errors. Round-trip evaluation showed that most formal-to-natural-language backtranslations preserved the original norm, while human review confirmed that syntactic validity alone is insufficient for assessing semantic faithfulness. The comparison further showed that the Claude-generated dataset produced fewer severe semantic mismatches, whereas the ChatGPT-generated dataset used a broader predicate vocabulary. The thesis contributes a structured dataset design and implementation pipeline for evaluating LLM-based norm formalization and preparing stakeholder norms for later use in DJ4ME-style dialogue, explanation, and reasoning components.
+The pipeline includes grammar-based validation, abstract syntax tree generation, normalized formula representations, and round-trip semantic preservation checks. To examine robustness across LLMs, the study compares datasets generated with ChatGPT and Claude using the same controlled grammar and prompt structure. Both datasets achieved zero parser validation errors. Round-trip evaluation showed that most formal-to-natural-language backtranslations preserved the original norm, while human review confirmed that syntactic validity alone is insufficient for assessing semantic faithfulness. The comparison further showed that the Claude-generated dataset produced fewer severe semantic mismatches, whereas the ChatGPT-generated dataset used a broader predicate vocabulary.
 
 Keywords: large language models; deontic logic; first-order logic; normative recommender systems; stakeholder norms; grammar validation; abstract syntax trees; round-trip evaluation
 
