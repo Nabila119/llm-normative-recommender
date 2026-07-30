@@ -669,17 +669,17 @@ Separating constitutive rules from stakeholder norms helps reduce redundancy and
 
 The separation is also useful for maintenance. If background classifications change, the constitutive-rule file can be updated without rewriting every stakeholder norm. Similarly, if a stakeholder norm changes, the background classifications can remain stable. This mirrors the way a larger system might separate normative policy rules from domain knowledge or ontology rules.
 
-### 4.5.4 Current Limitations
+### 4.5.4 Scope and Interpretation
 
-The current implementation has several limitations. First, the datasets are generated and structurally validated, but the human semantic review covers a selected sample rather than all round-trip rows. Second, the round-trip evaluation is automatic and heuristic; it should support, not replace, human judgment. Third, the current work validates syntax and structure but does not yet connect formulas to a full product database or formal model interpretation. Fourth, conflict detection and dialogue-based reasoning are downstream DJ4ME tasks and are not implemented in this thesis. Finally, if LLMs are used to generate or translate additional datasets, model version, prompt, temperature, and sampling settings must be recorded because exact reproducibility cannot be guaranteed from prompts alone.
+The boundaries of the current implementation are best understood as scope decisions rather than failures of the pipeline. The thesis focuses on the upstream norm-formalization layer: generating stakeholder norms, translating them into a controlled modal/deontic first-order logic syntax, validating the formulas, producing ASTs, and evaluating semantic preservation through round-trip checks and human review. It does not attempt to build the full downstream DJ4ME reasoning environment.
 
-Another limitation concerns the generated nature of the dataset. The natural-language norms are useful for testing the pipeline, but they are not collected from real users, regulators, or food industry representatives. This means the dataset should be interpreted as a controlled research artifact rather than as an empirical survey of stakeholder views. A future version could combine the pipeline with stakeholder interviews, policy documents, or domain-expert annotations.
+The datasets are controlled research artifacts. They are designed to test whether LLM-generated stakeholder norms can be formalized consistently and validated under a fixed grammar. They are not presented as empirical surveys of real users, regulators, or food-industry representatives, and they should not be treated as authoritative legal, nutritional, or policy guidance. A future version could strengthen external validity by incorporating stakeholder interviews, policy documents, or expert annotations.
 
-The current evaluation also does not measure downstream reasoning performance. It shows that formulas can be generated, parsed, normalized, backtranslated, and compared. It does not show that a DJ4ME avatar can use them successfully in a dialogue, that a conflict detector can identify all relevant conflicts, or that a recommender can apply them to a real product catalog. These are natural next steps, but they require additional components beyond the scope of this implementation.
+The semantic evaluation is also intentionally targeted. Human review was conducted on selected round-trip rows, including all automatically flagged low-score cases and sampled high-score cases for quality control. This strategy makes the review feasible while focusing attention on likely semantic mismatches. The resulting human-review results should therefore be interpreted as evidence about the reviewed subset and about the usefulness of the automatic triage procedure, not as exhaustive labels for every generated row.
 
-Finally, the thesis is limited by the absence of expert domain validation. The human review checks semantic preservation between original norms and backtranslations, but it does not certify that the original generated norms are complete, realistic, legally accurate, or nutritionally correct. Expert review by nutrition specialists, policy experts, or recommender-system researchers would strengthen the dataset. For the current thesis, the dataset is best understood as a controlled testbed for LLM-based norm formalization.
+The current pipeline validates syntax, structure, and controlled backtranslation behavior, but it does not provide a full model-theoretic interpretation of the formulas. Predicates such as `glutenFreeMeal(y)` or `certifiedHalal(y)` are controlled by vocabulary and naming conventions, but they are not grounded in a complete food ontology or product catalog. Similarly, conflict detection, priority handling, and dialogue-based norm resolution are treated as downstream DJ4ME tasks that could build on the validated formulas and AST outputs.
 
-These limitations do not undermine the thesis contribution, but they define its proper interpretation. The work demonstrates that LLM-generated stakeholder norms can be organized, validated, parsed, backtranslated, and compared under a controlled syntax. It does not demonstrate that LLMs can independently produce authoritative normative policy, or that the generated norms are ready for deployment in a live recommender system. The value of the thesis lies in building and evaluating a reproducible formalization pipeline, not in replacing domain expertise.
+These scope boundaries define how the contribution should be read. The thesis demonstrates a reproducible pipeline for producing, validating, structuring, and evaluating stakeholder norm formalizations. Its value lies in preparing norm representations for later DJ4ME-style reasoning and dialogue, while making clear where domain expertise, formal semantics, and deployed recommender-system integration would be needed in future work.
 
 # Chapter 5: Conclusion and Future Work
 
@@ -695,17 +695,13 @@ The comparison between the ChatGPT baseline and Claude illustrates this point. B
 
 ## 5.2 Limitations
 
-- The dataset is generated and structurally validated, but the human semantic evaluation covers a selected sample rather than every row.
+The limitations of this thesis mainly concern scope and interpretation. First, the datasets are controlled LLM-generated research artifacts rather than manually curated stakeholder, legal, or institutional corpora. This makes them suitable for evaluating the formalization pipeline, but not for making claims about real-world stakeholder preferences or regulatory completeness.
 
-- Automatic round-trip scores are heuristic and should not be treated as final truth.
+Second, parser validation ensures syntactic correctness, but semantic faithfulness requires additional checks. The thesis therefore uses round-trip evaluation and human semantic review as complementary validation layers. Human review was conducted on a targeted subset of round-trip outputs, including all automatically flagged low-score cases and sampled high-score cases for quality control. This makes the review feasible and focused, but the human-review results should be interpreted as evidence about the reviewed subset rather than as exhaustive labels for the full dataset.
 
-- The current implementation detects syntax and structure, not full model-theoretic semantics.
+Third, the predicate vocabulary is controlled, but it is not grounded in a complete food ontology, product catalog, or formal model interpretation. The formulas are therefore machine-parseable and structurally usable, but their full domain interpretation is left for future integration work.
 
-- Conflict detection is not part of the implemented thesis scope; it is treated as downstream DJ4ME future work.
-
-- The domain predicates assume a future product catalog or knowledge base for interpretation.
-
-- Using LLMs for data generation introduces reproducibility limits unless model settings and outputs are archived. In the current work, the Claude Opus 4.8 high-effort generation metadata was recorded, and the ChatGPT baseline model/version was recorded as ChatGPT 5.5, but the baseline effort setting was not explicitly logged.
+Finally, conflict detection, priority handling, and dialogue-based norm resolution are treated as downstream DJ4ME tasks. This thesis prepares validated formulas, ASTs, constitutive rules, and evaluation outputs that could support those tasks, but it does not implement the full reasoning environment. Future replications should also continue recording model versions, prompts, generation dates, and sampling settings so that LLM-based results remain as reproducible as possible.
 
 ## 5.3 Future Work
 
