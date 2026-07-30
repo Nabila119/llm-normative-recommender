@@ -31,9 +31,9 @@
     "auto_direct_overlap": "drink;energy",
     "auto_original_concepts": "2",
     "auto_concept_hits": "2",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: child user + energy drink -> prohibited recommendation is preserved."
   },
   {
     "id": "USER002",
@@ -121,9 +121,9 @@
     "auto_direct_overlap": "healthy",
     "auto_original_concepts": "1",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: child user + healthy meal -> permitted recommendation is preserved."
   },
   {
     "id": "USER004",
@@ -481,9 +481,9 @@
     "auto_direct_overlap": "elderly;ultraprocessed",
     "auto_original_concepts": "1",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: elderly user + ultra-processed food -> prohibited recommendation is preserved."
   },
   {
     "id": "USER014",
@@ -517,9 +517,9 @@
     "auto_direct_overlap": "energy;pregnant",
     "auto_original_concepts": "2",
     "auto_concept_hits": "2",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: pregnant user + energy drink -> prohibited recommendation is preserved."
   },
   {
     "id": "USER015",
@@ -625,9 +625,9 @@
     "auto_direct_overlap": "low;pregnant;sugar",
     "auto_original_concepts": "2",
     "auto_concept_hits": "2",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: pregnant user + low-sugar food -> permitted recommendation is preserved."
   },
   {
     "id": "USER018",
@@ -751,9 +751,9 @@
     "auto_direct_overlap": "diabetic;energy",
     "auto_original_concepts": "2",
     "auto_concept_hits": "2",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: diabetic user + energy drink condition -> prohibited recommendation is preserved."
   },
   {
     "id": "USER022",
@@ -1021,9 +1021,9 @@
     "auto_direct_overlap": "allergic;shellfish",
     "auto_original_concepts": "2",
     "auto_concept_hits": "2",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: shellfish-allergic user + shellfish meal -> prohibited recommendation is preserved."
   },
   {
     "id": "USER029",
@@ -1039,9 +1039,9 @@
     "auto_direct_overlap": "allergic;shellfish",
     "auto_original_concepts": "2",
     "auto_concept_hits": "2",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: shellfish-allergic user + shellfish meal -> prohibited recommendation is preserved."
   },
   {
     "id": "USER030",
@@ -1129,9 +1129,9 @@
     "auto_direct_overlap": "nonvegan;vegan",
     "auto_original_concepts": "1",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: vegan user + non-vegan product -> prohibited recommendation is preserved."
   },
   {
     "id": "USER032",
@@ -1273,9 +1273,9 @@
     "auto_direct_overlap": "halal",
     "auto_original_concepts": "1",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: user requires halal food + halal meal -> obligated recommendation is preserved."
   },
   {
     "id": "USER036",
@@ -1291,9 +1291,9 @@
     "auto_direct_overlap": "halal",
     "auto_original_concepts": "1",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: user requires halal food + halal meal -> obligated recommendation is preserved."
   },
   {
     "id": "USER037",
@@ -2227,9 +2227,9 @@
     "auto_direct_overlap": "vegan;vegetarian",
     "auto_original_concepts": "2",
     "auto_concept_hits": "2",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: the permission and vegan user + vegetarian meal condition are preserved, but the vegetarian user alternative from the original/formula is missing in the backtranslation."
   },
   {
     "id": "USER063",
@@ -2443,9 +2443,9 @@
     "auto_direct_overlap": "diabetic;sugary",
     "auto_original_concepts": "3",
     "auto_concept_hits": "3",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: diabetic child + sugary snack -> prohibited recommendation is preserved."
   },
   {
     "id": "USER069",
@@ -2875,9 +2875,9 @@
     "auto_direct_overlap": "shellfish;vegan",
     "auto_original_concepts": "2",
     "auto_concept_hits": "2",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: vegan user + shellfish meal -> prohibited recommendation is preserved."
   },
   {
     "id": "USER081",
@@ -3091,9 +3091,9 @@
     "auto_direct_overlap": "healthy;hypertensive",
     "auto_original_concepts": "1",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: hypertensive user + healthy meal -> permitted recommendation is preserved."
   },
   {
     "id": "USER087",
@@ -3289,9 +3289,9 @@
     "auto_direct_overlap": "diabetic;salty",
     "auto_original_concepts": "2",
     "auto_concept_hits": "2",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: diabetic user + salty snack -> prohibited recommendation is preserved."
   },
   {
     "id": "USER092",
@@ -3721,9 +3721,9 @@
     "auto_direct_overlap": "restricted",
     "auto_original_concepts": "2",
     "auto_concept_hits": "2",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: child user + restricted product -> prohibited recommendation is preserved."
   },
   {
     "id": "MINISTRY004",
@@ -3757,9 +3757,9 @@
     "auto_direct_overlap": "approved;ministry",
     "auto_original_concepts": "2",
     "auto_concept_hits": "2",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: child user + product not approved by the ministry -> prohibited recommendation is preserved."
   },
   {
     "id": "MINISTRY005",
@@ -4081,9 +4081,9 @@
     "auto_direct_overlap": "diabetic;fried",
     "auto_original_concepts": "1",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: diabetic user + fried meal -> prohibited recommendation is preserved."
   },
   {
     "id": "MINISTRY014",
@@ -4099,9 +4099,9 @@
     "auto_direct_overlap": "diabetic;fried",
     "auto_original_concepts": "1",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: diabetic user + fried meal -> prohibited recommendation is preserved."
   },
   {
     "id": "MINISTRY015",
@@ -4207,9 +4207,9 @@
     "auto_direct_overlap": "hypertensive;salt",
     "auto_original_concepts": "2",
     "auto_concept_hits": "2",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: hypertensive user + product exceeding salt limit -> prohibited recommendation is preserved."
   },
   {
     "id": "MINISTRY018",
@@ -4423,9 +4423,9 @@
     "auto_direct_overlap": "allergic;nuts",
     "auto_original_concepts": "2",
     "auto_concept_hits": "2",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: nut-allergic user + nut-containing product -> prohibited recommendation is preserved."
   },
   {
     "id": "MINISTRY024",
@@ -4693,9 +4693,9 @@
     "auto_direct_overlap": "halal;verified",
     "auto_original_concepts": "1",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: user requires halal food + product not verified halal -> prohibited recommendation is preserved."
   },
   {
     "id": "MINISTRY031",
@@ -4711,9 +4711,9 @@
     "auto_direct_overlap": "halal;verified",
     "auto_original_concepts": "1",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: user requires halal food + product not verified halal -> prohibited recommendation is preserved."
   },
   {
     "id": "MINISTRY032",
@@ -4999,9 +4999,9 @@
     "auto_direct_overlap": "energy;pregnant",
     "auto_original_concepts": "2",
     "auto_concept_hits": "2",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: pregnant user + energy drink -> prohibited recommendation is preserved."
   },
   {
     "id": "MINISTRY040",
@@ -5287,9 +5287,9 @@
     "auto_direct_overlap": "approved;ministry;restricted",
     "auto_original_concepts": "3",
     "auto_concept_hits": "3",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: adult user + restricted product approved by the ministry -> permitted recommendation is preserved."
   },
   {
     "id": "MINISTRY048",
@@ -5503,9 +5503,9 @@
     "auto_direct_overlap": "pregnant;safe;warning",
     "auto_original_concepts": "2",
     "auto_concept_hits": "2",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: pregnant user + safe-for-pregnant-users product + safety warning -> permitted recommendation is preserved."
   },
   {
     "id": "MINISTRY054",
@@ -5701,9 +5701,9 @@
     "auto_direct_overlap": "kosher;verified",
     "auto_original_concepts": "1",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: user requires kosher food + verified kosher product -> permitted recommendation is preserved."
   },
   {
     "id": "MINISTRY059",
@@ -5719,9 +5719,9 @@
     "auto_direct_overlap": "kosher;verified",
     "auto_original_concepts": "1",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: user requires kosher food + verified kosher product -> permitted recommendation is preserved."
   },
   {
     "id": "MINISTRY060",
@@ -6241,9 +6241,9 @@
     "auto_direct_overlap": "approved;kosher;ministry;verified",
     "auto_original_concepts": "2",
     "auto_concept_hits": "2",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: user requires kosher food + verified kosher product + ministry approval -> permitted recommendation is preserved."
   },
   {
     "id": "MINISTRY074",
@@ -6493,9 +6493,9 @@
     "auto_direct_overlap": "affordable;elderly;healthy",
     "auto_original_concepts": "2",
     "auto_concept_hits": "2",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: elderly user + healthy affordable meal -> obligated recommendation is preserved."
   },
   {
     "id": "MINISTRY081",
@@ -6889,9 +6889,9 @@
     "auto_direct_overlap": "approved;elderly;healthy",
     "auto_original_concepts": "2",
     "auto_concept_hits": "2",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: elderly user + ministry-approved healthy meal -> obligated recommendation is preserved."
   },
   {
     "id": "MINISTRY092",
@@ -7015,9 +7015,9 @@
     "auto_direct_overlap": "healthy;pregnant",
     "auto_original_concepts": "1",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: pregnant user + healthy meal + guideline compliance -> obligated recommendation is preserved."
   },
   {
     "id": "MINISTRY096",
@@ -7177,9 +7177,9 @@
     "auto_direct_overlap": "healthy;label;nutrition;vulnerable",
     "auto_original_concepts": "1",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: vulnerable user + healthy meal + nutrition label -> obligated recommendation is preserved."
   },
   {
     "id": "MINISTRY100",
@@ -7321,9 +7321,9 @@
     "auto_direct_overlap": "interested;local",
     "auto_original_concepts": "1",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: local product + user interested in local food -> obligated recommendation is preserved."
   },
   {
     "id": "INDUSTRY004",
@@ -7411,9 +7411,9 @@
     "auto_direct_overlap": "discounted;interested",
     "auto_original_concepts": "1",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: discounted product + user interested in discounted food -> obligated recommendation is preserved."
   },
   {
     "id": "INDUSTRY007",
@@ -7663,9 +7663,9 @@
     "auto_direct_overlap": "asian;cuisine;interested",
     "auto_original_concepts": "1",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: Asian meal + user interested in Asian cuisine -> obligated recommendation is preserved."
   },
   {
     "id": "INDUSTRY014",
@@ -8113,9 +8113,9 @@
     "auto_direct_overlap": "interested;organic;sustainable",
     "auto_original_concepts": "2",
     "auto_concept_hits": "2",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: organic product + user interested in sustainable food -> obligated recommendation is preserved."
   },
   {
     "id": "INDUSTRY026",
@@ -8257,9 +8257,9 @@
     "auto_direct_overlap": "approved;available;certified",
     "auto_original_concepts": "3",
     "auto_concept_hits": "3",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: certified + approved + available product -> obligated recommendation is preserved."
   },
   {
     "id": "INDUSTRY030",
@@ -8419,9 +8419,9 @@
     "auto_direct_overlap": "new;sponsored",
     "auto_original_concepts": "1",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: sponsored new product -> obligated recommendation is preserved."
   },
   {
     "id": "INDUSTRY035",
@@ -8923,9 +8923,9 @@
     "auto_direct_overlap": "seasonal",
     "auto_original_concepts": "1",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: the permission and seasonal product condition are preserved, but the new product alternative from the original/formula is missing in the backtranslation."
   },
   {
     "id": "INDUSTRY049",
@@ -8995,9 +8995,9 @@
     "auto_direct_overlap": "affordable",
     "auto_original_concepts": "1",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "missing_condition",
+    "human_notes": "Partially preserved: the permission and affordable product condition are preserved, but the discounted product alternative from the original/formula is missing in the backtranslation."
   },
   {
     "id": "INDUSTRY051",
@@ -9463,9 +9463,9 @@
     "auto_direct_overlap": "available",
     "auto_original_concepts": "1",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: available halal-certified product -> permitted recommendation is preserved."
   },
   {
     "id": "INDUSTRY064",
@@ -9661,9 +9661,9 @@
     "auto_direct_overlap": "adult;asian;cuisine;interested;spicy",
     "auto_original_concepts": "3",
     "auto_concept_hits": "3",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: spicy product + adult user interested in Asian cuisine -> permitted recommendation is preserved."
   },
   {
     "id": "INDUSTRY069",
@@ -9859,9 +9859,9 @@
     "auto_direct_overlap": "allergic;shellfish",
     "auto_original_concepts": "2",
     "auto_concept_hits": "2",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: shellfish-containing product + shellfish-allergic user -> prohibited recommendation is preserved."
   },
   {
     "id": "INDUSTRY075",
@@ -9949,9 +9949,9 @@
     "auto_direct_overlap": "certified;glutenfree",
     "auto_original_concepts": "2",
     "auto_concept_hits": "2",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: user requires gluten-free food + product not certified gluten-free -> prohibited recommendation is preserved."
   },
   {
     "id": "INDUSTRY077",
@@ -10165,9 +10165,9 @@
     "auto_direct_overlap": "available",
     "auto_original_concepts": "1",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: unavailable product -> prohibited recommendation is preserved."
   },
   {
     "id": "INDUSTRY083",
@@ -10183,9 +10183,9 @@
     "auto_direct_overlap": "available",
     "auto_original_concepts": "1",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: unavailable product -> prohibited recommendation is preserved."
   },
   {
     "id": "INDUSTRY084",
@@ -10417,9 +10417,9 @@
     "auto_direct_overlap": "discounted",
     "auto_original_concepts": "1",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: discounted unavailable product -> prohibited recommendation is preserved."
   },
   {
     "id": "INDUSTRY090",
@@ -10741,9 +10741,9 @@
     "auto_direct_overlap": "sponsored",
     "auto_original_concepts": "1",
     "auto_concept_hits": "1",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "2",
+    "human_error_type": "none",
+    "human_notes": "Faithful: sponsored unavailable product -> prohibited recommendation is preserved."
   },
   {
     "id": "INDUSTRY099",
