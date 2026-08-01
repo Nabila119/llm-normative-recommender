@@ -727,45 +727,43 @@ Finally, future work could connect the formalized norms to explanation generatio
 
 # Bibliography
 
-[0] DJ4ME. A DJ for Machine Ethics: the Dialogue Jiminy. University of Luxembourg project page. https://icr.uni.lu/dj4me/index.html
+[0] DJ4ME, "A DJ for Machine Ethics: the Dialogue Jiminy," University of Luxembourg. [Online]. Available: https://icr.uni.lu/dj4me/index.html
 
-[1] Yang, Y., Xiong, S., Payani, A., Shareghi, E., and Fekri, F. Harnessing the Power of Large Language Models for Natural Language to First-Order Logic Translation. arXiv:2305.15541, 2023.
+[1] Y. Yang, S. Xiong, A. Payani, E. Shareghi, and F. Fekri, "Harnessing the Power of Large Language Models for Natural Language to First-Order Logic Translation," in Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (ACL), 2024, pp. 6942-6959. doi: 10.18653/v1/2024.acl-long.375.
 
-[2] Han, S., Schoelkopf, H., Zhao, Y., Qi, Z., Riddell, M., Benson, L., Sun, L., Zubova, E., Qiao, Y., Burtell, M., Peng, D., Fan, J., Liu, Y., Wong, B., Sailor, M., Ni, A., Nan, L., Kasai, J., Yu, T., Zhang, R., Fabbri, A. R., Kryscinski, W., Lin, X. V., Cohan, A., Radev, D., Smith, N. A., and Yih, W.-t. FOLIO: Natural Language Reasoning with First-Order Logic. arXiv:2209.00840, 2022.
+[2] S. Han et al., "FOLIO: Natural Language Reasoning with First-Order Logic," in Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing (EMNLP), 2024, pp. 22017-22031. doi: 10.18653/v1/2024.emnlp-main.1229.
 
-[3] Pan, L., Albalak, A., Wang, X., and Wang, W. Y. Logic-LM: Empowering Large Language Models with Symbolic Solvers for Faithful Logical Reasoning. arXiv:2305.12295, 2023.
+[3] L. Pan, A. Albalak, X. Wang, and W. Y. Wang, "Logic-LM: Empowering Large Language Models with Symbolic Solvers for Faithful Logical Reasoning," in Findings of the Association for Computational Linguistics: EMNLP 2023, 2023, pp. 3806-3824.
 
-[4] Abdollahpouri, H., Burke, R., Mobasher, B., and Malthouse, E. C. Multi-Stakeholder Recommendation: Applications and Challenges. arXiv:1707.08913, 2017.
+[4] Y. Zheng, "Multi-Stakeholder Recommendation: Applications and Challenges," CoRR, abs/1707.08913, 2017.
 
-[5] Abdollahpouri, H. Multi-stakeholder Recommendation and its Connection to Multi-sided Fairness. arXiv:1907.13158, 2019.
+[5] H. Abdollahpouri and R. Burke, "Multi-stakeholder Recommendation and its Connection to Multi-sided Fairness," in RMSE@RecSys, 2019.
 
-[6] Olson, T., Salas-Damian, R., and Forbus, K. D. A Defeasible Deontic Calculus for Resolving Norm Conflicts. arXiv:2407.04869, 2024.
+[6] T. Olson, R. Salas-Damian, and K. D. Forbus, "A Defeasible Deontic Calculus for Resolving Norm Conflicts," CoRR, abs/2407.04869, 2024. doi: 10.48550/arXiv.2407.04869.
 
-[7] Dung, P. M. On the Acceptability of Arguments and its Fundamental Role in Nonmonotonic Reasoning, Logic Programming and n-Person Games. Artificial Intelligence, 77(2), 321-357, 1995.
+[7] P. M. Dung, "On the Acceptability of Arguments and its Fundamental Role in Nonmonotonic Reasoning, Logic Programming and n-Person Games," Artificial Intelligence, vol. 77, no. 2, pp. 321-357, 1995. doi: 10.1016/0004-3702(94)00041-X.
 
-[8] Personalized Food Recommendation as Constrained Question Answering over a Large-Scale Food Knowledge Graph. arXiv:2101.01775, 2021.
+[8] Y. Chen, A. Subburathinam, C.-H. Chen, and M. J. Zaki, "Personalized Food Recommendation as Constrained Question Answering over a Large-scale Food Knowledge Graph," in Proceedings of WSDM '21, 2021, pp. 544-552. doi: 10.1145/3437963.3441816.
 
-[9] Kamath, A., and Das, R. A Survey on Semantic Parsing. AKBC, 2019.
+[9] A. Kamath and R. Das, "A Survey on Semantic Parsing," in Proceedings of the 7th Workshop on Automated Knowledge Base Construction (AKBC), 2019.
 
-[10] Ryu, H., Kim, G., Lee, H. S., and Yang, E. Divide and Translate: Compositional First-Order Logic Translation and Verification for Complex Logical Reasoning. arXiv:2410.08047, 2024.
+[10] H. Ryu, G. Kim, H. S. Lee, and E. Yang, "Divide and Translate: Compositional First-Order Logic Translation and Verification for Complex Logical Reasoning," arXiv:2410.08047, 2024.
 
-[11] Boella, G., Pigozzi, G., and van der Torre, L. Normative Systems in Computer Science: Ten Guidelines for Normative Multiagent Systems. Dagstuhl Seminar Proceedings, 2009. https://doi.org/10.4230/DagSemProc.09121.2
+[11] G. Boella, G. Pigozzi, and L. van der Torre, "Normative Systems in Computer Science - Ten Guidelines for Normative Multiagent Systems," in Normative Multi-Agent Systems, Dagstuhl Seminar Proceedings, vol. 9121, Schloss Dagstuhl, 2009, pp. 1-21. doi: 10.4230/DagSemProc.09121.2.
 
-[12] Mahmoud, M. A., Ahmad, M. S., Yusoff, M. Z. M., and Mustapha, A. A Review of Norms and Normative Multiagent Systems. The Scientific World Journal, 2014.
+[12] M. A. Mahmoud, M. S. Ahmad, M. Z. M. Yusoff, and A. Mustapha, "A Review of Norms and Normative Multiagent Systems," The Scientific World Journal, 2014, Art. no. 684587. doi: 10.1155/2014/684587.
 
-[13] Santos, J. S., Zahn, J. O., Silvestre, E. A., and Silva, V. T. Detection and Resolution of Normative Conflicts in Multi-Agent Systems: A Literature Survey. Journal of Autonomous Agents and Multi-Agent Systems, 2017.
+[13] J. Santos, J. Zahn, E. Silvestre, V. T. Silva, and W. W. M. P. D. Vasconcelos, "Detection and Resolution of Normative Conflicts in Multi-Agent Systems: A Literature Survey," Autonomous Agents and Multi-Agent Systems, vol. 31, no. 6, pp. 1236-1282, 2017. doi: 10.1007/s10458-017-9362-z.
 
-[14] Pigozzi, G., and van der Torre, L. Multiagent Deontic Logic and its Challenges from a Normative Systems Perspective. Journal of Logics and Their Applications, 2017.
+[14] G. Pigozzi and L. W. N. van der Torre, "Multiagent Deontic Logic and its Challenges from a Normative Systems Perspective," Journal of Logics and Their Applications, vol. 4, no. 9, pp. 2929-2993, 2017.
 
-[15] Felfernig, A., and Burke, R. Constraint-Based Recommender Systems: Technologies and Research Issues. In International Conference on Electronic Commerce, ACM, 2008, pp. 17-26.
+[15] A. Felfernig and R. D. Burke, "Constraint-based Recommender Systems: Technologies and Research Issues," in Proceedings of the 10th International Conference on Electronic Commerce (ICEC), 2008, pp. 3:1-3:10. doi: 10.1145/1409540.1409544.
 
-[16] Bondevik, J. N., Bennin, K. E., Babur, O., and Ersch, C. A Systematic Review on Food Recommender Systems. Expert Systems with Applications, 238, 122166, 2024.
+[16] J. N. Bondevik, K. E. Bennin, Ö. Babur, and C. Ersch, "A Systematic Review on Food Recommender Systems," Expert Systems with Applications, vol. 238, Part E, Art. no. 122166, 2024. doi: 10.1016/j.eswa.2023.122166.
 
-[17] Trattner, C., and Elsweiler, D. An Overview of Recommender Systems in the Healthy Food Domain. Journal of Intelligent Information Systems, 50, 501-526, 2018.
+[17] T. N. T. Tran, M. Atas, A. Felfernig, and M. Stettinger, "An Overview of Recommender Systems in the Healthy Food Domain," Journal of Intelligent Information Systems, vol. 50, pp. 501-526, 2018. doi: 10.1007/s10844-017-0469-0.
 
-[18] De Croon, R., Van Houdt, L., Htun, N. N., Slabbinck, H., Verbert, K., and Vanden Abeele, V. Health Recommender Systems: Systematic Review. Journal of Medical Internet Research, 2021.
-
-Draft note: Before submission, convert this bibliography into the citation style required by the programme and ensure that every bibliography item is cited consistently.
+[18] R. De Croon, L. Van Houdt, N. N. Htun, G. Štiglic, V. Vanden Abeele, and K. Verbert, "Health Recommender Systems: Systematic Review," Journal of Medical Internet Research, vol. 23, no. 6, Art. no. e18035, 2021. doi: 10.2196/18035.
 
 # Appendix A: Repository and Reproducibility
 
