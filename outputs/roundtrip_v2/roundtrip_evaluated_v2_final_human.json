@@ -1057,9 +1057,9 @@
     "auto_direct_overlap": "allergic;nuts;shellfish",
     "auto_original_concepts": "3",
     "auto_concept_hits": "3",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "wrong_condition",
+    "human_notes": "The formula/backtranslation preserve a structurally different condition because allergenSafeMeal(y) applies only to the shellfish branch due to operator precedence. The intended NL meaning appears to require allergen-safe meals for both nut-allergic and shellfish-allergic users."
   },
   {
     "id": "USER030",
@@ -1075,9 +1075,9 @@
     "auto_direct_overlap": "allergic;nuts;shellfish",
     "auto_original_concepts": "3",
     "auto_concept_hits": "3",
-    "human_semantic_score": "",
-    "human_error_type": "",
-    "human_notes": ""
+    "human_semantic_score": "1",
+    "human_error_type": "wrong_condition",
+    "human_notes": "The formula/backtranslation preserve a structurally different condition because allergenSafeMeal(y) applies only to the shellfish branch due to operator precedence. The intended NL meaning appears to require allergen-safe meals for both nut-allergic and shellfish-allergic users."
   },
   {
     "id": "USER031",
