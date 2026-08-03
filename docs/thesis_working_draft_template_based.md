@@ -27,7 +27,7 @@ This thesis investigates how large language models can support the formalization
 
 The current implementation constructs a norm translation dataset rather than a recommendation dataset. Each natural-language norm is paired with both an implication-based monadic formulation and a dyadic formulation. This design supports comparison between formalization strategies rather than treating them as interchangeable. Product categories are modeled as predicates over product variables, and the recommendation relation is represented as recommend(System,y,x), where y is the product and x is the target user. Constitutive rules, such as category classifications, are stored separately from stakeholder norms as background domain knowledge.
 
-The pipeline includes grammar-based validation, AST generation, normalized formula representations, and round-trip checks. Using the same controlled grammar and prompt structure, it compares ChatGPT- and Claude-generated datasets. Both achieved zero parser validation errors. Round-trip evaluation and human review show that syntactic validity alone does not ensure semantic faithfulness: Claude produced fewer severe mismatches, while ChatGPT used a broader predicate vocabulary. This provides a reproducible DJ4ME-oriented norm-formalization pipeline.
+The pipeline includes grammar-based validation, AST generation, normalized formula representations, and round-trip checks. Using the same controlled grammar and prompt structure, it compares ChatGPT- and Claude-generated datasets. Both achieved zero parser validation errors. Round-trip evaluation and human review show that syntactic validity alone does not ensure semantic faithfulness: Claude produced fewer severe mismatches, while ChatGPT used a broader predicate vocabulary. The revised backtranslation also exposed a ChatGPT formula-precedence issue that automatic scoring alone did not flag. This provides a reproducible DJ4ME-oriented norm-formalization pipeline.
 
 Keywords: large language models; deontic logic; first-order logic; normative recommender systems; stakeholder norms; grammar validation; abstract syntax trees; round-trip evaluation
 
@@ -565,23 +565,23 @@ Table 4.3. Automatic round-trip comparison between ChatGPT baseline and Claude.
 
 | Source | Rows | Auto score 2 | Auto score 1 | Auto score 0 |
 | --- | ---: | ---: | ---: | ---: |
-| ChatGPT baseline | 600 | 538 (89.7%) | 40 (6.7%) | 22 (3.7%) |
-| Claude | 600 | 550 (91.7%) | 46 (7.7%) | 4 (0.7%) |
+| ChatGPT baseline | 600 | 540 (90.0%) | 38 (6.3%) | 22 (3.7%) |
+| Claude | 600 | 582 (97.0%) | 14 (2.3%) | 4 (0.7%) |
 
-Table 4.3 shows that Claude produced slightly more automatic score-2 rows than the ChatGPT baseline and substantially fewer automatic score-0 rows. Claude had 550 score-2 rows out of 600, or 91.7%, compared with 538 out of 600, or 89.7%, for the ChatGPT baseline. The most visible difference is at the severe-error end of the scale: Claude produced 4 automatic score-0 rows, or 0.7%, while the ChatGPT baseline produced 22 automatic score-0 rows, or 3.7%.
+Table 4.3 shows that Claude produced more automatic score-2 rows than the ChatGPT baseline and substantially fewer automatic low-score rows. Claude had 582 score-2 rows out of 600, or 97.0%, compared with 540 out of 600, or 90.0%, for the ChatGPT baseline. The most visible difference is at the severe-error end of the scale: Claude produced 4 automatic score-0 rows, or 0.7%, while the ChatGPT baseline produced 22 automatic score-0 rows, or 3.7%.
 
-Human review was then used to check the automatic scores. The reviewed samples were selected in the same general spirit but are not identical in size. For the ChatGPT baseline, 112 rows were reviewed: all automatic score-0 and score-1 rows plus 50 quality-control rows from automatic score-2 cases. For Claude, 100 rows were reviewed: all automatic score-0 and score-1 rows plus a reproducible 50-row sample from automatic score-2 cases. The human review comparison is shown in Table 4.4.
+Human review was then used to check the automatic scores. The reviewed samples were selected in the same general spirit but are not identical in size. For the ChatGPT baseline, 112 rows were reviewed: all automatic score-0 and score-1 rows, 50 quality-control rows from automatic score-2 cases, and the two USER030 rows whose revised backtranslation exposed a formula-precedence issue. For Claude, 68 rows were reviewed: all automatic score-0 and score-1 rows plus a reproducible 50-row sample from automatic score-2 cases. The human review comparison is shown in Table 4.4.
 
 Table 4.4. Human review comparison between ChatGPT baseline and Claude.
 
 | Source | Reviewed rows | Human score 2 | Human score 1 | Human score 0 | Exact auto-human agreement |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| ChatGPT baseline | 112 | 84 (75.0%) | 22 (19.6%) | 6 (5.4%) | 48/112 (42.9%) |
-| Claude | 100 | 61 (61.0%) | 37 (37.0%) | 2 (2.0%) | 81/100 (81.0%) |
+| ChatGPT baseline | 112 | 84 (75.0%) | 24 (21.4%) | 4 (3.6%) | 48/112 (42.9%) |
+| Claude | 68 | 63 (92.6%) | 5 (7.4%) | 0 (0.0%) | 49/68 (72.1%) |
 
-The human results confirm that Claude had fewer severe semantic mismatches in the reviewed sample. Only 2 of the 100 reviewed Claude rows were assigned human score 0, compared with 6 of the 112 reviewed ChatGPT baseline rows. However, Claude also had a larger proportion of partial-preservation cases in the reviewed sample: 37.0% of reviewed Claude rows received human score 1, compared with 19.6% of reviewed ChatGPT baseline rows. This reflects the fact that many Claude errors involved preserving the main modality and action while omitting one condition, especially one side of a disjunction.
+The human results confirm that Claude had fewer severe semantic mismatches in the reviewed sample. None of the 68 reviewed Claude rows were assigned human score 0, compared with 4 of the 112 reviewed ChatGPT baseline rows. Claude also had fewer partial-preservation cases in the reviewed sample: 7.4% of reviewed Claude rows received human score 1, compared with 21.4% of reviewed ChatGPT baseline rows. The revised backtranslation therefore changed the interpretation of the comparison: instead of mainly showing Claude missing compound conditions, the final v2 results show Claude preserving most reviewed meanings while the ChatGPT baseline still contains a broader mix of semantic and wording issues.
 
-The exact auto-human agreement rate was also higher for Claude: 81.0%, compared with 42.9% for the ChatGPT baseline. This does not mean that the automatic evaluator is generally reliable without human checking. Rather, it means that the automatic labels aligned more closely with the Claude reviewed sample than with the ChatGPT baseline reviewed sample. The ChatGPT baseline review showed many cases where automatic score 0 or 1 was overly conservative, while the Claude review showed fewer such disagreements.
+The exact auto-human agreement rate was also higher for Claude: 72.1%, compared with 42.9% for the ChatGPT baseline. This does not mean that the automatic evaluator is generally reliable without human checking. Rather, it means that the automatic labels aligned more closely with the Claude reviewed sample than with the ChatGPT baseline reviewed sample. The ChatGPT baseline review showed many cases where automatic score 0 or 1 was overly conservative, and it also included two automatic score-2 rows where human review found a wrong-condition issue caused by operator precedence.
 
 The detailed auto-human crosstabs show where the disagreements occurred.
 
@@ -590,18 +590,18 @@ Table 4.5. Auto-human crosstab for the ChatGPT baseline.
 | ChatGPT auto score | Human score 0 | Human score 1 | Human score 2 | Total |
 | --- | ---: | ---: | ---: | ---: |
 | Auto score 0 | 0 (0.0%) | 4 (18.2%) | 18 (81.8%) | 22 |
-| Auto score 1 | 6 (15.0%) | 8 (20.0%) | 26 (65.0%) | 40 |
-| Auto score 2 | 0 (0.0%) | 10 (20.0%) | 40 (80.0%) | 50 |
+| Auto score 1 | 4 (10.5%) | 8 (21.1%) | 26 (68.4%) | 38 |
+| Auto score 2 | 0 (0.0%) | 12 (23.1%) | 40 (76.9%) | 52 |
 
 Table 4.6. Auto-human crosstab for Claude.
 
 | Claude auto score | Human score 0 | Human score 1 | Human score 2 | Total |
 | --- | ---: | ---: | ---: | ---: |
 | Auto score 0 | 0 (0.0%) | 0 (0.0%) | 4 (100.0%) | 4 |
-| Auto score 1 | 2 (4.3%) | 34 (73.9%) | 10 (21.7%) | 46 |
+| Auto score 1 | 0 (0.0%) | 2 (14.3%) | 12 (85.7%) | 14 |
 | Auto score 2 | 0 (0.0%) | 3 (6.0%) | 47 (94.0%) | 50 |
 
-Tables 4.5 and 4.6 show two different patterns. In the ChatGPT baseline, many automatic low-score rows were judged faithful by the human reviewer: 18 of 22 automatic score-0 rows and 26 of 40 automatic score-1 rows received human score 2. This means the automatic evaluator was often too conservative for the baseline. In the Claude reviewed set, automatic score-1 rows more often corresponded to partial preservation: 34 of 46 automatic score-1 rows received human score 1. The Claude automatic score-2 sample was also strong, with 47 of 50 sampled rows confirmed as human score 2.
+Tables 4.5 and 4.6 show two different patterns. In the ChatGPT baseline, many automatic low-score rows were judged faithful by the human reviewer: 18 of 22 automatic score-0 rows and 26 of 38 automatic score-1 rows received human score 2. This means the automatic evaluator was often too conservative for the baseline. At the same time, the two USER030 rows show the opposite risk: both received automatic score 2 because the backtranslation accurately reflected the formula, but human review assigned score 1 because the formula itself attached `allergenSafeMeal(y)` only to the shellfish branch of a disjunction. In the Claude reviewed set, the automatic score-2 sample was strong, with 47 of 50 sampled rows confirmed as human score 2, and most automatic score-1 rows were also judged faithful after the revised backtranslation.
 
 The human error-type distribution gives additional qualitative detail:
 
@@ -609,18 +609,18 @@ Table 4.7. Human error-type comparison.
 
 | Error type | ChatGPT baseline count | ChatGPT baseline percent | Claude count | Claude percent |
 | --- | ---: | ---: | ---: | ---: |
-| None | 48 | 42.9% | 61 | 61.0% |
+| None | 48 | 42.9% | 63 | 92.6% |
 | Awkward but equivalent | 36 | 32.1% | 0 | 0.0% |
-| Lost meaning | 12 | 10.7% | 0 | 0.0% |
-| Wrong condition | 8 | 7.1% | 2 | 2.0% |
+| Lost meaning | 10 | 8.9% | 0 | 0.0% |
+| Wrong condition | 10 | 8.9% | 2 | 2.9% |
 | Wrong action | 6 | 5.4% | 0 | 0.0% |
-| Missing condition | 2 | 1.8% | 37 | 37.0% |
+| Missing condition | 2 | 1.8% | 3 | 4.4% |
 
-The error types suggest that the two datasets failed in different ways. The ChatGPT baseline had a broader mix of awkward-but-equivalent backtranslations, lost meaning, wrong conditions, wrong actions, and missing conditions. Claude's reviewed errors were more concentrated: most non-faithful cases were missing-condition errors, especially where one disjunctive alternative was dropped in the backtranslation. This makes the Claude error pattern easier to characterize, even though it still shows that human review is necessary.
+The error types suggest that the two datasets failed in different ways. The ChatGPT baseline had a broader mix of awkward-but-equivalent backtranslations, lost meaning, wrong conditions, wrong actions, and missing conditions. Claude's remaining reviewed errors were fewer and concentrated in missing-condition and wrong-condition cases. This makes the Claude error pattern easier to characterize, even though it still shows that human review is necessary.
 
-A closer inspection of these missing-condition cases suggests that some errors originated in the round-trip layer rather than in the generated formula itself. In particular, formulas containing compound conditions, especially disjunctions such as `diabetic(x)∨hypertensive(x)`, could be parser-valid and still be backtranslated with one condition omitted. These cases should therefore be interpreted carefully: a human score of 1 may indicate a limitation of the deterministic AST normalization or backtranslation component, not only a failure of the LLM to generate the correct formal formula. This finding motivates stronger compound-condition handling in future versions of the round-trip pipeline.
+A closer inspection of compound-condition cases shows why round-trip evaluation needs both automatic and human layers. Some earlier missing-condition cases originated in the round-trip layer rather than in the generated formula itself, because the backtranslator did not always express every branch of a disjunction. The revised backtranslation reduced this problem by making compound conditions explicit. At the same time, the `USER030` ChatGPT rows show a different issue: the backtranslation can be faithful to the formula while exposing that the formula does not preserve the intended natural-language grouping. In that case, the formula is read as `allergicTo(x,Nuts)` OR (`allergicTo(x,Shellfish)` AND `allergenSafeMeal(y)`), whereas the original norm appears to intend (`allergicTo(x,Nuts)` OR `allergicTo(x,Shellfish)`) AND `allergenSafeMeal(y)`. This finding motivates stronger handling of compound conditions, parentheses, and operator precedence in both generation prompts and evaluation scripts.
 
-Overall, these results suggest that Claude followed the grammar and formalisation conventions successfully and produced stronger round-trip results than the ChatGPT baseline, especially by reducing severe automatic and human mismatch cases. However, the comparison report also showed that Claude used a smaller predicate vocabulary, especially for the User and Food Ministry datasets. For example, the baseline User dataset used 83 predicates, while the Claude User dataset used 48. This indicates that parser validity and round-trip score alone are not sufficient to evaluate dataset quality. Diversity, stakeholder coverage, reproducibility metadata, and usefulness for downstream DJ4ME reasoning must also be considered.
+Overall, these results suggest that Claude followed the grammar and formalisation conventions successfully and produced stronger final v2 round-trip results than the ChatGPT baseline, especially by reducing severe automatic and human mismatch cases. However, the comparison report also showed that Claude used a smaller predicate vocabulary, especially for the User and Food Ministry datasets. For example, the baseline User dataset used 83 predicates, while the Claude User dataset used 48. This indicates that parser validity and round-trip score alone are not sufficient to evaluate dataset quality. Diversity, stakeholder coverage, reproducibility metadata, and usefulness for downstream DJ4ME reasoning must also be considered.
 
 The Claude comparison is useful because it separates pipeline robustness from dataset style. Both the baseline and Claude datasets pass validation, which suggests that the grammar and prompts are sufficiently clear for more than one LLM-generated dataset. At the same time, the predicate vocabulary differs substantially. Claude uses fewer predicates in the User and Food Ministry datasets, while the baseline dataset contains more varied predicate names. This may reflect different model tendencies: one model may generalize through broader predicates, while another may produce more specific product or condition predicates.
 
@@ -695,7 +695,7 @@ The current results demonstrate that the revised datasets can be parsed successf
 
 The thesis also shows that evaluation must be multi-layered. Parser validation is necessary because invalid formulas cannot support reliable downstream reasoning. However, parser validation is not sufficient because syntactically valid formulas can still fail to preserve the original norm. Round-trip evaluation and human review add semantic checks, while LLM comparison and formulation comparison add evidence about model behavior and representation choices. Together, these layers provide a more cautious evaluation than a single syntax score would allow.
 
-The comparison between the ChatGPT baseline and Claude illustrates this point. Both datasets passed parser validation, but their round-trip and human-review profiles differed. Claude produced fewer automatic score-0 rows, 4 out of 600 compared with 22 out of 600 for the ChatGPT baseline, and fewer human-confirmed semantic mismatches in the reviewed sample, 2 out of 100 compared with 6 out of 112. At the same time, Claude still produced partial-preservation errors, mainly missing-condition cases. The result is therefore not that one automatic metric settles dataset quality, but that a layered evaluation can reveal different kinds of strengths and weaknesses.
+The comparison between the ChatGPT baseline and Claude illustrates this point. Both datasets passed parser validation, but their round-trip and human-review profiles differed. Claude produced fewer automatic score-0 rows, 4 out of 600 compared with 22 out of 600 for the ChatGPT baseline, and fewer human-confirmed severe mismatches in the reviewed sample, 0 out of 68 compared with 4 out of 112. The ChatGPT review also showed two automatic score-2 rows that human review marked as partial because the formula preserved the wrong grouping of a compound condition. The result is therefore not that one automatic metric settles dataset quality, but that a layered evaluation can reveal different kinds of strengths and weaknesses.
 
 ## 5.2 Limitations
 
@@ -805,4 +805,4 @@ Table C.1. Human evaluation scoring rubric.
 | 1 | The backtranslation partially preserves the norm but loses or weakens some information. |
 | 0 | The backtranslation does not preserve the intended norm. |
 
-For the human error type, `faithful` or `none` means that no substantive semantic error was identified. `Wrong condition` means the user group, product property, threshold, exception, or triggering condition was changed. `Missing condition` means an important condition from the original norm was omitted. `Wrong action` means the action, modality target, or recommendation relation was changed. `Lost meaning` means the backtranslation no longer communicates the practical norm. `Awkward but equivalent` means the wording is unnatural but the intended norm is still preserved.
+For the human error type, `faithful` or `none` means that no substantive semantic error was identified. `Wrong condition` means the user group, product property, threshold, exception, triggering condition, or logical grouping of a compound condition was changed. `Missing condition` means an important condition from the original norm was omitted. `Wrong action` means the action, modality target, or recommendation relation was changed. `Lost meaning` means the backtranslation no longer communicates the practical norm. `Awkward but equivalent` means the wording is unnatural but the intended norm is still preserved.
