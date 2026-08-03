@@ -603,7 +603,21 @@ Table 4.6. Auto-human crosstab for Claude.
 
 Tables 4.5 and 4.6 show two different patterns. In the ChatGPT baseline, many automatic low-score rows were judged faithful by the human reviewer: 18 of 22 automatic score-0 rows and 26 of 38 automatic score-1 rows received human score 2. This means the automatic evaluator was often too conservative for the baseline. At the same time, the two USER030 rows show the opposite risk: both received automatic score 2 because the backtranslation accurately reflected the formula, but human review assigned score 1 because the formula itself attached `allergenSafeMeal(y)` only to the shellfish branch of a disjunction. In the Claude reviewed set, the automatic score-2 sample was strong, with 47 of 50 sampled rows confirmed as human score 2, and most automatic score-1 rows were also judged faithful after the revised backtranslation.
 
-The human error-type distribution gives additional qualitative detail:
+The following examples illustrate how the human labels were applied to concrete rows from the ChatGPT baseline. They are included to make the scoring categories more transparent and to show the difference between faithful translations, conservative automatic scores, partial semantic loss, and stronger mismatches.
+
+`none` is illustrated by `USER002` in implication form. The original norm states that children should not receive high-sugar product recommendations. The backtranslation says that, for every user and product, if the user is a child and the product is high in sugar, then the system is prohibited from recommending the product to the user. This was marked human score 2 because the prohibition, user group, and product condition are preserved.
+
+`awkward_but_equivalent` is illustrated by `USER056` in implication form. The original norm states that lactose-intolerant users should receive certified lactose-free meal recommendations. The backtranslation states that if the product is certified lactose-free, the product is a lactose-free meal, and the user is lactose-intolerant, then the system is obligated to recommend the product to the user. This was marked human score 2 because all conditions and the obligation are preserved, even though the wording is mechanical.
+
+`missing_condition` is illustrated by `USER078` in implication form. The original norm states that adult users should receive nutrition-labeled food recommendations when available. The backtranslation states that if the user is an adult and the product has a nutrition label, then the system is obligated to recommend the product. This was marked human score 1 because the availability qualifier is not represented, making the obligation stronger than the original.
+
+`wrong_condition` is illustrated by `USER030` in implication form. The original norm states that users allergic to nuts or shellfish should receive allergen-safe meal recommendations. The backtranslation says that either the user is allergic to nuts, or both the user is allergic to shellfish and the product is allergen-safe. This was marked human score 1 because operator precedence changes the condition: the allergen-safe meal condition is clearly attached only to the shellfish branch.
+
+`wrong_action` is illustrated by `MINISTRY055` in implication form. The original norm states that certified lactose-free products must comply with labeling rules. The backtranslation instead says that if a product is certified lactose-free and complies with labeling rules, then the system is obligated to recommend it. This was marked human score 0 because the deontic action changed from product-labeling compliance to product recommendation.
+
+`lost_meaning` is illustrated by `MINISTRY028` in implication form. The original norm states that allergic users must receive products with allergen labels. The backtranslation narrows this to users allergic to nuts receiving products with allergen labels. This was marked human score 1 because the broad category of allergic users is reduced to one specific allergy type.
+
+The aggregate error-type distribution gives additional qualitative detail:
 
 Table 4.7. Human error-type comparison.
 
